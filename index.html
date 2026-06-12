@@ -13,7 +13,7 @@
 }
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--branco);min-height:100vh;overflow-x:hidden;}
-.wrap{max-width:600px;margin:0 auto;padding:1rem;}
+.wrap{max-width:720px;margin:0 auto;padding:.65rem .85rem;}
 /* TELA INICIAL */
 #tela-inicio{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden;text-align:center;}
 #tela-inicio::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(107,31,162,.8),transparent 70%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(212,0,106,.4),transparent 60%);pointer-events:none;}
@@ -31,32 +31,33 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .jogo-logo{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;letter-spacing:.04em;background:linear-gradient(135deg,var(--amarelo),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent;}
 .btn-voltar{background:transparent;border:1px solid var(--card-borda);color:var(--cinza);padding:.3rem .7rem;border-radius:5px;font-size:.7rem;cursor:pointer;font-family:'Space Mono',monospace;}
 /* DADO / SORTEIO */
-.sorteio-zona{text-align:center;padding:1.5rem 0;position:relative;}
-.dado{width:90px;height:90px;margin:1rem auto;background:linear-gradient(135deg,#fff,#e0e0ff);border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:3rem;cursor:pointer;box-shadow:0 8px 30px rgba(200,150,255,.3);transition:transform .1s;user-select:none;}
+.sorteio-zona{text-align:center;padding:.35rem 0 .25rem;position:relative;}
+.dado{width:56px;height:56px;margin:0;background:linear-gradient(135deg,#fff,#e0e0ff);border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.85rem;cursor:pointer;box-shadow:0 5px 18px rgba(200,150,255,.24);transition:transform .1s;user-select:none;flex:0 0 56px;}
 .dado.rolling{animation:roll .5s ease;}
 @keyframes roll{0%{transform:rotate(0) scale(1);}25%{transform:rotate(90deg) scale(1.1);}50%{transform:rotate(180deg) scale(.95);}75%{transform:rotate(270deg) scale(1.1);}100%{transform:rotate(360deg) scale(1);}}
-.sort-info{margin:1rem 0;}
-.sort-pais{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;}
-.sort-hint{font-size:.78rem;color:var(--cinza);margin-top:.3rem;}
+.sort-info{margin:0;}
+.sort-info-centro{flex:1;min-width:130px;max-width:360px;padding:0 .35rem;text-align:center;}
+.sort-pais{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:.95;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.sort-hint{font-size:.6rem;color:var(--cinza);margin-top:.15rem;line-height:1.15;}
 /* ELENCO */
-.elenco-titulo{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--amarelo);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin:1rem 0 .6rem;}
-.elenco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:.4rem;}
-.jcard{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.42rem .35rem;text-align:center;cursor:pointer;transition:all .15s;position:relative;min-height:66px;display:flex;flex-direction:column;justify-content:center;}
+.elenco-titulo{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--amarelo);letter-spacing:.08em;text-transform:uppercase;text-align:center;margin:.35rem 0 .28rem;line-height:1.2;}
+.elenco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(68px,1fr));gap:.28rem;}
+.jcard{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:7px;padding:.26rem .22rem;text-align:center;cursor:pointer;transition:all .15s;position:relative;min-height:47px;display:flex;flex-direction:column;justify-content:center;}
 .jcard:active{transform:scale(.95);}
 .jcard.sel{border-color:var(--amarelo);background:rgba(200,255,0,.12);}
 .jcard.disabled{opacity:.35;pointer-events:none;}
-.jcard-pos{font-family:'Space Mono',monospace;font-size:.44rem;color:var(--pink);letter-spacing:.05em;}
-.jcard-nome{font-size:.66rem;font-weight:700;margin:.12rem 0;line-height:1.02;}
-.jcard-rat{font-family:'Bebas Neue',sans-serif;font-size:1.08rem;color:var(--amarelo);line-height:1;}
-.jcard-star{position:absolute;top:.18rem;right:.28rem;font-size:.52rem;}
+.jcard-pos{font-family:'Space Mono',monospace;font-size:.38rem;color:var(--pink);letter-spacing:.04em;}
+.jcard-nome{font-size:.56rem;font-weight:700;margin:.07rem 0;line-height:1.02;}
+.jcard-rat{font-family:'Bebas Neue',sans-serif;font-size:.9rem;color:var(--amarelo);line-height:1;}
+.jcard-star{position:absolute;top:.1rem;right:.18rem;font-size:.43rem;}
 /* TIME MONTADO */
-.meu-time-barra{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--roxo-escuro) 30%);padding:1rem 0 .5rem;margin-top:1rem;z-index:50;}
+.meu-time-barra{position:relative;background:linear-gradient(180deg,rgba(26,0,48,.2),rgba(26,0,48,.92));padding:.45rem 0 .25rem;margin-top:.45rem;z-index:50;}
 .time-slots{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-bottom:.6rem;}
 .slot{width:34px;height:34px;border-radius:50%;border:1.5px dashed var(--card-borda);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:var(--cinza);font-family:'Space Mono',monospace;background:rgba(0,0,0,.3);position:relative;}
 .slot.filled{border-style:solid;border-color:var(--amarelo);background:rgba(200,255,0,.1);color:var(--amarelo);font-weight:700;}
 .slot .slot-rat{font-family:'Bebas Neue',sans-serif;font-size:.85rem;}
-.barra-info{text-align:center;font-size:.72rem;color:var(--cinza);margin-bottom:.5rem;}
-.btn-confirmar{display:block;width:100%;padding:.9rem;border:none;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.06em;cursor:pointer;background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;opacity:.4;pointer-events:none;transition:opacity .2s;}
+.barra-info{text-align:center;font-size:.62rem;color:var(--cinza);margin-bottom:.25rem;}
+.btn-confirmar{display:block;width:100%;padding:.62rem;border:none;border-radius:6px;font-family:'Bebas Neue',sans-serif;font-size:1.12rem;letter-spacing:.06em;cursor:pointer;background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;opacity:.4;pointer-events:none;transition:opacity .2s;}
 .btn-confirmar.ativo{opacity:1;pointer-events:auto;}
 /* OVERALL */
 .overall-box{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.6rem .8rem;margin:.5rem 0;}
@@ -138,24 +139,25 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .copa-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--amarelo);}
 
 /* CAMPO DE FUTEBOL */
-.campo{background:linear-gradient(180deg,#24703a 0%,#18572b 55%,#0e401f 100%);border:2px solid rgba(255,255,255,.15);border-radius:16px;padding:.7rem .55rem .55rem;margin-bottom:.6rem;position:relative;overflow:hidden;min-height:255px;display:flex;flex-direction:column;justify-content:space-between;}
-.campo::before{content:'';position:absolute;left:10%;right:10%;bottom:12px;height:34%;border:2px solid rgba(255,255,255,.18);border-bottom:none;border-top-left-radius:18px;border-top-right-radius:18px;}
-.campo::after{content:'';position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:120px;height:62px;border:2px solid rgba(255,255,255,.18);border-bottom:none;border-top-left-radius:120px;border-top-right-radius:120px;}
-.campo-linha{display:flex;justify-content:center;gap:.45rem;position:relative;z-index:1;flex-wrap:nowrap;}
-.campo-linha.linha-ata{margin-top:.1rem;}
-.campo-linha.linha-meio{margin-top:.55rem;gap:.35rem;}
-.campo-linha.linha-def{margin-top:.8rem;justify-content:space-between;padding:0 .3rem;}
-.campo-linha.linha-gol{margin-top:.55rem;margin-bottom:.1rem;}
-.pos-slot{width:46px;display:flex;flex-direction:column;align-items:center;flex:0 0 auto;}
-.pos-bola{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.08rem;border:2px dashed rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:rgba(255,255,255,.55);transition:all .2s;}
-.pos-slot.filled .pos-bola{border-style:solid;border-color:var(--amarelo);background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;box-shadow:0 0 10px rgba(200,255,0,.36);}
-.pos-lbl{font-family:'Space Mono',monospace;font-size:.42rem;color:rgba(255,255,255,.72);margin-top:.18rem;letter-spacing:.05em;}
-.pos-nome{font-size:.49rem;color:#fff;font-weight:600;margin-top:.05rem;text-align:center;line-height:1;max-width:46px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.campo{background:linear-gradient(180deg,#24703a 0%,#18572b 55%,#0e401f 100%);border:2px solid rgba(255,255,255,.15);border-radius:14px;padding:.48rem .45rem .38rem;margin-bottom:.32rem;position:relative;overflow:hidden;min-height:205px;display:flex;flex-direction:column;justify-content:space-between;}
+.campo::before{content:'';position:absolute;left:9%;right:9%;bottom:9px;height:34%;border:2px solid rgba(255,255,255,.15);border-bottom:none;border-top-left-radius:16px;border-top-right-radius:16px;}
+.campo::after{content:'';position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:108px;height:54px;border:2px solid rgba(255,255,255,.15);border-bottom:none;border-top-left-radius:108px;border-top-right-radius:108px;}
+.campo-linha{display:flex;justify-content:center;gap:.32rem;position:relative;z-index:1;flex-wrap:nowrap;}
+.campo-linha.linha-ata{margin-top:.02rem;}
+.campo-linha.linha-meio{margin-top:.28rem;gap:.24rem;}
+.campo-linha.linha-def{margin-top:.42rem;justify-content:space-around;padding:0 .1rem;}
+.campo-linha.linha-gol{margin-top:.25rem;margin-bottom:.02rem;}
+.pos-slot{width:54px;display:flex;flex-direction:column;align-items:center;flex:0 0 auto;}
+.pos-bola{width:31px;height:31px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.92rem;border:2px dashed rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:rgba(255,255,255,.55);transition:all .2s;}
+.pos-slot.filled .pos-bola{border-style:solid;border-color:var(--amarelo);background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;box-shadow:0 0 8px rgba(200,255,0,.32);}
+.pos-lbl{font-family:'Space Mono',monospace;font-size:.38rem;color:rgba(255,255,255,.72);margin-top:.12rem;letter-spacing:.04em;}
+.pos-nome{font-size:.55rem;color:#fff;font-weight:700;margin-top:.02rem;text-align:center;line-height:1.05;max-width:56px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .pos-slot.filled .pos-lbl{color:var(--amarelo);}
 
-.dados-row{display:flex;gap:1rem;justify-content:center;align-items:center;}
+.dados-row{display:flex;gap:.42rem;justify-content:center;align-items:center;}
+.dados-row-compacta{max-width:520px;margin:0 auto;}
 .dado-dourado{background:linear-gradient(135deg,#ffd700,#ffaa00)!important;color:#5a3d00;position:relative;box-shadow:0 8px 30px rgba(255,200,0,.5)!important;}
-.dado-dourado .dourado-badge{position:absolute;top:-6px;right:-6px;background:#fff;color:#ffaa00;border-radius:50%;width:22px;height:22px;font-size:.8rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+.dado-dourado .dourado-badge{position:absolute;top:-5px;right:-5px;background:#fff;color:#ffaa00;border-radius:50%;width:18px;height:18px;font-size:.65rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
 .dado-dourado.usado{opacity:.3;pointer-events:none;filter:grayscale(1);}
 .jcard-dourado{border-color:#ffd700!important;background:rgba(255,215,0,.1)!important;}
 .jcard-dourado .jcard-rat{color:#ffd700!important;}
@@ -222,6 +224,28 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .config-card{background:rgba(0,0,0,.16);border:1px solid var(--card-borda);border-radius:12px;padding:.75rem;}
 .config-card .modo-jogo-titulo{margin-bottom:.5rem;}
 @media(min-width:560px){.config-dupla{grid-template-columns:1fr 1fr;}}
+
+
+@media (max-height:760px){
+  .jogo-header{margin-bottom:.35rem;padding-bottom:.45rem;}
+  .campo{min-height:185px;}
+  .pos-bola{width:28px;height:28px;font-size:.84rem;}
+  .pos-nome{font-size:.5rem;}
+  .jcard{min-height:42px;}
+  .jcard-nome{font-size:.52rem;}
+  .jcard-rat{font-size:.82rem;}
+}
+@media (max-width:430px){
+  .wrap{padding:.5rem .55rem;}
+  .dado{width:50px;height:50px;font-size:1.65rem;flex-basis:50px;}
+  .sort-pais{font-size:1.28rem;}
+  .sort-hint{font-size:.54rem;}
+  .elenco-grid{grid-template-columns:repeat(auto-fill,minmax(61px,1fr));gap:.22rem;}
+  .jcard{min-height:43px;padding:.22rem .18rem;}
+  .campo{min-height:190px;}
+  .pos-slot{width:47px;}
+  .pos-nome{max-width:49px;font-size:.49rem;}
+}
 
 </style>
 </head>
@@ -296,13 +320,13 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
       <button class="btn-voltar" onclick="location.reload()">↺ Reiniciar</button>
     </div>
     <div class="sorteio-zona">
-      <div class="dados-row">
+      <div class="dados-row dados-row-compacta">
         <div class="dado" id="dado" onclick="rolarDado()">🎲</div>
+        <div class="sort-info sort-info-centro">
+          <div class="sort-pais" id="sort-pais">Toque no dado</div>
+          <div class="sort-hint" id="sort-hint">🎲 normal · 🥇 craque 90+</div>
+        </div>
         <div class="dado dado-dourado" id="dado-dourado" onclick="rolarDadoDourado()">🎲<span class="dourado-badge">★</span></div>
-      </div>
-      <div class="sort-info">
-        <div class="sort-pais" id="sort-pais">Toque no dado</div>
-        <div class="sort-hint" id="sort-hint">🎲 normal: seleção aleatória · 🥇 dourado: craque 90+ (1 vez)</div>
       </div>
     </div>
     <div id="elenco-zona" style="display:none">
