@@ -85,6 +85,8 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .timeline{margin-top:.5rem;display:flex;flex-direction:column;gap:.25rem;max-height:0;overflow:hidden;transition:max-height .3s;}
 .timeline.show{max-height:2000px;}
 .ev-item{font-size:.72rem;padding:.3rem .5rem;border-radius:5px;background:rgba(0,0,0,.2);border-left:2px solid var(--card-borda);}
+.ev-coment{margin-top:.18rem;color:rgba(240,240,255,.72);font-size:.68rem;font-style:italic;}
+.ev-voz{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.06em;margin-right:.25rem;text-transform:uppercase;}
 .ev-gol-pro{border-left-color:var(--amarelo);background:rgba(200,255,0,.08);font-weight:600;}
 .ev-gol-contra{border-left-color:var(--pink);background:rgba(212,0,106,.08);}
 .ev-min{font-family:'Space Mono',monospace;color:var(--cinza);font-size:.6rem;margin-right:.4rem;}
@@ -177,6 +179,46 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .campeao-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;}
 .btn-share{padding:.7rem 1.4rem;border:none;border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.04em;cursor:pointer;background:linear-gradient(135deg,#FFD700,#ffaa00);color:#5a3d00;}
 .btn-share.alt{background:linear-gradient(135deg,var(--pink),var(--roxo));color:#fff;}
+.controles-sim{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:10px;padding:.75rem;margin-bottom:1rem;display:flex;flex-direction:column;gap:.7rem;}
+.ctrl-label{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.35rem;text-align:center;}
+.ctrl-row{display:flex;gap:.35rem;justify-content:center;flex-wrap:wrap;}
+.ctrl-btn{padding:.45rem .7rem;border:1px solid var(--card-borda);border-radius:6px;background:rgba(255,255,255,.03);color:var(--cinza);font-family:'Space Mono',monospace;font-size:.62rem;cursor:pointer;transition:all .18s;}
+.ctrl-btn.ativo{border-color:var(--amarelo);color:var(--amarelo);background:rgba(200,255,0,.1);box-shadow:0 0 10px rgba(200,255,0,.12);}
+.resumo-rodada{background:rgba(0,0,0,.24);border:1px solid var(--card-borda);border-radius:10px;padding:.75rem;margin:.65rem 0;}
+.resumo-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--amarelo);letter-spacing:.05em;text-align:center;margin-bottom:.45rem;}
+.resultado-linha{display:flex;justify-content:space-between;align-items:center;padding:.32rem .1rem;border-bottom:1px solid rgba(255,255,255,.05);font-size:.76rem;}
+.resultado-linha:last-child{border-bottom:none;}
+.resultado-placar{font-family:'Bebas Neue',sans-serif;font-size:1.25rem;color:var(--branco);}
+.hist-actions{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.55rem;}
+.hist-actions .btn-avancar{flex:1;margin-top:0;min-width:130px;}
+.campanha-tag{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--cinza);text-align:center;margin-top:.35rem;}
+
+.modo-jogo-box{position:relative;z-index:1;margin-top:1.1rem;width:100%;max-width:460px;background:rgba(0,0,0,.16);border:1px solid var(--card-borda);border-radius:12px;padding:.85rem;}
+.modo-jogo-titulo{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--cinza);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.55rem;}
+.modo-jogo-btns{display:flex;gap:.5rem;justify-content:center;flex-wrap:wrap;}
+.btn-modo-jogo{flex:1;min-width:150px;padding:.65rem .8rem;border:1px solid var(--card-borda);border-radius:8px;background:rgba(255,255,255,.04);color:var(--cinza);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.04em;cursor:pointer;transition:all .18s;}
+.btn-modo-jogo.ativo{border-color:var(--amarelo);color:var(--amarelo);background:rgba(200,255,0,.1);box-shadow:0 0 16px rgba(200,255,0,.12);}
+.real-select-wrap{display:none;margin-top:.75rem;}
+.real-select-wrap.show{display:block;}
+.select-real{width:100%;padding:.72rem;border-radius:8px;border:1px solid var(--card-borda);background:rgba(20,0,45,.85);color:var(--branco);font-family:'Inter',sans-serif;font-weight:700;}
+.real-preview{margin-top:.55rem;font-size:.7rem;color:var(--cinza);line-height:1.45;}
+.dado.bloqueado{opacity:.45;pointer-events:none;filter:grayscale(.7);}
+
+.conquista-box,.ranking-box{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:12px;padding:1rem;margin:.8rem 0;}
+.conquista-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:.45rem;margin-top:.65rem;}
+.conquista-item{background:rgba(0,0,0,.22);border:1px solid rgba(255,255,255,.08);border-radius:9px;padding:.55rem;text-align:center;font-size:.68rem;line-height:1.25;}
+.conquista-item .c-ico{display:block;font-size:1.45rem;margin-bottom:.22rem;}
+.ranking-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.42rem .15rem;border-bottom:1px solid rgba(255,255,255,.05);font-size:.72rem;}
+.ranking-row:last-child{border-bottom:none;}
+.ranking-pos{font-family:'Bebas Neue',sans-serif;font-size:1.15rem;color:var(--amarelo);width:28px;text-align:center;}
+.ranking-main{flex:1;line-height:1.25;}
+.ranking-sub{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);margin-top:.08rem;}
+.ranking-score{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;color:var(--amarelo);min-width:42px;text-align:right;}
+.config-dupla{display:grid;grid-template-columns:1fr;gap:.65rem;position:relative;z-index:1;width:100%;max-width:560px;margin-top:.75rem;}
+.config-card{background:rgba(0,0,0,.16);border:1px solid var(--card-borda);border-radius:12px;padding:.75rem;}
+.config-card .modo-jogo-titulo{margin-bottom:.5rem;}
+@media(min-width:560px){.config-dupla{grid-template-columns:1fr 1fr;}}
+
 </style>
 </head>
 <body>
@@ -186,13 +228,57 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
   <div class="copa-logo">COPA 2026</div>
   <div class="copa-sub">Monte Sua Seleção dos Sonhos</div>
   <div class="copa-flags">🇺🇸 🇨🇦 🇲🇽</div>
-  <p class="estilo-label">Estilo de jogo</p>
+  <div class="modo-jogo-box">
+    <div class="modo-jogo-titulo">Escolha como quer jogar</div>
+    <div class="modo-jogo-btns">
+      <button class="btn-modo-jogo ativo" id="modo-personalizado" onclick="setModoJogo('personalizado')">🎲 Time personalizado</button>
+      <button class="btn-modo-jogo" id="modo-real" onclick="setModoJogo('real')">🏆 Seleção real</button>
+    </div>
+    <div class="real-select-wrap" id="real-select-wrap">
+      <select class="select-real" id="select-real" onchange="atualizarPreviewReal()"></select>
+      <div class="real-preview" id="real-preview">Escolha uma das 48 seleções carregadas do Firebase.</div>
+    </div>
+  </div>
+  <div class="config-dupla">
+    <div class="config-card">
+      <div class="modo-jogo-titulo">Dificuldade</div>
+      <div class="modo-jogo-btns">
+        <button class="btn-modo-jogo" id="dif-facil" onclick="setDificuldade('facil')">🟢 Fácil</button>
+        <button class="btn-modo-jogo ativo" id="dif-normal" onclick="setDificuldade('normal')">🟡 Normal</button>
+        <button class="btn-modo-jogo" id="dif-dificil" onclick="setDificuldade('dificil')">🔴 Difícil</button>
+        <button class="btn-modo-jogo" id="dif-lendario" onclick="setDificuldade('lendario')">☠️ Lendário</button>
+      </div>
+    </div>
+    <div class="config-card">
+      <div class="modo-jogo-titulo">Narrador</div>
+      <div class="modo-jogo-btns">
+        <button class="btn-modo-jogo ativo" id="nar-aleatorio" onclick="setNarrador('aleatorio')">🎲 Aleatório</button>
+        <button class="btn-modo-jogo" id="nar-classico" onclick="setNarrador('classico')">🎙️ Clássico</button>
+        <button class="btn-modo-jogo" id="nar-epico" onclick="setNarrador('epico')">🔥 Épico</button>
+        <button class="btn-modo-jogo" id="nar-resenha" onclick="setNarrador('resenha')">😂 Resenha</button>
+        <button class="btn-modo-jogo" id="nar-radio" onclick="setNarrador('radio')">📻 Rádio raiz</button>
+        <button class="btn-modo-jogo" id="nar-moderno" onclick="setNarrador('moderno')">⚡ Moderno</button>
+      </div>
+    </div>
+    <div class="config-card">
+      <div class="modo-jogo-titulo">Comentarista</div>
+      <div class="modo-jogo-btns">
+        <button class="btn-modo-jogo ativo" id="com-aleatorio" onclick="setComentarista('aleatorio')">🎲 Aleatório</button>
+        <button class="btn-modo-jogo" id="com-tecnico" onclick="setComentarista('tecnico')">🎯 Técnico</button>
+        <button class="btn-modo-jogo" id="com-regra" onclick="setComentarista('regra')">⚖️ Regra clara</button>
+        <button class="btn-modo-jogo" id="com-corneta" onclick="setComentarista('corneta')">📣 Corneta</button>
+        <button class="btn-modo-jogo" id="com-enciclopedia" onclick="setComentarista('enciclopedia')">📚 Enciclopédia</button>
+      </div>
+    </div>
+  </div>
+  <div id="transmissao-preview" style="font-family:'Space Mono',monospace;font-size:.62rem;color:var(--cinza);margin-top:.35rem;position:relative;z-index:1;letter-spacing:.03em;">🎲 Transmissão aleatória a cada Copa</div>
+  <p class="estilo-label">Estilo / formação inicial</p>
   <div class="estilo-btns">
     <button class="btn-estilo ativo" onclick="setEstilo('equilibrado',this)">Equilibrado</button>
     <button class="btn-estilo" onclick="setEstilo('defensivo',this)">Defensivo</button>
     <button class="btn-estilo" onclick="setEstilo('ofensivo',this)">Ofensivo</button>
   </div>
-  <p style="font-size:.7rem;color:var(--cinza);max-width:420px;line-height:1.5;position:relative;z-index:1;margin-top:.8rem;">
+  <p id="intro-desc" style="font-size:.7rem;color:var(--cinza);max-width:420px;line-height:1.5;position:relative;z-index:1;margin-top:.8rem;">
   Sorteie uma seleção por vez e escolha 1 jogador dela. Monte 11 titulares com craques reais da Copa 2026. Seu time substitui uma seleção de pouca expressão e disputa os grupos e chaves oficiais.</p>
   <button class="btn-jogar" id="btn-comecar" onclick="iniciar()" disabled style="opacity:.5">⏳ Carregando dados...</button>
   <div id="load-status" style="font-family:'Space Mono',monospace;font-size:.66rem;color:var(--cinza);margin-top:.8rem;position:relative;z-index:1;letter-spacing:.05em;">Conectando ao Firebase...</div>
@@ -244,6 +330,26 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
       </div>
       <div id="copa-art-panel"></div>
       <div id="copa-stats-panel" style="display:none"></div>
+    </div>
+    <div class="controles-sim" id="controles-sim" style="display:none">
+      <div>
+        <div class="ctrl-label">Velocidade da simulação</div>
+        <div class="ctrl-row">
+          <button class="ctrl-btn ativo" id="vel-1" onclick="setVelocidade(1)">1x</button>
+          <button class="ctrl-btn" id="vel-2" onclick="setVelocidade(2)">2x</button>
+          <button class="ctrl-btn" id="vel-4" onclick="setVelocidade(4)">4x</button>
+          <button class="ctrl-btn" id="vel-8" onclick="setVelocidade(8)">8x</button>
+        </div>
+      </div>
+      <div>
+        <div class="ctrl-label">Mudança tática durante a Copa</div>
+        <div class="ctrl-row">
+          <button class="ctrl-btn ativo" id="tat-equilibrado" onclick="setTatica('equilibrado')">⚖️ Equilibrado</button>
+          <button class="ctrl-btn" id="tat-defensivo" onclick="setTatica('defensivo')">🛡️ Defensivo</button>
+          <button class="ctrl-btn" id="tat-ofensivo" onclick="setTatica('ofensivo')">⚡ Ofensivo</button>
+          <button class="ctrl-btn" id="tat-contra" onclick="setTatica('contra')">🏃 Contra-ataque</button>
+        </div>
+      </div>
     </div>
     <div id="jogos-cont"></div>
     <button class="btn-novo" onclick="location.reload()">🎲 JOGAR NOVAMENTE</button>
@@ -310,9 +416,10 @@ async function carregarDados(){
       // formato esperado: {nome, e (emoji), r (overall), j: [{n,p,r}]}
       // Normaliza: jogadores podem vir com {n,p,r}; o jogo usa {n,pos,r}
       const jogadores = (x.j||[]).map(p => ({ n: p.n, pos: p.pos||p.p, r: p.r }));
-      wc[x.nome] = { e: x.e, r: x.r, j: jogadores };
+      wc[x.nome] = { e: x.e, r: x.r, fifaRank: x.fifaRank || x.rank || x.rk || null, prevRank: x.prevRank || x.previousRank || null, j: jogadores };
     });
     window.WC = wc;
+    if (typeof aplicarRankingOficial === 'function') aplicarRankingOficial();
 
     // 2) Config (grupos + fracas) no doc "config/torneio"
     statusEl.textContent = 'Carregando grupos...';
@@ -322,6 +429,8 @@ async function carregarDados(){
       window.GRUPOS = c.grupos || {};
       window.FRACAS = c.fracas || [];
     }
+    if (typeof popularSelectSelecoesReais === 'function') popularSelectSelecoesReais();
+    if (typeof atualizarModoInicio === 'function') atualizarModoInicio();
 
     const nSel = Object.keys(window.WC).length;
     if (nSel === 0) throw new Error('Nenhuma seleção encontrada no Firestore.');
@@ -350,6 +459,22 @@ let usadas=[]; // seleções já sorteadas
 let artilharia={}; // meus gols
 let artilhariaCopa={}; // todos os gols da Copa
 let copaStats={jogos:0,gp:0,gc:0,fin:0,finAlvo:0,esc:0,faltas:0,amarelos:0,defesas:0};
+let velocidadeSim=1;
+let taticaAtual='equilibrado';
+let campanhaResumo={fase:'Montagem',v:0,e:0,d:0,gp:0,gc:0,resultado:'Em andamento'};
+let modoJogo='personalizado';
+let selecaoRealEscolhida=null;
+let grupoJogadorReal=null;
+let nomeMeuTime='Seu Time';
+let emojiMeuTime='🌟';
+let dadoRolando=false;
+let dificuldade='normal';
+let narrador='aleatorio';
+let comentarista='aleatorio';
+let narradorResolvido='classico';
+let comentaristaResolvido='tecnico';
+let conquistasUltimaCampanha=[];
+
 
 const FORM={
   equilibrado:{nome:'4-3-3',slots:['GOL','ZAG','ZAG','LAT','LAT','MED','MED','MEI','ATA','ATA','ATA']},
@@ -362,6 +487,173 @@ function setEstilo(e,btn){
   document.querySelectorAll('.btn-estilo').forEach(b=>b.classList.remove('ativo'));
   btn.classList.add('ativo');
 }
+
+function setVelocidade(v){
+  velocidadeSim=v;
+  document.querySelectorAll('[id^="vel-"]').forEach(b=>b.classList.remove('ativo'));
+  const el=document.getElementById('vel-'+v);if(el)el.classList.add('ativo');
+}
+function setTatica(t){
+  taticaAtual=t;
+  document.querySelectorAll('[id^="tat-"]').forEach(b=>b.classList.remove('ativo'));
+  const el=document.getElementById('tat-'+t);if(el)el.classList.add('ativo');
+}
+
+function setDificuldade(d){
+  dificuldade=d;
+  document.querySelectorAll('[id^="dif-"]').forEach(b=>b.classList.remove('ativo'));
+  const el=document.getElementById('dif-'+d);if(el)el.classList.add('ativo');
+}
+function setNarrador(n){
+  narrador=n;
+  document.querySelectorAll('[id^="nar-"]').forEach(b=>b.classList.remove('ativo'));
+  const el=document.getElementById('nar-'+n);if(el)el.classList.add('ativo');
+  atualizarPreviewTransmissao(false);
+}
+function setComentarista(c){
+  comentarista=c;
+  document.querySelectorAll('[id^="com-"]').forEach(b=>b.classList.remove('ativo'));
+  const el=document.getElementById('com-'+c);if(el)el.classList.add('ativo');
+  atualizarPreviewTransmissao(false);
+}
+const NARRADORES_OPCOES=['classico','epico','resenha','radio','moderno'];
+const COMENTARISTAS_OPCOES=['tecnico','regra','corneta','enciclopedia'];
+function nomeNarrador(n){return (VOZES_NARRADOR[n]||VOZES_NARRADOR.classico).tag;}
+function nomeComentarista(c){return (VOZES_COMENTARISTA[c]||VOZES_COMENTARISTA.tecnico).tag;}
+function getNarradorAtual(){return narrador==='aleatorio'?narradorResolvido:narrador;}
+function getComentaristaAtual(){return comentarista==='aleatorio'?comentaristaResolvido:comentarista;}
+function resolverTransmissaoAleatoria(){
+  narradorResolvido = narrador==='aleatorio' ? rnd(NARRADORES_OPCOES) : narrador;
+  comentaristaResolvido = comentarista==='aleatorio' ? rnd(COMENTARISTAS_OPCOES) : comentarista;
+  atualizarPreviewTransmissao(true);
+}
+function atualizarPreviewTransmissao(sorteado){
+  const el=document.getElementById('transmissao-preview');
+  if(!el)return;
+  if(sorteado){
+    el.innerHTML=`🎙️ Transmissão sorteada: <b>${nomeNarrador(narradorResolvido)}</b> + <b>${nomeComentarista(comentaristaResolvido)}</b>`;
+  }else if(narrador==='aleatorio'||comentarista==='aleatorio'){
+    el.textContent='🎲 Transmissão aleatória a cada Copa';
+  }else{
+    el.innerHTML=`🎙️ Transmissão escolhida: <b>${nomeNarrador(narrador)}</b> + <b>${nomeComentarista(comentarista)}</b>`;
+  }
+}
+function getDificuldadeCfg(){
+  return {
+    facil:{nome:'Fácil',meuBonus:4,advBonus:-2,golPro:1.12,golContra:.82,score:0.85},
+    normal:{nome:'Normal',meuBonus:0,advBonus:0,golPro:1,golContra:1,score:1},
+    dificil:{nome:'Difícil',meuBonus:-2,advBonus:3,golPro:.9,golContra:1.12,score:1.25},
+    lendario:{nome:'Lendário',meuBonus:-5,advBonus:6,golPro:.78,golContra:1.26,score:1.6}
+  }[dificuldade] || {nome:'Normal',meuBonus:0,advBonus:0,golPro:1,golContra:1,score:1};
+}
+const VOZES_NARRADOR={
+  classico:{tag:'Narrador clássico',abertura:['Bola rolando, emoção em campo.','Jogo começa com clima de decisão.','O espetáculo está autorizado.'],gol:[
+    n=>`Balançou a rede! ${n} finaliza com categoria.`,
+    n=>`${n} aproveita a chance e manda para o fundo do barbante.`,
+    n=>`Tá lá dentro! ${n} aparece no momento certo.`
+  ],golaço:[
+    n=>`Que pintura de ${n}! Pode emoldurar.`,
+    n=>`${n} acertou onde a coruja dorme. Golaço!`,
+    n=>`Obra de arte! ${n} fez o estádio levantar.`
+  ],contra:[
+    n=>`${n} castiga a defesa, que dormiu no ponto.`,
+    n=>`${n} aproveita o vacilo e coloca na rede.`,
+    n=>`${n} não perdoa a falha defensiva.`
+  ]},
+  epico:{tag:'Narrador épico',abertura:['Bem-vindos a mais uma noite de Copa!','Haja coração, porque isso aqui vale história!','A bola vai rolar e o mundo vai parar!'],gol:[
+    n=>`GOOOOOOOL! ${n} explode a torcida e muda o destino da Copa!`,
+    n=>`Olha o gol! Olha o gol! ${n} chama a responsabilidade!`,
+    n=>`É teste cardíaco! ${n} manda para a rede e incendeia o estádio!`
+  ],golaço:[
+    n=>`MEU DEUS DO CÉU! ${n} acaba de fazer um gol antológico!`,
+    n=>`Isso não foi gol, foi capítulo de documentário! ${n}!`,
+    n=>`Senhoras e senhores, ${n} escreveu uma pintura em forma de gol!`
+  ],contra:[
+    n=>`Gol do adversário! ${n} silencia o estádio neste momento dramático.`,
+    n=>`A defesa bobeou e ${n} não teve piedade.`,
+    n=>`É Copa do Mundo! Piscou, ${n} guardou.`
+  ]},
+  resenha:{tag:'Narrador resenha',abertura:['Olho no lance que hoje promete bagunça.','A bola vai rolar e a resenha está garantida.','Prepare o coração e o meme.'],gol:[
+    n=>`Foi, foi, foi ele! ${n} balançou o capim no fundo do gol!`,
+    n=>`${n} bateu, ela entrou e acabou a conversa.`,
+    n=>`Caixa! ${n} mandou a redonda para passear na rede.`
+  ],golaço:[
+    n=>`Pelo amor dos meus filhinhos! Que golaço de ${n}!`,
+    n=>`${n} chutou essa bola com endereço, CEP e firma reconhecida.`,
+    n=>`Confira comigo no replay: ${n} acabou de cometer uma pintura.`
+  ],contra:[
+    n=>`A defesa abriu o portão da chácara e ${n} entrou sorrindo.`,
+    n=>`${n} agradeceu a gentileza e guardou.`,
+    n=>`O zagueiro foi comprar pipoca e ${n} fez o gol.`
+  ]},
+  radio:{tag:'Narrador rádio raiz',abertura:['Abrem-se as cortinas e começa o espetáculo.','Ripa na bola, que lá vem emoção.','O tempo passa, o drama cresce e a bola rola.'],gol:[
+    n=>`Pimba na gorduchinha! ${n} manda a bola no barbante!`,
+    n=>`Sai daí que lá vem bala! ${n} estufa a rede!`,
+    n=>`Uma beleza de gol! ${n} faz a torcida cantar.`
+  ],golaço:[
+    n=>`Ripa na chulipa! ${n} acerta uma pancada monumental!`,
+    n=>`É fogo no boné do guarda! Que pintura de ${n}!`,
+    n=>`Aguenta coração! ${n} faz um golaço de almanaque.`
+  ],contra:[
+    n=>`Tenta passar, passa e marca! ${n} coloca no fundo da rede.`,
+    n=>`A bola viaja, a defesa para e ${n} comemora.`,
+    n=>`O tempo passa e o castigo vem: gol de ${n}.`
+  ]},
+  moderno:{tag:'Narrador moderno',abertura:['Eu quero é gritar gol — bola rolando!','A emoção tem nome e hoje começa aqui.','Olha ele aí, jogo valendo Copa!'],gol:[
+    n=>`Sabe de quem? ${n}! É gol, é dele, é Copa!`,
+    n=>`Guooooool! ${n} coloca no fundo da rede!`,
+    n=>`${n} aparece livre e faz o estádio explodir.`
+  ],golaço:[
+    n=>`É o nome da emoção! ${n} faz um golaço absurdo!`,
+    n=>`Olha ele aí! ${n} tirou da cartola uma jogada genial!`,
+    n=>`Guooooool de placa! ${n} fez uma pintura moderna.`
+  ],contra:[
+    n=>`Sabe de quem? Do adversário. ${n} castiga sem dó.`,
+    n=>`${n} bate forte e muda tudo no placar.`,
+    n=>`Olha ele aí: ${n} aproveita e guarda.`
+  ]}
+};
+
+const VOZES_COMENTARISTA={
+  tecnico:{tag:'Comentarista técnico',frases:{gol:['A movimentação antes da finalização foi decisiva.','O espaço apareceu porque a linha defensiva atrasou.','É mérito da construção da jogada.'],golaço:['Tecnicamente é um lance dificílimo.','Controle corporal perfeito na finalização.','É execução de jogador acima da média.'],erro:['A decisão foi ruim, ele tinha passe melhor.','Faltou capricho no último toque.','O time ficou muito espaçado nesse lance.'],var:['O lance é ajustado, precisa ver o momento exato do passe.','A câmera lateral vai definir tudo.','A regra precisa ser aplicada sem achismo.'],cartao:['Cartão bem aplicado pela intensidade da entrada.','Ele chegou atrasado e assumiu o risco.','O árbitro tenta controlar o jogo cedo.'],defesa:['Essa defesa vale como gol.','O goleiro fechou muito bem o ângulo.','Leitura perfeita do goleiro.'],penalti:['Agora é mais psicológico do que técnica.','O cobrador precisa escolher o canto e sustentar a decisão.','O goleiro tenta ganhar no olhar.'],geral:['O desenho tático explica muita coisa.','Esse dado é importante para entender o jogo.','O time precisa compactar melhor.']}},
+  regra:{tag:'Comentarista de arbitragem',frases:{gol:['A princípio, gol legal. Nada que invalide o lance.','O árbitro olhou para o assistente e confirmou.','Sem infração no início da jogada.'],golaço:['Gol legal e muito bem construído.','Não há nada irregular, só categoria mesmo.','Pode validar sem medo.'],erro:['Segue o jogo. Não foi nada.','Contato normal de jogo.','Não vejo falta no lance.'],var:['A regra é clara: precisa de imagem conclusiva.','Se houver interferência, tem que anular.','O árbitro precisa revisar com calma.'],cartao:['Cartão bem aplicado. Ele interrompeu ataque promissor.','Foi imprudente, o amarelo é correto.','Se pegar com intensidade maior, pode virar vermelho.'],defesa:['Lance limpo do goleiro.','Sem falta no goleiro, jogada normal.','Defesa legal, nada a marcar.'],penalti:['Se o goleiro se adiantar, pode voltar.','O pé de apoio e o movimento do goleiro são decisivos.','Na cobrança, qualquer invasão pode ser revisada.'],geral:['O árbitro acertou ao deixar seguir.','O critério disciplinar precisa ser mantido.','O jogo está quente e ele precisa controlar.']}},
+  corneta:{tag:'Comentarista corneta',frases:{gol:['A defesa marcou Wi-Fi: tinha sinal, mas não conectou.','Esse zagueiro aí ficou olhando o lance igual turista.','Gol merecido, porque a marcação foi uma mãe.'],golaço:['Cê tá de brincadeira! Isso foi sacanagem com o goleiro.','Esse aí acordou craque hoje.','Pode fechar o estádio depois dessa.'],erro:['Cabeça de bagre! Era só empurrar.','Essa bola ainda está subindo.','Fez o mais difícil: perdeu.'],var:['Ih, vai ter novela e capítulo extra.','Depois do VAR, até comemoração tem que esperar recibo.','O estádio inteiro virou advogado agora.'],cartao:['Foi tomar banho mais cedo por burrice.','Chegou atrasado e ainda reclamou. Aí complica.','Essa entrada foi de quem confundiu futebol com demolição.'],defesa:['Hoje o goleiro não trouxe luva, trouxe ímã.','Botou uma parede no meio do caminho.','O atacante já estava comemorando, coitado.'],penalti:['Cavadinha agora é coragem ou irresponsabilidade.','Se bater mal, vai virar meme até amanhã.','Pressão pura: joelho vira gelatina.'],geral:['Que fase!','Aí é brincadeira.','O futebol não perdoa.']}},
+  enciclopedia:{tag:'Comentarista enciclopédia',frases:{gol:['Esse tipo de jogada lembra muito as Copas dos anos 90.','Historicamente, gol nesse momento muda completamente a partida.','Não é coincidência: o time vinha criando por aquele lado.'],golaço:['Gol desse porte entra para a memória da competição.','É lance raro, de jogador que decide Copa.','Esse gol vai aparecer em qualquer retrospectiva.'],erro:['Em mata-mata, esse tipo de chance perdida costuma custar caro.','A estatística cobra esse desperdício depois.','Historicamente, quem perde gol assim sofre.'],var:['Desde a chegada do VAR, esse tipo de lance exige paciência.','A tecnologia entra para reduzir o erro claro.','Esse detalhe pode mudar uma campanha inteira.'],cartao:['Cartão em jogo eliminatório altera todo o comportamento defensivo.','A equipe agora precisa calcular melhor as abordagens.','Historicamente, expulsões mudam Copas.'],defesa:['Defesas assim sustentam campanhas campeãs.','Esse lance pode pesar na eleição de melhor goleiro.','Goleiro grande aparece em momento grande.'],penalti:['Disputa de pênaltis tem memória própria na Copa.','Aqui pesa histórico, pressão e repertório.','Cada cobrança altera o psicológico da próxima.'],geral:['É preciso contextualizar.','Esse dado é importante.','O desenho histórico do confronto pesa.']}}
+};
+
+function textoNarradorGol(nome,tipo,contra=false){
+  const voz=VOZES_NARRADOR[getNarradorAtual()]||VOZES_NARRADOR.classico;
+  const detalhe={
+    'chute de fora':'num chute de fora da área',
+    'cabeçada':'de cabeça, subindo mais que todo mundo',
+    'contra-ataque':'num contra-ataque fulminante',
+    'pênalti':'de pênalti, com frieza absurda',
+    'bicicleta':'de bicicleta, coisa de maluco',
+    'driblando':'depois de driblar a marcação inteira',
+    'falta':'numa cobrança de falta venenosa',
+    'descuido':'aproveitando uma falha defensiva',
+  }[tipo] || 'num lance rápido';
+  const pool=contra?voz.contra:(['bicicleta','falta','chute de fora','driblando'].includes(tipo)?voz.golaço:voz.gol);
+  return rnd(pool)(nome)+` Foi ${detalhe}.`;
+}
+function textoComentario(tipo){
+  const perfil=VOZES_COMENTARISTA[getComentaristaAtual()]||VOZES_COMENTARISTA.tecnico;
+  const mapa=perfil.frases||{};
+  const pool=mapa[tipo]||mapa.geral||['Comentário importante sobre o lance.'];
+  return `<div class="ev-coment"><span class="ev-voz">${perfil.tag}</span>${rnd(pool)}</div>`;
+}
+function eventoComComentario(txt,tipo){
+  return `${txt}${textoComentario(tipo||'geral')}`;
+}
+function registrarJogadorDescoberto(j){
+  try{
+    const key='wc2026_album_jogadores_v1';
+    const arr=JSON.parse(localStorage.getItem(key)||'[]');
+    const id=`${j.sel||selSorteada||''}|${j.n||j.nome}`;
+    if(id&&!arr.includes(id)){arr.push(id);localStorage.setItem(key,JSON.stringify(arr.slice(0,5000)));}
+  }catch(e){}
+}
+function albumCount(){try{return JSON.parse(localStorage.getItem('wc2026_album_jogadores_v1')||'[]').length;}catch(e){return 0;}}
 
 // ═══════════ SOM (Web Audio) ═══════════
 let AC=null;
@@ -399,6 +691,7 @@ function tocarCartao(){beep(300,.4,.08,'sawtooth');}
 
 // ═══════════ UTILS ═══════════
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const simSleep=ms=>sleep(Math.max(35,ms/velocidadeSim));
 const rnd=a=>a[Math.floor(Math.random()*a.length)];
 const chance=p=>Math.random()<p;
 function randPoisson(l){const L=Math.exp(-l);let k=0,p=1;do{k++;p*=Math.random();}while(p>L);return k-1;}
@@ -408,13 +701,162 @@ function getF(){return FORM[estilo];}
 // Nomes de seleções
 function nomesSel(){return Object.keys(WC);}
 
+
+// ═══════════ RANKING FIFA OFICIAL — 11/06/2026 ═══════════
+// Usado como desempate final. O Firebase pode sobrescrever com fifaRank/rank/rk se você atualizar depois.
+const FIFA_RANKING_OFICIAL_JUN_2026 = {
+  "Argentina":1,"Espanha":2,"Spain":2,"França":3,"France":3,"Inglaterra":4,"England":4,"Portugal":5,"Brasil":6,"Brazil":6,"Marrocos":7,"Morocco":7,"Holanda":8,"Países Baixos":8,"Netherlands":8,"Bélgica":9,"Belgium":9,"Alemanha":10,"Germany":10,"Croácia":11,"Croatia":11,"Itália":12,"Italy":12,"Colômbia":13,"Colombia":13,"México":14,"Mexico":14,"Senegal":15,"Uruguai":16,"Uruguay":16,"Estados Unidos":17,"EUA":17,"USA":17,"United States":17,"Japão":18,"Japan":18,"Suíça":19,"Switzerland":19,"Irã":20,"Iran":20,"Dinamarca":21,"Denmark":21,"Turquia":22,"Türkiye":22,"Turkey":22,"Equador":23,"Ecuador":23,"Áustria":24,"Austria":24,"Coreia do Sul":25,"South Korea":25,"Nigéria":26,"Nigeria":26,"Austrália":27,"Australia":27,"Argélia":28,"Algeria":28,"Egito":29,"Egypt":29,"Canadá":30,"Canada":30,"Noruega":31,"Norway":31,"Ucrânia":32,"Ukraine":32,"Costa do Marfim":33,"Côte d'Ivoire":33,"Ivory Coast":33,"Panamá":34,"Panama":34,"Rússia":35,"Russia":35,"Polônia":36,"Poland":36,"País de Gales":37,"Wales":37,"Suécia":38,"Sweden":38,"Hungria":39,"Hungary":39,"Tchéquia":40,"Czechia":40,"República Tcheca":40,"Paraguai":41,"Paraguay":41,"Escócia":42,"Scotland":42,"Sérvia":43,"Serbia":43,"Camarões":44,"Cameroon":44,"Tunísia":45,"Tunisia":45,"RD Congo":46,"DR Congo":46,"Congo DR":46,"Eslováquia":47,"Slovakia":47,"Grécia":48,"Greece":48,"Venezuela":49,"Uzbequistão":50,"Uzbekistan":50,"Chile":51,"Peru":52,"Costa Rica":53,"Romênia":54,"Romania":54,"Qatar":56,"Catar":56,"Iraque":57,"Iraq":57,"Eslovênia":59,"Slovenia":59,"África do Sul":60,"South Africa":60,"Arábia Saudita":61,"Saudi Arabia":61,"Jordânia":63,"Jordan":63,"Bósnia e Herzegovina":64,"Bosnia & Herzegovina":64,"Bosnia and Herzegovina":64,"Honduras":65,"Cabo Verde":67,"Cape Verde":67,"Emirados Árabes":68,"United Arab Emirates":68,"Jamaica":71,"Gana":73,"Ghana":73,"Bolívia":77,"Bolivia":77,"Curaçao":82,"Curaçao":82,"Haiti":83,"Nova Zelândia":85,"New Zealand":85,"China":91,"Guatemala":97,"El Salvador":100,"Trinidad e Tobago":102,"Trinidad and Tobago":102,"Coreia do Norte":120,"North Korea":120,"Kuwait":133
+};
+function normalizarNomeSelecao(nome){
+  return String(nome||'').replace(/^\p{Emoji_Presentation}+\s*/u,'').replace(/^\p{Regional_Indicator}+\s*/u,'').trim();
+}
+function rankingOficialNome(nome){
+  const limpo=normalizarNomeSelecao(nome);
+  return FIFA_RANKING_OFICIAL_JUN_2026[limpo] || FIFA_RANKING_OFICIAL_JUN_2026[limpo.replace('United States','USA')] || null;
+}
+function aplicarRankingOficial(){
+  if(!window.WC)return;
+  Object.keys(WC).forEach(nome=>{
+    const rk=rankingOficialNome(nome);
+    if(rk && (!WC[nome].fifaRank || WC[nome].fifaRank>rk)) WC[nome].fifaRank=rk;
+  });
+}
+function getTimesDoTorneio(){
+  const lista=[];const visto=new Set();
+  Object.keys(window.GRUPOS||{}).sort().forEach(g=>{
+    (GRUPOS[g]||[]).forEach(n=>{if(WC[n]&&!visto.has(n)){visto.add(n);lista.push({nome:n,grupo:g});}});
+  });
+  if(!lista.length){Object.keys(WC||{}).forEach(n=>lista.push({nome:n,grupo:'?'}));}
+  return lista;
+}
+function popularSelectSelecoesReais(){
+  const sel=document.getElementById('select-real');if(!sel||!window.WC)return;
+  const lista=getTimesDoTorneio();
+  sel.innerHTML=lista.map(x=>`<option value="${x.nome.replace(/"/g,'&quot;')}">Grupo ${x.grupo} · ${WC[x.nome].e||''} ${x.nome} · RK ${fifaRankDaSelecao({n:x.nome,r:WC[x.nome].r})}</option>`).join('');
+  atualizarPreviewReal();
+}
+function setModoJogo(modo){
+  modoJogo=modo;
+  atualizarModoInicio();
+}
+function atualizarModoInicio(){
+  const p=document.getElementById('modo-personalizado'),r=document.getElementById('modo-real'),wrap=document.getElementById('real-select-wrap'),desc=document.getElementById('intro-desc'),btn=document.getElementById('btn-comecar');
+  if(p)p.classList.toggle('ativo',modoJogo==='personalizado');
+  if(r)r.classList.toggle('ativo',modoJogo==='real');
+  if(wrap)wrap.classList.toggle('show',modoJogo==='real');
+  if(desc)desc.textContent=modoJogo==='real'
+    ? 'Escolha uma das 48 seleções da Copa 2026 e simule a campanha real dela, pulando o sorteio dos dados. Você vê a equipe em campo antes de avançar.'
+    : 'Sorteie uma seleção por vez e escolha 1 jogador dela. Monte 11 titulares com craques reais da Copa 2026. Seu time substitui uma seleção de pouca expressão e disputa os grupos e chaves oficiais.';
+  if(btn&&!btn.disabled)btn.textContent=modoJogo==='real'?'🏆 ESCOLHER SELEÇÃO':'⚽ COMEÇAR';
+}
+function atualizarPreviewReal(){
+  const sel=document.getElementById('select-real'),prev=document.getElementById('real-preview');if(!sel||!prev||!WC[sel.value])return;
+  const nome=sel.value,s=WC[nome];
+  const g=grupoDaSelecao(nome)||'?';
+  prev.innerHTML=`${s.e||''} <b>${nome}</b> · Grupo ${g} · Overall ${s.r||'--'} · Ranking FIFA ${fifaRankDaSelecao({n:nome,r:s.r})} · ${s.j?s.j.length:0} jogadores cadastrados.`;
+}
+function grupoDaSelecao(nome){
+  for(const g of Object.keys(window.GRUPOS||{})){if((GRUPOS[g]||[]).includes(nome))return g;}
+  return null;
+}
+
+// ═══════════ REGULAMENTO OFICIAL FIFA 2026 ═══════════
+// Formato usado no jogo: 12 grupos de 4; avançam os 2 primeiros de cada grupo + os 8 melhores terceiros.
+// Critérios de classificação/desempate aplicados no jogo:
+// 1) Pontos; 2) Saldo de gols; 3) Gols marcados; 4) Pontuação de conduta da equipe;
+// 5) Ranking FIFA mais recente; 6) ranking anterior/força estimada como último recurso interno.
+function fifaRankDaSelecao(t){
+  if(!t)return 999;
+  const base=WC[t.n]||{};
+  const oficial=rankingOficialNome(t.n);
+  if(oficial) return oficial;
+  const rank=t.fifaRank || base.fifaRank || t.rank || base.rank || null;
+  if(rank!==null && rank!==undefined && !Number.isNaN(Number(rank))) return Number(rank);
+  return Math.max(1, Math.min(211, Math.round(220 - ((t.r||70)*2))));
+}
+function prevRankDaSelecao(t){
+  if(!t)return 999;
+  const base=WC[t.n]||{};
+  const rank=t.prevRank || base.prevRank || base.previousRank || null;
+  if(rank!==null && rank!==undefined && !Number.isNaN(Number(rank))) return Number(rank);
+  return fifaRankDaSelecao(t);
+}
+function garantirStatsFifa(t,grupo){
+  if(!t)return t;
+  if(typeof t.conduta!=='number')t.conduta=0;
+  if(!t.grupo&&grupo)t.grupo=grupo;
+  if(!t.fifaRank)t.fifaRank=fifaRankDaSelecao(t);
+  if(!t.prevRank)t.prevRank=prevRankDaSelecao(t);
+  return t;
+}
+function comparaFifa2026(a,b){
+  garantirStatsFifa(a);garantirStatsFifa(b);
+  const sgA=a.gp-a.gc, sgB=b.gp-b.gc;
+  return (b.pts-a.pts) || (sgB-sgA) || (b.gp-a.gp) || (b.conduta-a.conduta) || (fifaRankDaSelecao(a)-fifaRankDaSelecao(b)) || (prevRankDaSelecao(a)-prevRankDaSelecao(b)) || String(a.n).localeCompare(String(b.n));
+}
+function condutaAleatoria(){
+  // pontuação FIFA: cartão amarelo -1; vermelho indireto -3; vermelho direto -4; amarelo + vermelho direto -5.
+  let c=0;
+  const amarelos=Math.floor(Math.random()*3);
+  c-=amarelos;
+  if(chance(.08))c-=3;
+  else if(chance(.05))c-=4;
+  return c;
+}
+function condutaDoEvento(events){
+  let c=0;
+  (events||[]).forEach(e=>{
+    if(e.tipo==='amarelo')c-=1;
+    if(e.tipo==='vermelho')c-=String(e.txt||'').toLowerCase().includes('segundo') ? 3 : 4;
+  });
+  return c;
+}
+
 // ═══════════ MONTAGEM DO TIME ═══════════
 function iniciar(){
   if(!window.WC||!Object.keys(window.WC).length){alert('Os dados ainda não carregaram. Aguarde um instante.');return;}
   ac();
+  resolverTransmissaoAleatoria();
+  if(modoJogo==='real'){
+    iniciarSelecaoReal();
+    return;
+  }
+  nomeMeuTime='Seu Time';emojiMeuTime='🌟';selecaoRealEscolhida=null;grupoJogadorReal=null;
   document.getElementById('tela-inicio').style.display='none';
   document.getElementById('tela-montar').style.display='block';
+  const dr=document.querySelector('.dados-row');if(dr)dr.style.display='flex';
+  document.getElementById('sorteio-zona')?.style&& (document.getElementById('sorteio-zona').style.display='block');
   renderSlots();
+}
+function escolherMelhoresDaSelecao(nome){
+  const s=WC[nome];if(!s||!s.j||!s.j.length)return [];
+  const slots=getF().slots.slice();
+  const usados=new Set();const escolhidos=[];
+  slots.forEach(pos=>{
+    let best=-1,bj=null;
+    s.j.forEach((j,i)=>{if(usados.has(i))return;if(j.pos===pos && (best<0||j.r>bj.r)){best=i;bj=j;}});
+    if(best<0){s.j.forEach((j,i)=>{if(usados.has(i))return;if(best<0||j.r>bj.r){best=i;bj=j;}});}
+    if(best>=0){usados.add(best);escolhidos.push({...bj,sel:nome,emoji:s.e});}
+  });
+  return escolhidos.slice(0,11);
+}
+function iniciarSelecaoReal(){
+  const sel=document.getElementById('select-real');
+  const nome=sel&&sel.value?sel.value:null;
+  if(!nome||!WC[nome]){alert('Escolha uma seleção real para simular.');return;}
+  selecaoRealEscolhida=nome;grupoJogadorReal=grupoDaSelecao(nome);nomeMeuTime=nome;emojiMeuTime=WC[nome].e||'🏆';
+  meuTime=escolherMelhoresDaSelecao(nome);
+  meuTime.forEach(j=>registrarJogadorDescoberto({...j,sel:nome}));
+  if(meuTime.length<11){alert('Essa seleção não tem 11 jogadores cadastrados. Complete a base antes de simular.');return;}
+  escolhaPendente=false;dadoRolando=false;selSorteada=null;
+  document.getElementById('tela-inicio').style.display='none';
+  document.getElementById('tela-montar').style.display='block';
+  const dr=document.querySelector('.dados-row');if(dr)dr.style.display='none';
+  document.getElementById('elenco-zona').style.display='none';
+  document.getElementById('sort-pais').innerHTML=`${emojiMeuTime} ${nomeMeuTime}`;
+  document.getElementById('sort-hint').innerHTML=`Modo seleção real · Grupo ${grupoJogadorReal||'?'} · RK ${fifaRankDaSelecao({n:nomeMeuTime,r:WC[nomeMeuTime].r})}. Confira o time em campo e avance.`;
+  renderSlots();
+  const btn=document.getElementById('btn-confirmar');btn.classList.add('ativo');btn.textContent='▶️ SIMULAR COPA REAL';
 }
 
 let dadoDouradoUsado=false;
@@ -424,8 +866,8 @@ let modoDourado=false; // se true, só mostra craques 90+
 
 function rolarDado(){
   if(meuTime.length>=11)return;
+  if(dadoRolando){document.getElementById('sort-hint').textContent='🎲 O dado ainda está rolando...';return;}
   if(escolhaPendente){
-    // Já tem uma seleção sorteada esperando — não deixa rolar de novo
     document.getElementById('sort-hint').textContent='⚠️ Escolha um jogador desta seleção antes de rolar de novo!';
     document.getElementById('elenco-zona').scrollIntoView({behavior:'smooth',block:'center'});
     beep(200,.2,.1,'sawtooth');
@@ -435,12 +877,12 @@ function rolarDado(){
   if(!pool.length){usadas=[];}
   const pool2=nomesSel().filter(n=>!usadas.includes(n));
   const dado=document.getElementById('dado');
-  dado.classList.add('rolling');tocarDado();
+  dadoRolando=true;dado.classList.add('rolling','bloqueado');tocarDado();
   modoDourado=false;
   setTimeout(()=>{
-    dado.classList.remove('rolling');
+    dado.classList.remove('rolling','bloqueado');
     selSorteada=rnd(pool2);usadas.push(selSorteada);
-    escolhaPendente=true; // trava até escolher ou pular
+    escolhaPendente=true;dadoRolando=false;
     tocarSelecao();
     mostrarElenco();
   },500);
@@ -448,19 +890,19 @@ function rolarDado(){
 
 function rolarDadoDourado(){
   if(meuTime.length>=11||dadoDouradoUsado)return;
+  if(dadoRolando){document.getElementById('sort-hint').textContent='🎲 O dado ainda está rolando...';return;}
   if(escolhaPendente){document.getElementById('sort-hint').textContent='⚠️ Escolha um jogador da seleção atual primeiro!';beep(200,.2,.1,'sawtooth');return;}
   const dado=document.getElementById('dado-dourado');
-  dado.classList.add('rolling');tocarDadoDourado();
+  dadoRolando=true;dado.classList.add('rolling','bloqueado');tocarDadoDourado();
   modoDourado=true;
-  // Sorteia uma seleção que TENHA craque 90+
   const comCraque=nomesSel().filter(n=>WC[n].j.some(j=>j.r>=90));
   const pool=comCraque.length?comCraque:nomesSel();
   setTimeout(()=>{
-    dado.classList.remove('rolling');
+    dado.classList.remove('rolling','bloqueado');
     selSorteada=rnd(pool);
     dadoDouradoUsado=true;
     dado.classList.add('usado');
-    escolhaPendente=true;
+    escolhaPendente=true;dadoRolando=false;
     tocarDourado();
     mostrarElenco();
   },500);
@@ -503,12 +945,19 @@ function mostrarElenco(){
 }
 
 function pularSelecao(){
-  if(pulosRestantes<=0||!escolhaPendente)return;
-  pulosRestantes--;
+  if(pulosRestantes<=0||!escolhaPendente||modoDourado){
+    document.getElementById('sort-hint').textContent='⚠️ O pulo já foi usado ou não vale no dado dourado.';
+    beep(180,.2,.1,'sawtooth');
+    return;
+  }
+  pulosRestantes=0;
   escolhaPendente=false;
+  modoDourado=false;
+  selSorteada=null;
   document.getElementById('elenco-zona').style.display='none';
   document.getElementById('sort-pais').textContent='Pulou! Toque no dado';
-  document.getElementById('sort-hint').textContent='Você usou seu único pulo. Agora escolha um jogador de cada seleção.';
+  document.getElementById('sort-hint').textContent='Pulos restantes: 0 · agora escolha um jogador de cada seleção sorteada.';
+  const btnP=document.getElementById('btn-pular');if(btnP){btnP.style.display='none';btnP.classList.add('usado');}
   beep(300,.15,.1,'square');
 }
 
@@ -516,6 +965,7 @@ function escolherJogador(j){
   if(meuTime.length>=11)return;
   escolhaPendente=false;
   meuTime.push({...j,sel:selSorteada,emoji:WC[selSorteada].e});
+  registrarJogadorDescoberto({...j,sel:selSorteada});
   beep(700,.12,.12);
   renderSlots();
   document.getElementById('elenco-zona').style.display='none';
@@ -579,8 +1029,11 @@ function forcaMeuTime(){
 // ═══════════ SIMULAÇÃO DA COPA ═══════════
 function confirmarTime(){
   if(meuTime.length<11)return;
+  taticaAtual=estilo;
   document.getElementById('tela-montar').style.display='none';
   document.getElementById('tela-sim').style.display='block';
+  const cs=document.getElementById('controles-sim');if(cs)cs.style.display='flex';
+  setTatica(taticaAtual);
   simularCopa();
 }
 
@@ -607,8 +1060,8 @@ function regGolCopa(nomeSel){
 }
 function regMeusGols(golsPro){
   golsPro.forEach(g=>{
-    const key='Seu Time|'+g.nome;
-    artilhariaCopa[key]=artilhariaCopa[key]||{nome:g.nome,pos:'',time:'Seu Time',emoji:'🌟',r:g.r||80,g:0,voce:true};
+    const key=nomeMeuTime+'|'+g.nome;
+    artilhariaCopa[key]=artilhariaCopa[key]||{nome:g.nome,pos:'',time:nomeMeuTime,emoji:emojiMeuTime,r:g.r||80,g:0,voce:true};
     artilhariaCopa[key].g++;
   });
 }
@@ -616,52 +1069,68 @@ function regMeusGols(golsPro){
 async function simularCopa(){
   artilharia={};artilhariaCopa={};
   copaStats={jogos:0,gp:0,gc:0,fin:0,finAlvo:0,esc:0,faltas:0,amarelos:0,defesas:0};
+  campanhaResumo={fase:'Fase de grupos',v:0,e:0,d:0,gp:0,gc:0,resultado:'Em andamento',penaltisVencidos:0,maiorSaldo:-99,semUsarPulo:false,usouDourado:false,score:0};
+  const cs=document.getElementById('controles-sim');if(cs)cs.style.display='flex';
 
   // Montar grupos (clone)
   const grupos={};
   Object.keys(GRUPOS).forEach(g=>{
-    grupos[g]=GRUPOS[g].map(n=>({n,e:WC[n].e,r:WC[n].r,pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0,voce:false}));
+    grupos[g]=GRUPOS[g].map(n=>garantirStatsFifa({n,e:WC[n].e,r:WC[n].r,fifaRank:WC[n].fifaRank,prevRank:WC[n].prevRank,pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0,conduta:0,voce:false},g));
   });
 
-  // Inserir meu time substituindo uma FRACA sorteada
-  const fracasDisp=FRACAS.filter(f=>nomesSel().includes(f));
-  const substituida=rnd(fracasDisp);
-  let meuGrupo=null,idxSub=-1;
-  Object.keys(grupos).forEach(g=>{
-    const i=grupos[g].findIndex(t=>t.n===substituida);
-    if(i>=0){meuGrupo=g;idxSub=i;}
-  });
-  const meuRef={n:'Seu Time',e:'🌟',r:forcaMeuTime(),pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0,voce:true};
-  grupos[meuGrupo][idxSub]=meuRef;
+  // Define o time controlado: personalizado substitui uma seleção fraca; seleção real joga na própria vaga.
+  let substituida=null,meuGrupo=null,idxSub=-1,meuRef=null;
+  if(modoJogo==='real'&&selecaoRealEscolhida){
+    Object.keys(grupos).forEach(g=>{
+      const i=grupos[g].findIndex(t=>t.n===selecaoRealEscolhida);
+      if(i>=0){meuGrupo=g;idxSub=i;}
+    });
+    if(meuGrupo===null){alert('A seleção escolhida não foi encontrada nos grupos do Firebase.');return;}
+    meuRef=grupos[meuGrupo][idxSub];
+    meuRef.voce=true;meuRef.e=WC[selecaoRealEscolhida].e;meuRef.r=WC[selecaoRealEscolhida].r;meuRef.fifaRank=fifaRankDaSelecao(meuRef);
+    nomeMeuTime=meuRef.n;emojiMeuTime=meuRef.e;
+  }else{
+    const fracasDisp=FRACAS.filter(f=>nomesSel().includes(f));
+    substituida=rnd(fracasDisp.length?fracasDisp:nomesSel());
+    Object.keys(grupos).forEach(g=>{
+      const i=grupos[g].findIndex(t=>t.n===substituida);
+      if(i>=0){meuGrupo=g;idxSub=i;}
+    });
+    nomeMeuTime='Seu Time';emojiMeuTime='🌟';
+    meuRef=garantirStatsFifa({n:nomeMeuTime,e:emojiMeuTime,r:forcaMeuTime(),pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0,conduta:0,fifaRank:999,prevRank:999,voce:true},meuGrupo);
+    grupos[meuGrupo][idxSub]=meuRef;
+  }
 
   document.getElementById('sim-titulo').textContent='🏆 COPA 2026';
-  document.getElementById('sim-sub').innerHTML=`Você assumiu a vaga de ${WC[substituida].e} ${substituida} no <b>Grupo ${meuGrupo}</b>`;
+  document.getElementById('sim-sub').innerHTML=modoJogo==='real'
+    ? `Você está comandando ${emojiMeuTime} <b>${nomeMeuTime}</b> no <b>Grupo ${meuGrupo}</b>`
+    : `Você assumiu a vaga de ${WC[substituida].e} ${substituida} no <b>Grupo ${meuGrupo}</b>`;
   const cont=document.getElementById('jogos-cont');cont.innerHTML='';
 
   // ── FASE DE GRUPOS ──
   cont.innerHTML=`<div class="fase-titulo">📋 FASE DE GRUPOS · GRUPO ${meuGrupo}</div>`;
   const grupoTimes=grupos[meuGrupo];
-  const meusJogos=grupoTimes.filter(t=>!t.voce);
-  for(const adv of meusJogos){
-    const p=gerarPartida(adv,0);
+  const adversariosGrupo=grupoTimes.filter(t=>!t.voce);
+  for(let rodada=0;rodada<adversariosGrupo.length;rodada++){
+    const adv=adversariosGrupo[rodada];
+    const p=gerarPartida(adv,0,false);
     const idx=document.querySelectorAll('.jogo-card').length;
     const card=criarCard(p,idx);cont.appendChild(card);
     card.scrollIntoView({behavior:'smooth',block:'center'});
     await sleep(250);
     await jogarPartida(p,idx);
-    aplicarResultado(meuRef,adv,p.pro,p.contra);
+    aplicarResultado(meuRef,adv,p.pro,p.contra,{condA:p.condPro,condB:p.condContra});
+    registrarCampanha(p);
     regMeusGols(p.golsPro);
     for(let i=0;i<p.contra;i++)regGolCopa(adv.n);
+    const outros=adversariosGrupo.filter(t=>t!==adv);
+    const outroResultado=outros.length===2?simularJogoGrupo(outros[0],outros[1]):null;
     acumular(p);renderCopaLive();
+    const resultados=[{a:meuRef,b:adv,ga:p.pro,gb:p.contra}];
+    if(outroResultado)resultados.push(outroResultado);
+    const resumo=renderResumoRodada(`📋 RESULTADOS DA RODADA ${rodada+1}`,resultados,grupoTimes,meuGrupo);
+    cont.appendChild(resumo);resumo.scrollIntoView({behavior:'smooth',block:'start'});
     await esperarAvanco(idx);
-  }
-  // Jogos entre adversários do grupo
-  for(let i=0;i<grupoTimes.length;i++)for(let j=i+1;j<grupoTimes.length;j++){
-    const a=grupoTimes[i],b=grupoTimes[j];
-    if(a.voce||b.voce)continue;
-    const[ga,gb]=placarEntre(a.r,b.r);
-    aplicarResultado(a,b,ga,gb);
-    for(let x=0;x<ga;x++)regGolCopa(a.n);for(let x=0;x<gb;x++)regGolCopa(b.n);
   }
   // Outros grupos
   Object.keys(grupos).forEach(g=>{
@@ -680,13 +1149,15 @@ async function simularCopa(){
   cont.appendChild(tab);tab.scrollIntoView({behavior:'smooth',block:'start'});
   await sleep(400);
 
-  // Classificados: 2 por grupo + 8 melhores 3os
-  const prim=[],seg=[],terc=[];
+  // Classificados FIFA 2026: 2 primeiros de cada grupo + 8 melhores terceiros
+  const prim=[],seg=[],terc=[],rankings={};
   Object.keys(grupos).forEach(g=>{
-    const o=[...grupos[g]].sort(ordena);
+    const o=[...grupos[g]].map(t=>garantirStatsFifa(t,g)).sort(ordena);
+    o.forEach((t,i)=>{t.posGrupo=i+1;t.grupo=g;});
+    rankings[g]=o;
     prim.push(o[0]);seg.push(o[1]);terc.push(o[2]);
   });
-  terc.sort(ordena);
+  terc.sort(ordena); // melhores terceiros: pontos, SG, GP, conduta, ranking FIFA
   const mTerc=terc.slice(0,8);
   const c32=[...prim,...seg,...mTerc];
 
@@ -694,48 +1165,24 @@ async function simularCopa(){
   const passou=minhaPos<=2||(minhaPos===3&&mTerc.some(t=>t.voce));
 
   const ce=document.createElement('div');
-  ce.innerHTML=`<div class="fase-titulo">✅ CLASSIFICADOS (32)</div>
+  ce.innerHTML=`<div class="fase-titulo">✅ CLASSIFICADOS FIFA 2026 (32)</div>
     <div style="font-size:.74rem;color:${passou?'var(--amarelo)':'var(--pink)'};text-align:center;margin-bottom:.5rem;">
-    ${passou?`Você passou em ${minhaPos}º no Grupo ${meuGrupo}! 🎉`:`Você caiu na fase de grupos (${minhaPos}º). Mas a Copa segue até o fim! 💔`}</div>`;
+    ${passou?`Você passou em ${minhaPos}º no Grupo ${meuGrupo}! 🎉`:`Você caiu na fase de grupos (${minhaPos}º). Mas a Copa segue até o fim! 💔`}</div>
+    <div style="font-size:.62rem;color:var(--cinza);text-align:center;line-height:1.45;margin-bottom:.6rem;">
+      Critérios FIFA aplicados: PTS → SG → GP → conduta da equipe → ranking FIFA.
+    </div>
+    <div style="font-size:.64rem;color:var(--cinza);line-height:1.45;text-align:center;">
+      Melhores terceiros: ${mTerc.map(t=>`${t.e} ${t.n} (${t.pts} pts, SG ${t.gp-t.gc>0?'+':''}${t.gp-t.gc})`).join(' · ')}
+    </div>`;
   cont.appendChild(ce);ce.scrollIntoView({behavior:'smooth',block:'start'});
   await sleep(400);
   if(passou){tocarVitoria();await mostrarAlerta('🎉','CLASSIFICADO!',`Você passou em ${minhaPos}º no Grupo ${meuGrupo} e está no mata-mata!`,'');}
   else{tocarDerrota();await mostrarAlerta('💔','ELIMINADO NA FASE DE GRUPOS',`Você terminou em ${minhaPos}º no Grupo ${meuGrupo}. Mas veja como termina a Copa!`,'derrota');}
 
-  // ── MATA-MATA jogado por você (enquanto vivo) ──
-  const fases=['RODADA DE 32','OITAVAS DE FINAL','QUARTAS DE FINAL','SEMIFINAL','FINAL'];
-  let pool=c32.filter(t=>!t.voce);pool.sort(()=>Math.random()-.5);
-  let vivo=passou,faseSaiu=passou?null:'FASE DE GRUPOS',cheguei='GRUPOS',fi=1;
-
-  if(vivo){
-    for(const fase of fases){
-      const adv=pool[Math.floor(Math.random()*pool.length)]||pool[0];
-      cont.innerHTML+=`<div class="fase-titulo">${faseEmoji(fase)} ${fase}</div>`;
-      const p=gerarPartida(adv,fi,true);
-      const idx=document.querySelectorAll('.jogo-card').length;
-      const card=criarCard(p,idx);cont.appendChild(card);
-      card.scrollIntoView({behavior:'smooth',block:'center'});
-      await sleep(250);
-      await jogarPartida(p,idx);
-      regMeusGols(p.golsPro);
-      for(let i=0;i<p.contra;i++)regGolCopa(adv.n);
-      acumular(p);renderCopaLive();
-      // Som + alerta de vitória/derrota da partida (exceto a final, que tem alerta de Copa)
-      if(fase!=='FINAL'){
-        if(p.ganhou){tocarVitoria();await mostrarAlerta('✅','VITÓRIA!',`Você venceu ${adv.e} ${adv.n} por ${p.pro}×${p.contra} e avançou nas ${fase.toLowerCase()}!`,'');}
-        else{tocarDerrota();await mostrarAlerta('❌','DERROTA',`${adv.e} ${adv.n} venceu por ${p.contra}×${p.pro}. Fim da sua campanha nas ${fase.toLowerCase()}.`,'derrota');}
-      }
-      await esperarAvanco(idx);
-      pool=pool.filter(t=>t!==adv);
-      cheguei=fase;
-      if(!p.ganhou){vivo=false;faseSaiu=fase;break;}
-      fi++;
-    }
-  }
-
-  // ── Simular resto do bracket (silencioso) ──
-  const podio=simularBracket(c32);
-  if(vivo&&cheguei==='FINAL')podio.campeao={n:'Seu Time',e:'🌟',voce:true};
+  // ── MATA-MATA OFICIAL FIFA 2026 ──
+  const mataResult=await simularMataMataOficial(rankings,mTerc,meuRef,cont,passou);
+  let vivo=mataResult.vivo, faseSaiu=mataResult.faseSaiu, cheguei=mataResult.cheguei;
+  const podio=mataResult.podio;
 
   let badge,sub,venceu=false;
   if(vivo&&cheguei==='FINAL'){venceu=true;badge='🏆 CAMPEÃO DO MUNDO 2026!';sub='Você levantou a taça com seu time dos sonhos!';}
@@ -746,37 +1193,144 @@ async function simularCopa(){
   if(venceu){tocarCampeao();await mostrarAlerta('🏆','CAMPEÃO DO MUNDO!','Você conquistou a Copa de 2026 com seu time dos sonhos! Lenda absoluta! 🥇','campeao');}
   else{tocarEliminado();await mostrarAlerta('🥀','FIM DA SUA COPA',sub+' Veja o pódio e a artilharia completos abaixo.','derrota');}
 
+  campanhaResumo.semUsarPulo=(typeof pulosRestantes!=='undefined'&&pulosRestantes===1);
+  campanhaResumo.usouDourado=(typeof dadoDouradoUsado!=='undefined'&&dadoDouradoUsado);
+  campanhaResumo.score=calcularScoreCampanha(venceu,passou);
+  conquistasUltimaCampanha=calcularConquistasCampanha(venceu,passou,podio);
+  salvarRankingLocal(venceu);
   renderPodio(podio);
-  // Card compartilhável de campeão
-  if(venceu){
-    const cont=document.getElementById('jogos-cont');
-    const box=document.createElement('div');
-    box.className='campeao-share';
-    box.innerHTML=`
-      <div class="campeao-share-titulo">🏆 Você é CAMPEÃO! Compartilhe seu time:</div>
-      <div id="card-preview"></div>
-      <div class="campeao-btns">
-        <button class="btn-share" onclick="compartilharCampeao()">📤 Compartilhar</button>
-        <button class="btn-share alt" onclick="baixarCardCampeao()">⬇️ Baixar imagem</button>
-      </div>`;
-    cont.insertBefore(box,cont.firstChild);
-    // Preview do card
-    try{
-      const cv=gerarCardCampeao();
-      cv.style.width='100%';cv.style.maxWidth='320px';cv.style.borderRadius='12px';cv.style.display='block';cv.style.margin='0 auto';
-      document.getElementById('card-preview').appendChild(cv);
-    }catch(e){console.error(e);}
-  }
+  renderConquistasERanking();
+  // Card compartilhável da campanha — aparece vencendo ou perdendo
+  campanhaResumo.fase=venceu?'Campeão':(!passou?'Fase de grupos':faseSaiu);
+  campanhaResumo.resultado=venceu?'Campeão do Mundo':badge.replace(/<[^>]*>/g,'');
+  const shareBox=document.createElement('div');
+  shareBox.className='campeao-share';
+  shareBox.innerHTML=`
+    <div class="campeao-share-titulo">📤 Compartilhe sua equipe</div>
+    <div class="campanha-tag">${campanhaResumo.resultado} · ${campanhaResumo.v}V ${campanhaResumo.e}E ${campanhaResumo.d}D · ${campanhaResumo.gp} GP / ${campanhaResumo.gc} GC</div>
+    <div id="card-preview"></div>
+    <div class="campeao-btns">
+      <button class="btn-share" onclick="compartilharCampanha()">📤 Compartilhar</button>
+      <button class="btn-share alt" onclick="baixarCardCampanha()">⬇️ Baixar imagem</button>
+    </div>`;
+  cont.insertBefore(shareBox,cont.firstChild);
+  try{
+    const cv=gerarCardCampanha();
+    cv.style.width='100%';cv.style.maxWidth='320px';cv.style.borderRadius='12px';cv.style.display='block';cv.style.margin='0 auto';
+    document.getElementById('card-preview').appendChild(cv);
+  }catch(e){console.error(e);}
   document.getElementById('sim-badge').innerHTML=`<div style="font-family:'Bebas Neue';font-size:2rem;color:${venceu?'var(--amarelo)':'var(--pink)'}">${badge}</div>`;
   document.getElementById('sim-sub').textContent=sub;
   window.scrollTo({top:document.getElementById('sim-badge').offsetTop-20,behavior:'smooth'});
 }
 
-function faseEmoji(f){return{'RODADA DE 32':'🎯','OITAVAS DE FINAL':'⚔️','QUARTAS DE FINAL':'🏅','SEMIFINAL':'🔥','FINAL':'🏆'}[f]||'⚽';}
-function ordena(a,b){return b.pts-a.pts||(b.gp-b.gc)-(a.gp-a.gc)||b.gp-a.gp;}
-function aplicarResultado(a,b,ga,gb){
+function faseEmoji(f){return{'16 AVOS DE FINAL':'🎯','OITAVAS DE FINAL':'⚔️','QUARTAS DE FINAL':'🏅','SEMIFINAL':'🔥','FINAL':'🏆'}[f]||'⚽';}
+function ordena(a,b){return comparaFifa2026(a,b);}
+function aplicarResultado(a,b,ga,gb,meta={}){
+  garantirStatsFifa(a);garantirStatsFifa(b);
   a.j++;b.j++;a.gp+=ga;a.gc+=gb;b.gp+=gb;b.gc+=ga;
+  a.conduta += (typeof meta.condA==='number'?meta.condA:condutaAleatoria());
+  b.conduta += (typeof meta.condB==='number'?meta.condB:condutaAleatoria());
   if(ga>gb){a.v++;a.pts+=3;b.d++;}else if(ga===gb){a.emp++;a.pts++;b.emp++;b.pts++;}else{b.v++;b.pts+=3;a.d++;}
+}
+
+function registrarCampanha(p){
+  campanhaResumo.gp+=p.pro;campanhaResumo.gc+=p.contra;
+  const saldo=p.pro-p.contra;
+  campanhaResumo.maiorSaldo=Math.max(campanhaResumo.maiorSaldo||-99,saldo);
+  if(p.penaltis&&p.ganhou)campanhaResumo.penaltisVencidos=(campanhaResumo.penaltisVencidos||0)+1;
+  if(p.ganhou){campanhaResumo.v++;}
+  else if(!p.mata&&p.pro===p.contra){campanhaResumo.e++;}
+  else{campanhaResumo.d++;}
+}
+
+function simularJogoGrupo(a,b){
+  const[ga,gb]=placarEntre(a.r,b.r);
+  aplicarResultado(a,b,ga,gb,{condA:condutaAleatoria(),condB:condutaAleatoria()});
+  for(let x=0;x<ga;x++)regGolCopa(a.n);for(let x=0;x<gb;x++)regGolCopa(b.n);
+  return{a,b,ga,gb};
+}
+function renderResumoRodada(titulo,resultados,tabela,grupo){
+  const box=document.createElement('div');box.className='resumo-rodada';
+  box.innerHTML=`<div class="resumo-titulo">${titulo}</div>`+
+    resultados.map(r=>`<div class="resultado-linha"><span>${r.a.e} ${r.a.n}</span><span class="resultado-placar">${r.ga} × ${r.gb}</span><span>${r.b.e} ${r.b.n}</span></div>`).join('')+
+    renderTabela([...tabela].sort(ordena),grupo);
+  return box;
+}
+
+
+function terceiroDisponivel(cands, thirdByGroup, usados){
+  for(const g of cands){if(thirdByGroup[g]&&!usados.has(g)){usados.add(g);return thirdByGroup[g];}}
+  for(const g of Object.keys(thirdByGroup).sort()){if(!usados.has(g)){usados.add(g);return thirdByGroup[g];}}
+  return null;
+}
+function montarRound32Oficial(rankings,mTerc){
+  const thirdByGroup={};mTerc.forEach(t=>{thirdByGroup[t.grupo]=t;});
+  const usados=new Set();
+  const T=(g,i)=>rankings[g]&&rankings[g][i]?rankings[g][i]:null;
+  return [
+    {id:73,a:T('A',1),b:T('B',1),label:'2A x 2B'},
+    {id:74,a:T('E',0),b:terceiroDisponivel(['A','B','C','D','F'],thirdByGroup,usados),label:'1E x 3A/B/C/D/F'},
+    {id:75,a:T('F',0),b:T('C',1),label:'1F x 2C'},
+    {id:76,a:T('C',0),b:T('F',1),label:'1C x 2F'},
+    {id:77,a:T('I',0),b:terceiroDisponivel(['C','D','F','G','H'],thirdByGroup,usados),label:'1I x 3C/D/F/G/H'},
+    {id:78,a:T('E',1),b:T('I',1),label:'2E x 2I'},
+    {id:79,a:T('A',0),b:terceiroDisponivel(['C','E','F','H','I'],thirdByGroup,usados),label:'1A x 3C/E/F/H/I'},
+    {id:80,a:T('L',0),b:terceiroDisponivel(['E','H','I','J','K'],thirdByGroup,usados),label:'1L x 3E/H/I/J/K'},
+    {id:81,a:T('D',0),b:terceiroDisponivel(['B','E','F','I','J'],thirdByGroup,usados),label:'1D x 3B/E/F/I/J'},
+    {id:82,a:T('G',0),b:terceiroDisponivel(['A','E','H','I','J'],thirdByGroup,usados),label:'1G x 3A/E/H/I/J'},
+    {id:83,a:T('K',1),b:T('L',1),label:'2K x 2L'},
+    {id:84,a:T('H',0),b:T('J',1),label:'1H x 2J'},
+    {id:85,a:T('B',0),b:terceiroDisponivel(['E','F','G','I','J'],thirdByGroup,usados),label:'1B x 3E/F/G/I/J'},
+    {id:86,a:T('J',0),b:T('H',1),label:'1J x 2H'},
+    {id:87,a:T('K',0),b:terceiroDisponivel(['D','E','I','J','L'],thirdByGroup,usados),label:'1K x 3D/E/I/J/L'},
+    {id:88,a:T('D',1),b:T('G',1),label:'2D x 2G'}
+  ].filter(m=>m.a&&m.b);
+}
+function simularConfrontoSilencioso(a,b){
+  const r=confronto(a,b);
+  return r.venc;
+}
+async function simularMataMataOficial(rankings,mTerc,meuRef,cont,passou){
+  const winners={};let vivo=passou,cheguei='GRUPOS',faseSaiu=passou?null:'FASE DE GRUPOS';
+  async function jogarMatch(m,fase,fi){
+    if(!m||!m.a||!m.b)return null;
+    if(vivo&&(m.a.voce||m.b.voce)){
+      const adv=m.a.voce?m.b:m.a;
+      cont.innerHTML+=`<div class="fase-titulo">${faseEmoji(fase)} ${fase} · ${m.label||''}</div>`;
+      const p=gerarPartida(adv,fi,true);
+      const idx=document.querySelectorAll('.jogo-card').length;
+      const card=criarCard(p,idx);cont.appendChild(card);
+      card.scrollIntoView({behavior:'smooth',block:'center'});
+      await simSleep(250);
+      await jogarPartida(p,idx);
+      registrarCampanha(p);regMeusGols(p.golsPro);for(let i=0;i<p.contra;i++)regGolCopa(adv.n);
+      acumular(p);renderCopaLive();
+      cheguei=fase;
+      let vencedor=p.ganhou?meuRef:adv;
+      if(!p.ganhou){vivo=false;faseSaiu=fase;}
+      if(fase!=='FINAL'){
+        if(p.ganhou){tocarVitoria();await mostrarAlerta('✅','VITÓRIA!',`Você venceu ${adv.e} ${adv.n} por ${p.pro}×${p.contra} e avançou em ${fase.toLowerCase()}!`,'');}
+        else{tocarDerrota();await mostrarAlerta('❌','DERROTA',`${adv.e} ${adv.n} venceu por ${p.contra}×${p.pro}. Fim da sua campanha em ${fase.toLowerCase()}.`,'derrota');}
+      }
+      await esperarAvanco(idx);
+      return vencedor;
+    }
+    return simularConfrontoSilencioso(m.a,m.b);
+  }
+  const r32=montarRound32Oficial(rankings,mTerc);
+  for(const m of r32){winners[m.id]=await jogarMatch(m,'16 AVOS DE FINAL',1);}
+  const r16=[{id:89,a:winners[73],b:winners[75],label:'V73 x V75'},{id:90,a:winners[74],b:winners[77],label:'V74 x V77'},{id:91,a:winners[76],b:winners[78],label:'V76 x V78'},{id:92,a:winners[79],b:winners[80],label:'V79 x V80'},{id:93,a:winners[83],b:winners[84],label:'V83 x V84'},{id:94,a:winners[81],b:winners[82],label:'V81 x V82'},{id:95,a:winners[86],b:winners[88],label:'V86 x V88'},{id:96,a:winners[85],b:winners[87],label:'V85 x V87'}];
+  for(const m of r16){winners[m.id]=await jogarMatch(m,'OITAVAS DE FINAL',2);}
+  const qf=[{id:97,a:winners[89],b:winners[90],label:'V89 x V90'},{id:98,a:winners[93],b:winners[94],label:'V93 x V94'},{id:99,a:winners[91],b:winners[92],label:'V91 x V92'},{id:100,a:winners[95],b:winners[96],label:'V95 x V96'}];
+  for(const m of qf){winners[m.id]=await jogarMatch(m,'QUARTAS DE FINAL',3);}
+  const sf=[{id:101,a:winners[97],b:winners[98],label:'V97 x V98'},{id:102,a:winners[99],b:winners[100],label:'V99 x V100'}];
+  for(const m of sf){winners[m.id]=await jogarMatch(m,'SEMIFINAL',4);}
+  const final={id:104,a:winners[101],b:winners[102],label:'V101 x V102'};
+  const campeao=await jogarMatch(final,'FINAL',5);
+  const vice=campeao===winners[101]?winners[102]:winners[101];
+  const terceiro=simularConfrontoSilencioso(winners[97]===winners[101]?winners[98]:winners[97], winners[99]===winners[102]?winners[100]:winners[99]);
+  return {vivo,cheguei,faseSaiu,podio:{campeao,vice,terceiro,quarto:null}};
 }
 
 function confronto(a,b){
@@ -838,20 +1392,58 @@ function sortArt(lst){
   for(const p of peso){r-=p.w;if(r<=0)return p.j;}return lst[0];
 }
 
+function gerarPenaltis(ganhou,adv){
+  const cobradores=atks().slice().sort((a,b)=>b.r-a.r);
+  const advSquad=WC[adv.n];
+  let advCob=advSquad?advSquad.j.filter(j=>j.pos!=='GOL').sort((a,b)=>b.r-a.r):[];
+  if(!advCob.length)advCob=[{n:adv.n,r:78,pos:'ATA'}];
+  const seq=[];let meu=0,outro=0;
+  for(let i=0;i<5;i++){
+    const j=cobradores[i%cobradores.length]||{n:'Jogador',r:78};
+    const fez=chance(.72+(j.r-80)*.006);
+    if(fez)meu++;
+    seq.push({lado:'p',nome:j.n,fez,placar:[meu,outro],min:'P'+(i+1)});
+    const a=advCob[i%advCob.length];
+    const fezAdv=chance(.70+(a.r-80)*.005);
+    if(fezAdv)outro++;
+    seq.push({lado:'c',nome:a.n,fez:fezAdv,placar:[meu,outro],min:'P'+(i+1)});
+  }
+  let rodada=6;
+  while((ganhou&&meu<=outro)||(!ganhou&&outro<=meu)){
+    const j=cobradores[(rodada-1)%cobradores.length]||{n:'Jogador',r:78};
+    const a=advCob[(rodada-1)%advCob.length];
+    let fezMeu=chance(.74),fezAdv=chance(.74);
+    if(ganhou&&meu===outro){fezMeu=true;fezAdv=false;}
+    if(!ganhou&&meu===outro){fezMeu=false;fezAdv=true;}
+    if(fezMeu)meu++;seq.push({lado:'p',nome:j.n,fez:fezMeu,placar:[meu,outro],min:'M'+rodada});
+    if(fezAdv)outro++;seq.push({lado:'c',nome:a.n,fez:fezAdv,placar:[meu,outro],min:'M'+rodada});
+    rodada++;if(rodada>9)break;
+  }
+  if(ganhou&&meu<=outro)meu=outro+1;
+  if(!ganhou&&outro<=meu)outro=meu+1;
+  seq.resultado=[meu,outro];
+  return seq;
+}
+
 function gerarPartida(adv,faseIdx,mata){
   faseIdx=faseIdx||0;
-  const forca=forcaMeuTime(),advF=adv.r+faseIdx*.8;
+  const difCfg=getDificuldadeCfg();
+  const forcaBase=forcaMeuTime()+difCfg.meuBonus,advF=(adv.r+faseIdx*.8)+difCfg.advBonus;
+  let bonusForca=0,atkMult=1*difCfg.golPro,defMult=.65*difCfg.golContra;
+  if(taticaAtual==='ofensivo'){atkMult=1.22*difCfg.golPro;defMult=.82*difCfg.golContra;bonusForca=1;}
+  else if(taticaAtual==='defensivo'){atkMult=.82*difCfg.golPro;defMult=.52*difCfg.golContra;bonusForca=2;}
+  else if(taticaAtual==='contra'){atkMult=(advF>forcaBase?1.18:0.95)*difCfg.golPro;defMult=.60*difCfg.golContra;bonusForca=advF>forcaBase?4:0;}
+  const forca=forcaBase+bonusForca;
   const diff=(forca-advF)/9;
-  const eB=estilo==='ofensivo'?1.18:estilo==='defensivo'?.85:1;
-  let pro=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,diff*.6))*eB)));
-  let contra=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,-diff*.6))*.65)));
+  let pro=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,diff*.6))*atkMult)));
+  let contra=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,-diff*.6))*defMult)));
   if(chance(.1))contra++;if(chance(.1))pro++;
 
   const atkList=atks();
   const golsPro=mins(pro,2,90).map(min=>{
     const art=sortArt(atkList);const tipo=rnd(GOL_TIPOS);
     artilharia[art.n]=(artilharia[art.n]||{jog:art,g:0});artilharia[art.n].g++;
-    return{min,nome:art.n,r:art.r,craque:art.r>=88,tipo:tipo.t,narr:tipo.d(art.n)};
+    return{min,nome:art.n,r:art.r,craque:art.r>=88,tipo:tipo.t,narr:textoNarradorGol(art.n,tipo.t,false)};
   });
   const advSquad=WC[adv.n];
   const advAtk=advSquad?advSquad.j.filter(j=>['ATA','MEI','MED'].includes(j.pos)):null;
@@ -859,43 +1451,59 @@ function gerarPartida(adv,faseIdx,mata){
     const tipo=rnd(GOL_CONTRA_TIPOS);
     let autor=adv.n;
     if(advAtk&&advAtk.length){autor=sortArt(advAtk).n;}
-    return{min,nome:`${adv.e} ${autor}`,adv:true,tipo:tipo.t,narr:tipo.d('seu time',autor)};
+    return{min,nome:`${adv.e} ${autor}`,adv:true,tipo:tipo.t,narr:textoNarradorGol(autor,tipo.t,true)};
   });
 
-  const eventos=[];
+  const eventos=[{min:1,tipo:'narr',txt:rnd((VOZES_NARRADOR[getNarradorAtual()]||VOZES_NARRADOR.classico).abertura)}];
   const nr=()=>rnd(meuTime)?.n||'um jogador';
   const goleiro=meuTime.find(j=>j.pos==='GOL')?.n||'o goleiro';
-  // Cartões amarelos (1-3)
   mins(1+Math.floor(Math.random()*3),10,88).forEach(m=>eventos.push({min:m,tipo:'amarelo',txt:rnd(EV_AMARELO)(nr())}));
-  // Vermelho (18% de chance)
   if(chance(.18))mins(1,30,89).forEach(m=>eventos.push({min:m,tipo:'vermelho',txt:rnd(EV_VERMELHO)(nr())}));
-  // VAR (35%)
   if(chance(.35))mins(1,15,90).forEach(m=>eventos.push({min:m,tipo:'var',txt:rnd(EV_VAR)()}));
-  // Lesão/contusão (40%)
   if(chance(.4))mins(1,12,85).forEach(m=>eventos.push({min:m,tipo:'lesao',txt:rnd(EV_LESAO)(nr())}));
-  // Defesa do goleiro (50%)
   if(chance(.5))mins(1+Math.floor(Math.random()*2),8,88).forEach(m=>eventos.push({min:m,tipo:'defesa',txt:rnd(EV_DEFESA)(goleiro)}));
-  // Eventos engraçados (45%)
   if(chance(.45))mins(1,5,88).forEach(m=>eventos.push({min:m,tipo:'funny',txt:rnd(EV_FUNNY)()}));
-  // Narração de ambiente (sempre 2-3)
   mins(2+Math.floor(Math.random()*2),5,85).forEach(m=>eventos.push({min:m,tipo:'narr',txt:rnd(EV_NARR)()}));
 
-  // empate em mata-mata -> pênaltis decididos por força
-  let ganhou=pro>contra,penaltis=null;
-  if(mata&&pro===contra){
+  let ganhou=pro>contra,penaltis=null,penSeq=[],empateReg=pro===contra,teveProrrogacao=false;
+  if(mata&&empateReg){
+    teveProrrogacao=true;
+    eventos.push({min:91,tipo:'narr',txt:'Começa a prorrogação. Agora é teste de nervos.'});
+    eventos.push({min:106,tipo:'narr',txt:'Começa o segundo tempo da prorrogação. Qualquer erro pode ser fatal.'});
     const meuP=forca/(forca+adv.r);
-    ganhou=Math.random()<meuP;
-    penaltis=ganhou?[4+Math.floor(Math.random()*2),3]:[3,4+Math.floor(Math.random()*2)];
+    if(chance(.38)){
+      const meuGol=chance(meuP);
+      const minExtra=92+Math.floor(Math.random()*28);
+      if(meuGol){
+        pro++;
+        const art=sortArt(atkList),tipo=rnd(GOL_TIPOS);
+        artilharia[art.n]=(artilharia[art.n]||{jog:art,g:0});artilharia[art.n].g++;
+        golsPro.push({min:minExtra,nome:art.n,r:art.r,craque:art.r>=88,tipo:tipo.t,narr:'na prorrogação, '+textoNarradorGol(art.n,tipo.t,false)});
+        ganhou=true;
+      }else{
+        contra++;
+        let autor=adv.n;if(advAtk&&advAtk.length){autor=sortArt(advAtk).n;}
+        const tipo=rnd(GOL_CONTRA_TIPOS);
+        golsContra.push({min:minExtra,nome:`${adv.e} ${autor}`,adv:true,tipo:tipo.t,narr:'na prorrogação, '+textoNarradorGol(autor,tipo.t,true)});
+        ganhou=false;
+      }
+    }else{
+      ganhou=chance(meuP);
+      penSeq=gerarPenaltis(ganhou,adv);
+      penaltis=penSeq.resultado;
+    }
   }
 
-  return{adv:adv.n,advE:adv.e,pro,contra,ganhou,empate:pro===contra,golsPro,golsContra,eventos,penaltis,mata};
+  const condPro=condutaDoEvento(eventos);
+  const condContra=condutaAleatoria();
+  return{meuNome:nomeMeuTime,meuE:emojiMeuTime,adv:adv.n,advE:adv.e,pro,contra,ganhou,empate:pro===contra,empateReg,golsPro,golsContra,eventos,penaltis,penSeq,mata,teveProrrogacao,tatica:taticaAtual,condPro,condContra};
 }
 
 function criarCard(p,idx){
   const card=document.createElement('div');card.className='jogo-card';
   card.innerHTML=`
     <div class="live-placar">
-      <div class="live-side clickable-team" onclick="abrirMeuTime()"><div class="live-flag">🌟</div><div class="live-nome">Seu Time 👁</div></div>
+      <div class="live-side clickable-team" onclick="abrirMeuTime()"><div class="live-flag">${p.meuE||emojiMeuTime}</div><div class="live-nome">${p.meuNome||nomeMeuTime} 👁</div></div>
       <div class="live-num" id="pp-${idx}" style="color:var(--amarelo)">0</div>
       <div class="live-x">×</div>
       <div class="live-num" id="pc-${idx}" style="color:var(--pink)">0</div>
@@ -920,47 +1528,88 @@ async function jogarPartida(p,idx){
   const ppEl=document.getElementById(`pp-${idx}`),pcEl=document.getElementById(`pc-${idx}`);
   let vpp=0,vpc=0;
   const lances=[...p.golsPro.map(g=>({...g,tipo:'gol-pro'})),...p.golsContra.map(g=>({...g,tipo:'gol-contra'})),...p.eventos].sort((a,b)=>a.min-b.min);
-  const msPorMin=480; // ~43s base + pausas = ~50-55s
+  const msPorMin=480;
   tocarApito();
   let li=0;
+  async function processarLance(cur){
+    aplicarLance(cur,tl,idx);
+    if(cur.tipo==='gol-pro'){vpp++;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);tocarGol();addScorer(idx,'p',cur.nome,cur.min,'⚽');await simSleep(750);}
+    else if(cur.tipo==='gol-contra'){vpc++;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);tocarFalha();addScorer(idx,'c',cur.nome,cur.min,'⚽');await simSleep(750);}
+    else if(cur.tipo==='vermelho'){tocarCartao();addScorer(idx,'p','Expulsão',cur.min,'🟥');await simSleep(500);}
+    else if(cur.tipo==='amarelo'){tocarCartao();await simSleep(300);}
+    else if(cur.tipo==='lesao'){addScorer(idx,'p','Contusão',cur.min,'🤕');await simSleep(350);}
+    else if(cur.tipo==='defesa'){await simSleep(350);}
+    else{await simSleep(300);}
+  }
   for(let m=1;m<=90;m++){
-    clk.textContent=`⏱️ ${m}'`;
-    if(m===45){clk.textContent='⏸️ INTERVALO';await sleep(800);}
-    while(li<lances.length&&lances[li].min===m){
-      const cur=lances[li];aplicarLance(cur,tl,idx);
-      if(cur.tipo==='gol-pro'){vpp++;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);tocarGol();addScorer(idx,'p',cur.nome,cur.min,'⚽');await sleep(750);}
-      else if(cur.tipo==='gol-contra'){vpc++;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);tocarFalha();addScorer(idx,'c',cur.nome,cur.min,'⚽');await sleep(750);}
-      else if(cur.tipo==='vermelho'){tocarCartao();addScorer(idx,'p',cur.txt.replace(/^[^A-ZÀ-Ý]*/,'').split(' ')[0]||'—',cur.min,'🟥');await sleep(500);}
-      else if(cur.tipo==='amarelo'){tocarCartao();await sleep(300);}
-      else if(cur.tipo==='lesao'){addScorer(idx,'p','Contusão',cur.min,'🤕');await sleep(350);}
-      else if(cur.tipo==='defesa'){await sleep(350);}
-      else{await sleep(300);}
-      li++;
+    clk.textContent=`⏱️ ${m}' · ${p.tatica==='contra'?'contra-ataque':p.tatica}`;
+    if(m===45){clk.textContent='⏸️ INTERVALO';await simSleep(800);}
+    while(li<lances.length&&lances[li].min===m){await processarLance(lances[li]);li++;}
+    await simSleep(msPorMin);
+  }
+  if(p.teveProrrogacao){
+    clk.textContent='⏱️ 90\' · Fim do tempo normal — vai para a prorrogação!';
+    await simSleep(900);
+    for(let m=91;m<=120;m++){
+      clk.textContent=`⏱️ ${m}' · Prorrogação`;
+      if(m===105){clk.textContent='⏸️ Intervalo da prorrogação';await simSleep(650);}
+      while(li<lances.length&&lances[li].min===m){await processarLance(lances[li]);li++;}
+      await simSleep(msPorMin);
     }
-    await sleep(msPorMin);
+  }
+  if(p.penSeq&&p.penSeq.length){
+    clk.textContent='🎯 Disputa de pênaltis';
+    await simSleep(700);
+    for(const pen of p.penSeq){
+      const d=document.createElement('div');d.className='ev-item '+(pen.fez?'ev-gol-pro':'ev-gol-contra');
+      const lado=pen.lado==='p'?(p.meuNome||nomeMeuTime):p.adv;
+      d.innerHTML=`<span class="ev-min">${pen.min}</span>🎯 ${lado}: ${pen.nome} ${pen.fez?'marcou ⚽':'perdeu ❌'} · Pênaltis ${pen.placar[0]}×${pen.placar[1]}${textoComentario('penalti')}`;
+      tl.appendChild(d);
+      if(pen.lado==='p')addScorer(idx,'p',pen.nome,pen.min,pen.fez?'🎯':'❌');
+      else addScorer(idx,'c',pen.nome,pen.min,pen.fez?'🎯':'❌');
+      pen.fez?tocarGol():tocarFalha();
+      await simSleep(850);
+    }
   }
   tocarApito();
   let fim=`⏹️ Fim: ${vpp} × ${vpc}`;
   if(p.penaltis)fim+=` (pên. ${p.penaltis[0]}×${p.penaltis[1]})`;
   clk.textContent=fim;
+  tl.classList.remove('show');
 }
 
 function aplicarLance(item,tl,idx){
   const d=document.createElement('div');d.className='ev-item';
-  if(item.tipo==='gol-pro'){d.className+=' ev-gol-pro';d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ GOL! ${item.nome} — ${item.narr}`;}
-  else if(item.tipo==='gol-contra'){d.className+=' ev-gol-contra';d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ ${item.nome} — ${item.narr}`;}
-  else{const ico={amarelo:'🟨',vermelho:'🟥',var:'📺',funny:'🎪',lesao:'🤕',defesa:'🧤',narr:'🎙️'}[item.tipo]||'•';d.innerHTML=`<span class="ev-min">${item.min}'</span>${ico} ${item.txt}`;}
+  if(item.tipo==='gol-pro'){
+    d.className+=' ev-gol-pro';
+    const tipoCom=['bicicleta','falta','chute de fora','driblando'].includes(item.tipoGol||item.tipo)?'golaço':'gol';
+    d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ GOL! ${item.nome} — ${item.narr}${textoComentario(tipoCom)}`;
+  }
+  else if(item.tipo==='gol-contra'){
+    d.className+=' ev-gol-contra';
+    d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ ${item.nome} — ${item.narr}${textoComentario('gol')}`;
+  }
+  else{
+    const ico={amarelo:'🟨',vermelho:'🟥',var:'📺',funny:'🎪',lesao:'🤕',defesa:'🧤',narr:'🎙️'}[item.tipo]||'•';
+    const tipoCom={amarelo:'cartao',vermelho:'cartao',var:'var',lesao:'geral',defesa:'defesa',funny:'geral',narr:'geral'}[item.tipo]||'geral';
+    d.innerHTML=`<span class="ev-min">${item.min}'</span>${ico} ${item.txt}${textoComentario(tipoCom)}`;
+  }
   tl.appendChild(d);
 }
 
 function esperarAvanco(idx){
   return new Promise(res=>{
-    const cont=document.getElementById('jogos-cont');
-    const btn=document.createElement('button');btn.className='btn-avancar';btn.textContent='▶️ AVANÇAR';
-    btn.id=`av-${idx}`;
     const card=document.getElementById(`tl-${idx}`).closest('.jogo-card');
-    card.appendChild(btn);
-    btn.onclick=()=>{btn.remove();res();};
+    const actions=document.createElement('div');actions.className='hist-actions';actions.id=`act-${idx}`;
+    const hist=document.createElement('button');hist.className='btn-avancar';hist.textContent='📜 VER HISTÓRICO';
+    const btn=document.createElement('button');btn.className='btn-avancar';btn.textContent='▶️ AVANÇAR';btn.id=`av-${idx}`;
+    hist.onclick=()=>{
+      const tl=document.getElementById(`tl-${idx}`);
+      tl.classList.toggle('show');
+      hist.textContent=tl.classList.contains('show')?'🙈 OCULTAR HISTÓRICO':'📜 VER HISTÓRICO';
+    };
+    btn.onclick=()=>{actions.remove();res();};
+    actions.appendChild(hist);actions.appendChild(btn);card.appendChild(actions);
   });
 }
 
@@ -980,7 +1629,7 @@ function renderCopaLive(){
   const arts=Object.values(artilharia).sort((a,b)=>b.g-a.g).slice(0,8);
   document.getElementById('copa-art-panel').innerHTML=arts.length?arts.map((a,i)=>`
     <div class="art-row"><div class="art-rank ${i===0?'g1':i===1?'g2':i===2?'g3':''}">${i+1}</div>
-    <div class="art-info"><div class="art-nome">${a.jog.n}${a.jog.r>=88?' ⭐':''}</div><div class="art-sub">${a.jog.pos} · Seu Time</div></div>
+    <div class="art-info"><div class="art-nome">${a.jog.n}${a.jog.r>=88?' ⭐':''}</div><div class="art-sub">${a.jog.pos} · ${nomeMeuTime}</div></div>
     <div class="art-gols">${a.g} ⚽</div></div>`).join(''):'<div style="color:var(--cinza);font-size:.75rem;text-align:center;padding:.5rem">Sem gols ainda</div>';
   const cs=copaStats,med=v=>cs.jogos?(v/cs.jogos).toFixed(1):'0';
   document.getElementById('copa-stats-panel').innerHTML=`
@@ -1009,18 +1658,20 @@ function renderTabela(times,grupo){
       <td ${t.voce?'':`class="clickable-team" style="cursor:pointer" onclick="abrirSquad('${t.n.replace(/'/g,"\\'")}','${t.e}')"`}>${i<2?'✅':i===2?'➕':'❌'} ${t.e} ${t.n}${t.voce?'':' 👁'}</td>
       <td>${t.j}</td><td>${t.v}</td><td>${t.emp}</td><td>${t.d}</td><td>${t.gp}</td><td>${t.gc}</td>
       <td style="color:${sg>=0?'var(--amarelo)':'var(--pink)'}">${sg>0?'+':''}${sg}</td>
+      <td>${t.conduta||0}</td><td>${fifaRankDaSelecao(t)}</td>
       <td style="font-family:'Bebas Neue';font-size:1.1rem;color:${i<2?'var(--amarelo)':'var(--cinza)'}">${t.pts}</td></tr>`;
   }).join('');
   return`<div style="background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.75rem;margin:.75rem 0;">
-    <div style="font-family:'Space Mono';font-size:.55rem;color:var(--cinza);letter-spacing:.1em;margin-bottom:.4rem;">GRUPO ${grupo} — Top 2 ✅ + 3º pode avançar ➕</div>
-    <table class="grupo-tabela"><thead><tr><th>Seleção</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>PTS</th></tr></thead>
+    <div style="font-family:'Space Mono';font-size:.55rem;color:var(--cinza);letter-spacing:.1em;margin-bottom:.4rem;">GRUPO ${grupo} — Top 2 ✅ + 8 melhores terceiros ➕</div>
+    <div style="font-size:.58rem;color:var(--cinza);line-height:1.35;margin-bottom:.35rem;">Desempate FIFA: PTS → SG → GP → Conduta → Ranking FIFA</div>
+    <table class="grupo-tabela"><thead><tr><th>Seleção</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>FP</th><th>RK</th><th>PTS</th></tr></thead>
     <tbody>${rows}</tbody></table></div>`;
 }
 
 // ═══════════ PÓDIO + PREMIAÇÕES ═══════════
 
 // ═══════════ CARD DE CAMPEÃO COMPARTILHÁVEL ═══════════
-function gerarCardCampeao(){
+function gerarCardCampanha(){
   const cv=document.createElement('canvas');
   const W=720,H=1280;cv.width=W;cv.height=H;
   const ctx=cv.getContext('2d');
@@ -1039,25 +1690,29 @@ function gerarCardCampeao(){
   ctx.textAlign='center';
   ctx.font='90px serif';ctx.fillText('🏆',W/2,140);
   ctx.fillStyle='#FFD700';ctx.font='bold 64px Arial';
-  ctx.fillText('CAMPEÃO MUNDIAL',W/2,220);
+  ctx.fillText(campanhaResumo.resultado&&campanhaResumo.resultado.includes('Campeão')?'CAMPEÃO MUNDIAL':'MINHA CAMPANHA',W/2,220);
   ctx.fillStyle='#C8FF00';ctx.font='bold 38px Arial';
   ctx.fillText('COPA 2026',W/2,270);
+  ctx.fillStyle='rgba(255,255,255,.72)';ctx.font='bold 22px Arial';
+  ctx.fillText(`Modo: ${modoJogo==='real'?'Seleção real':'Time personalizado'} · ${getDificuldadeCfg().nome}`,W/2,303);
 
   // Overall do time
   const ov=Math.round(meuTime.reduce((a,j)=>a+j.r,0)/meuTime.length);
   ctx.fillStyle='#fff';ctx.font='bold 28px Arial';
-  ctx.fillText('OVERALL DO TIME',W/2,340);
+  ctx.fillText('OVERALL DO TIME',W/2,330);
+  ctx.fillStyle='rgba(255,255,255,.72)';ctx.font='bold 26px Arial';
+  ctx.fillText(`${campanhaResumo.v}V ${campanhaResumo.e}E ${campanhaResumo.d}D · ${campanhaResumo.gp} GP / ${campanhaResumo.gc} GC`,W/2,375);
   ctx.fillStyle='#FFD700';ctx.font='bold 90px Arial';
-  ctx.fillText(ov,W/2,430);
+  ctx.fillText(ov,W/2,455);
 
   // Linha divisória
   ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=2;
-  ctx.beginPath();ctx.moveTo(60,470);ctx.lineTo(W-60,470);ctx.stroke();
+  ctx.beginPath();ctx.moveTo(60,490);ctx.lineTo(W-60,490);ctx.stroke();
 
   // Jogadores — ordenar por rating
   const ordem={GOL:0,ZAG:1,LAT:2,MED:3,MEI:4,ATA:5};
   const time=[...meuTime].sort((a,b)=>(ordem[a.pos]-ordem[b.pos])||b.r-a.r);
-  let y=520;
+  let y=540;
   ctx.textAlign='left';
   time.forEach(j=>{
     // posição (badge)
@@ -1086,28 +1741,89 @@ function gerarCardCampeao(){
   return cv;
 }
 
-async function compartilharCampeao(){
-  const cv=gerarCardCampeao();
+async function compartilharCampanha(){
+  const cv=gerarCardCampanha();
   cv.toBlob(async(blob)=>{
-    const file=new File([blob],'campeao-copa2026.png',{type:'image/png'});
-    // Tenta compartilhamento nativo (celular)
+    const file=new File([blob],'campanha-copa2026.png',{type:'image/png'});
     if(navigator.canShare&&navigator.canShare({files:[file]})){
       try{
-        await navigator.share({files:[file],title:'Campeão da Copa 2026!',text:'Fui campeão mundial com meu time dos sonhos! ⚽🏆'});
+        await navigator.share({files:[file],title:'Minha campanha na Copa 2026',text:'Montei meu time dos sonhos na Copa 2026! ⚽🏆'});
         return;
       }catch(e){/* usuário cancelou */}
     }
-    // Fallback: download
     const url=URL.createObjectURL(blob);
-    const a=document.createElement('a');a.href=url;a.download='campeao-copa2026.png';a.click();
+    const a=document.createElement('a');a.href=url;a.download='campanha-copa2026.png';a.click();
     URL.revokeObjectURL(url);
   },'image/png');
 }
-
-function baixarCardCampeao(){
-  const cv=gerarCardCampeao();
+function baixarCardCampanha(){
+  const cv=gerarCardCampanha();
   const url=cv.toDataURL('image/png');
-  const a=document.createElement('a');a.href=url;a.download='campeao-copa2026.png';a.click();
+  const a=document.createElement('a');a.href=url;a.download='campanha-copa2026.png';a.click();
+}
+function compartilharCampeao(){return compartilharCampanha();}
+function baixarCardCampeao(){return baixarCardCampanha();}
+
+
+function calcularScoreCampanha(venceu,passou){
+  const dif=getDificuldadeCfg().score||1;
+  let score=(campanhaResumo.v*12)+(campanhaResumo.e*4)+(campanhaResumo.gp*2)-(campanhaResumo.gc*1.2);
+  if(passou)score+=35;
+  if(venceu)score+=120;
+  if((campanhaResumo.d||0)===0)score+=20;
+  if(modoJogo==='real')score+=10;
+  return Math.max(0,Math.round(score*dif));
+}
+function calcularConquistasCampanha(venceu,passou,podio){
+  const c=[];
+  if(venceu)c.push(['🏆','Campeão do Mundo']);
+  if(venceu&&(campanhaResumo.d||0)===0)c.push(['🥶','Campeão invicto']);
+  if(passou)c.push(['✅','Sobreviveu aos grupos']);
+  if(campanhaResumo.gp>=12)c.push(['⚽','Ataque assassino']);
+  if(campanhaResumo.gc<=2&&campanhaResumo.v>=3)c.push(['🧱','Muralha defensiva']);
+  if((campanhaResumo.penaltisVencidos||0)>0)c.push(['🎯','Rei dos pênaltis']);
+  if(campanhaResumo.maiorSaldo>=4)c.push(['🔥','Goleada histórica']);
+  if(campanhaResumo.semUsarPulo&&modoJogo==='personalizado')c.push(['🎲','Sem fugir do dado']);
+  if(campanhaResumo.usouDourado)c.push(['⭐','Usou o craque dourado']);
+  if(dificuldade==='lendario'&&venceu)c.push(['☠️','Lenda absoluta']);
+  if(modoJogo==='real')c.push(['🌎','Simulação real']);
+  if(albumCount()>=50)c.push(['📒','Olheiro insistente']);
+  if(!c.length)c.push(['📌','Campanha registrada']);
+  return c;
+}
+function salvarRankingLocal(venceu){
+  try{
+    const key='wc2026_ranking_local_v1';
+    const arr=JSON.parse(localStorage.getItem(key)||'[]');
+    arr.push({
+      data:new Date().toLocaleDateString('pt-BR'),
+      time:nomeMeuTime,
+      emoji:emojiMeuTime,
+      resultado:campanhaResumo.resultado,
+      fase:campanhaResumo.fase,
+      v:campanhaResumo.v,e:campanhaResumo.e,d:campanhaResumo.d,gp:campanhaResumo.gp,gc:campanhaResumo.gc,
+      dificuldade:getDificuldadeCfg().nome,
+      modo:modoJogo==='real'?'Real':'Fantasia',
+      score:campanhaResumo.score||0,
+      campeao:!!venceu
+    });
+    arr.sort((a,b)=>b.score-a.score);
+    localStorage.setItem(key,JSON.stringify(arr.slice(0,20)));
+  }catch(e){}
+}
+function getRankingLocal(){try{return JSON.parse(localStorage.getItem('wc2026_ranking_local_v1')||'[]');}catch(e){return[];}}
+function renderConquistasERanking(){
+  const cont=document.getElementById('jogos-cont');
+  const box=document.createElement('div');box.className='conquista-box';
+  box.innerHTML=`<div class="podio-titulo">🏅 CONQUISTAS DA CAMPANHA</div>
+    <div style="font-size:.7rem;color:var(--cinza);text-align:center;line-height:1.45">Score: <b style="color:var(--amarelo)">${campanhaResumo.score}</b> · Álbum: ${albumCount()} jogadores descobertos</div>
+    <div class="conquista-grid">${conquistasUltimaCampanha.map(x=>`<div class="conquista-item"><span class="c-ico">${x[0]}</span>${x[1]}</div>`).join('')}</div>`;
+  cont.appendChild(box);
+  const rank=getRankingLocal().slice(0,5);
+  const rb=document.createElement('div');rb.className='ranking-box';
+  rb.innerHTML=`<div class="podio-titulo">📊 TOP CAMPANHAS SALVAS</div>`+
+    (rank.length?rank.map((r,i)=>`<div class="ranking-row"><div class="ranking-pos">${i+1}</div><div class="ranking-main"><b>${r.emoji||'🌟'} ${r.time}</b><div class="ranking-sub">${r.resultado||r.fase} · ${r.v}V ${r.e}E ${r.d}D · ${r.gp}/${r.gc} · ${r.modo} · ${r.dificuldade}</div></div><div class="ranking-score">${r.score}</div></div>`).join(''):'<div style="font-size:.72rem;color:var(--cinza);text-align:center">Nenhuma campanha salva ainda.</div>');
+  cont.appendChild(rb);
 }
 
 function renderPodio(podio){
@@ -1149,7 +1865,7 @@ function abrirSquad(nome,emoji){
 function abrirMeuTime(){
   if(!meuTime.length)return;
   const r=Math.round(meuTime.reduce((a,j)=>a+j.r,0)/meuTime.length);
-  document.getElementById('squad-header').innerHTML='🌟 Seu Time dos Sonhos';
+  document.getElementById('squad-header').innerHTML=`${emojiMeuTime} ${nomeMeuTime}`;
   document.getElementById('squad-rating').textContent=`Overall ${r} · ${meuTime.length} jogadores · ${getF().nome}`;
   document.getElementById('squad-list').innerHTML=montarListaSquad(meuTime.map(j=>({n:j.n,pos:j.pos,r:j.r,sel:j.sel,emoji:j.emoji})),true);
   document.getElementById('squad-modal').classList.add('show');
