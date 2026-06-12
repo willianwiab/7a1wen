@@ -1,0 +1,3003 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7 a 0 — Monte sua Seleção</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+:root{--roxo:#6B1FA2;--pink:#D4006A;--amarelo:#C8FF00;--roxo-escuro:#1a0030;--roxo-mid:#2d0a5a;--cinza:#8a8a9a;--branco:#f0f0ff;--card-bg:rgba(255,255,255,0.05);--card-borda:rgba(200,255,0,0.15);}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--roxo-escuro);color:var(--branco);font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden;}
+#tela-inicio{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2rem;position:relative;overflow:hidden;}
+#tela-inicio::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(107,31,162,.8) 0%,transparent 70%),radial-gradient(ellipse 60% 40% at 80% 100%,rgba(212,0,106,.4) 0%,transparent 60%);pointer-events:none;}
+.logo-7a0{font-family:'Bebas Neue',sans-serif;font-size:clamp(5rem,18vw,13rem);line-height:.85;letter-spacing:-.02em;text-align:center;position:relative;z-index:1;}
+.logo-7a0 .sete{color:var(--amarelo);}.logo-7a0 .a{color:rgba(240,240,255,.22);font-size:.5em;}.logo-7a0 .zero{color:var(--pink);}
+.logo-sub{font-family:'Space Mono',monospace;font-size:.75rem;color:var(--cinza);letter-spacing:.25em;text-transform:uppercase;margin-top:.5rem;text-align:center;position:relative;z-index:1;}
+.inicio-tagline{font-size:1rem;color:rgba(240,240,255,.65);text-align:center;max-width:440px;line-height:1.65;margin-top:1.25rem;position:relative;z-index:1;}
+.estilo-label{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--cinza);letter-spacing:.15em;text-transform:uppercase;margin-top:1.5rem;margin-bottom:.5rem;position:relative;z-index:1;}
+.estilo-btns{display:flex;gap:.5rem;margin-bottom:1rem;position:relative;z-index:1;flex-wrap:wrap;justify-content:center;}
+.btn-estilo{padding:.45rem 1rem;border:1px solid rgba(255,255,255,.2);border-radius:20px;font-family:'Space Mono',monospace;font-size:.68rem;cursor:pointer;transition:all .2s;background:transparent;color:var(--cinza);}
+.btn-estilo.ativo-eq{border-color:var(--amarelo);color:var(--amarelo);background:rgba(200,255,0,.1);}
+.btn-estilo.ativo-def{border-color:#4fc3f7;color:#4fc3f7;background:rgba(79,195,247,.1);}
+.btn-estilo.ativo-ofe{border-color:var(--pink);color:var(--pink);background:rgba(212,0,106,.1);}
+.btn-group{display:flex;gap:1rem;margin-top:.75rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1;}
+.btn-modo{padding:.9rem 1.8rem;border:2px solid;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:.1em;cursor:pointer;transition:all .2s;background:transparent;}
+.btn-classico{border-color:var(--amarelo);color:var(--amarelo);}.btn-classico:hover{background:var(--amarelo);color:var(--roxo-escuro);}
+.btn-almanaque{border-color:var(--pink);color:var(--pink);}.btn-almanaque:hover{background:var(--pink);color:white;}
+.modo-desc{font-size:.66rem;display:block;font-family:'Inter',sans-serif;letter-spacing:normal;margin-top:.25rem;opacity:.7;}
+#tela-jogo{display:none;min-height:100vh;padding:1.25rem;max-width:960px;margin:0 auto;}
+.jogo-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem;padding-bottom:.875rem;border-bottom:1px solid var(--card-borda);flex-wrap:wrap;gap:.5rem;}
+.jogo-logo{font-family:'Bebas Neue',sans-serif;font-size:1.9rem;letter-spacing:.05em;}
+.jogo-logo .sete{color:var(--amarelo);}.jogo-logo .zero{color:var(--pink);}
+.progresso{display:flex;align-items:center;gap:.4rem;font-family:'Space Mono',monospace;font-size:.72rem;color:var(--cinza);flex-wrap:wrap;}
+.prog-bolinha{width:9px;height:9px;border-radius:50%;background:var(--card-borda);border:1px solid rgba(255,255,255,.2);transition:all .3s;}
+.prog-bolinha.feito{background:var(--amarelo);border-color:var(--amarelo);}
+.prog-bolinha.atual{background:var(--pink);border-color:var(--pink);box-shadow:0 0 8px var(--pink);}
+.modo-badge{font-family:'Space Mono',monospace;font-size:.6rem;padding:.18rem .55rem;border-radius:2px;letter-spacing:.08em;}
+.modo-classico{background:rgba(200,255,0,.12);color:var(--amarelo);border:1px solid rgba(200,255,0,.3);}
+.modo-almanaque{background:rgba(212,0,106,.12);color:var(--pink);border:1px solid rgba(212,0,106,.3);}
+.sorteio-zona{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:1.25rem;margin-bottom:1rem;text-align:center;position:relative;overflow:hidden;}
+.sorteio-zona::before{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at center,rgba(107,31,162,.22) 0%,transparent 60%);pointer-events:none;}
+.dado-row{display:flex;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;}
+.dado-wrap{display:flex;flex-direction:column;align-items:center;gap:.3rem;}
+.dado-emoji{font-size:3.2rem;cursor:pointer;user-select:none;display:inline-block;line-height:1;transition:transform .15s;}
+.dado-emoji:hover{transform:rotate(15deg) scale(1.15);}
+.dado-emoji.rolando{animation:rolar .55s cubic-bezier(.36,.07,.19,.97);}
+@keyframes rolar{0%{transform:rotate(0) scale(1) translate(0,0);}10%{transform:rotate(72deg) scale(1.25) translate(-3px,-4px);}25%{transform:rotate(130deg) scale(.85) translate(4px,2px);}40%{transform:rotate(200deg) scale(1.2) translate(-2px,5px);}55%{transform:rotate(255deg) scale(.9) translate(5px,-3px);}70%{transform:rotate(310deg) scale(1.15) translate(-4px,1px);}85%{transform:rotate(350deg) scale(1.03) translate(1px,-1px);}100%{transform:rotate(360deg) scale(1) translate(0,0);}}
+.dado-hint{font-family:'Space Mono',monospace;font-size:.6rem;color:var(--cinza);}
+.reroll-info{font-size:.7rem;color:var(--cinza);font-family:'Space Mono',monospace;}
+.reroll-info span{color:var(--pink);}
+.sorteio-info{display:none;flex-direction:column;align-items:flex-start;gap:.2rem;}
+.sorteio-ano{font-family:'Space Mono',monospace;font-size:.78rem;color:var(--amarelo);letter-spacing:.1em;}
+.sorteio-pais{font-family:'Bebas Neue',sans-serif;font-size:2rem;line-height:1;}
+.btn-reroll{margin-top:.3rem;padding:.38rem .85rem;border:1px solid var(--pink);color:var(--pink);background:transparent;border-radius:4px;font-size:.74rem;cursor:pointer;font-family:'Space Mono',monospace;transition:all .18s;}
+.btn-reroll:hover:not(:disabled){background:var(--pink);color:white;}
+.btn-reroll:disabled{opacity:.3;cursor:not-allowed;}
+.super-btn{display:none;width:100%;margin-bottom:1rem;padding:.75rem;background:linear-gradient(135deg,#5a1200,#9a7000);border:2px solid gold;border-radius:6px;color:gold;font-family:'Bebas Neue',sans-serif;font-size:1.25rem;letter-spacing:.12em;cursor:pointer;transition:all .2s;text-align:center;}
+.super-btn:hover:not(:disabled){background:linear-gradient(135deg,#7a1800,#c49000);box-shadow:0 0 20px rgba(255,215,0,.35);}
+.super-btn:disabled{opacity:.3;cursor:not-allowed;filter:grayscale(.8);}
+.super-btn .sc-sub{font-size:.62rem;display:block;font-family:'Space Mono',monospace;letter-spacing:.06em;opacity:.75;margin-top:.1rem;}
+.elenco-zone{display:none;margin-bottom:1rem;}
+.elenco-titulo{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--cinza);margin-bottom:.6rem;}
+.elenco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(122px,1fr));gap:.48rem;}
+.card-jog{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:6px;padding:.62rem .68rem;cursor:pointer;transition:all .18s;position:relative;}
+.card-jog:hover{border-color:var(--amarelo);background:rgba(200,255,0,.07);transform:translateY(-2px);}
+.card-jog.craque{border-color:gold;background:rgba(255,215,0,.07);}
+.card-jog.craque:hover{background:rgba(255,215,0,.13);}
+.card-jog.nodisponivel{opacity:.32;cursor:not-allowed;pointer-events:none;}
+.card-pos{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--pink);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.1rem;}
+.card-nome{font-weight:700;font-size:.79rem;line-height:1.2;color:var(--branco);}
+.card-rat{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;color:var(--amarelo);line-height:1;margin-top:.12rem;}
+.card-rat.oculto{color:var(--cinza);font-size:.88rem;font-family:'Space Mono',monospace;letter-spacing:.2em;}
+.card-star{position:absolute;top:4px;right:5px;font-size:.7rem;}
+.campo-section{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:1rem;}
+.campo-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:.6rem;flex-wrap:wrap;gap:.35rem;}
+.campo-titulo{font-family:'Bebas Neue',sans-serif;font-size:1rem;letter-spacing:.1em;color:var(--cinza);}
+.campo-meta{display:flex;gap:.4rem;flex-wrap:wrap;}
+.meta-pill{font-family:'Space Mono',monospace;font-size:.58rem;padding:.18rem .5rem;border-radius:3px;}
+.meta-form{background:rgba(107,31,162,.3);border:1px solid var(--roxo);color:var(--branco);}
+.meta-est{background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.25);color:var(--amarelo);}
+.overall-bar{display:none;margin-bottom:.65rem;background:rgba(0,0,0,.18);border-radius:6px;padding:.55rem .8rem;border:1px solid rgba(255,255,255,.06);}
+.ov-row{display:flex;justify-content:space-around;align-items:center;gap:.4rem;}
+.ov-item{text-align:center;}
+.ov-lbl{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--cinza);letter-spacing:.1em;text-transform:uppercase;}
+.ov-val{font-family:'Bebas Neue',sans-serif;font-size:1.55rem;line-height:1;}
+.ov-total{color:var(--amarelo);}.ov-atk{color:var(--pink);}.ov-def{color:#4fc3f7;}
+.ov-div{width:1px;background:rgba(255,255,255,.08);height:28px;}
+.campo-visual{background:linear-gradient(180deg,#1a4a1a 0%,#1e5a1e 100%);border-radius:6px;padding:.8rem;min-height:320px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid rgba(255,255,255,.1);position:relative;}
+.campo-visual::before{content:'';position:absolute;inset:0;background:linear-gradient(transparent 49%,rgba(255,255,255,.14) 49%,rgba(255,255,255,.14) 51%,transparent 51%),radial-gradient(circle 50px at 50% 50%,transparent 48px,rgba(255,255,255,.11) 48px,rgba(255,255,255,.11) 50px,transparent 50px);border-radius:6px;pointer-events:none;}
+.linha-campo{display:flex;justify-content:center;gap:.38rem;flex-wrap:wrap;}
+.slot-jog{display:flex;flex-direction:column;align-items:center;gap:.18rem;min-width:56px;}
+.slot-circ{width:45px;height:45px;border-radius:50%;border:2px dashed rgba(255,255,255,.27);background:rgba(0,0,0,.27);display:flex;align-items:center;justify-content:center;font-size:.5rem;color:rgba(255,255,255,.36);text-align:center;font-family:'Space Mono',monospace;transition:all .2s;}
+.slot-jog.cheio .slot-circ{border:2px solid var(--amarelo);background:linear-gradient(135deg,var(--roxo-mid),#3d1070);color:var(--branco);}
+.slot-jog.cheio.ouro .slot-circ{border-color:gold;box-shadow:0 0 10px rgba(255,215,0,.32);background:linear-gradient(135deg,#3d1070,#5a1a00);}
+.slot-pos-txt{font-family:'Space Mono',monospace;font-size:.49rem;color:rgba(255,255,255,.4);text-transform:uppercase;}
+.slot-jog.cheio .slot-pos-txt{color:var(--amarelo);}
+#tela-sim{display:none;min-height:100vh;padding:1.5rem;max-width:680px;margin:0 auto;}
+.sim-topo{text-align:center;margin-bottom:1.5rem;}
+.sim-titulo{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--amarelo);letter-spacing:.05em;}
+.placar-total{font-family:'Bebas Neue',sans-serif;font-size:4.5rem;line-height:1;margin:.75rem 0;}
+.vitoria-badge{display:inline-block;padding:.4rem 1.25rem;border-radius:3px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.15em;margin-bottom:.4rem;}
+.vitoria-badge.ganhou{background:var(--amarelo);color:var(--roxo-escuro);}.vitoria-badge.perdeu{background:var(--pink);color:white;}
+.jogo-card{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;margin-bottom:.875rem;overflow:hidden;}
+.jogo-fase{font-family:'Space Mono',monospace;font-size:.58rem;color:var(--cinza);letter-spacing:.12em;text-transform:uppercase;padding:.45rem 1rem;border-bottom:1px solid rgba(255,255,255,.05);background:rgba(0,0,0,.14);}
+.jogo-placar-bar{display:flex;justify-content:space-between;align-items:center;padding:.7rem 1rem;}
+.jogo-time{font-weight:600;font-size:.84rem;}
+.jogo-placar-num{font-family:'Bebas Neue',sans-serif;font-size:2rem;letter-spacing:.1em;}
+.jogo-placar-num.bump{animation:bump .2s ease;}
+@keyframes bump{0%{transform:scale(1);}50%{transform:scale(1.45);}100%{transform:scale(1);}}
+.jogo-clock{font-family:'Space Mono',monospace;font-size:.62rem;color:var(--cinza);text-align:center;padding:.1rem 0 .28rem;}
+.gols-timeline{padding:.38rem 1rem .62rem;display:flex;flex-direction:column;gap:.2rem;}
+.gol-ev{font-size:.72rem;display:flex;align-items:center;gap:.35rem;animation:goalIn .26s ease;}
+@keyframes goalIn{from{opacity:0;transform:translateX(-8px);}to{opacity:1;transform:translateX(0);}}
+.gol-ev.pro{color:var(--amarelo);}.gol-ev.contra{color:var(--pink);}
+.gol-min{font-family:'Space Mono',monospace;font-size:.6rem;opacity:.62;min-width:26px;}
+.adv-info{text-align:right;}
+.adv-flag{font-size:1.6rem;line-height:1;}
+.adv-ano{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.06em;}
+.jogo-time-info{display:flex;flex-direction:column;gap:.08rem;min-width:80px;}
+.jogo-time-info.adv-info{align-items:flex-end;}
+.btn-avancar{width:100%;padding:.62rem;background:transparent;border:1px solid var(--amarelo);color:var(--amarelo);font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:.12em;cursor:pointer;transition:all .18s;margin-top:.35rem;}
+.btn-avancar:hover{background:var(--amarelo);color:var(--roxo-escuro);}
+.artilharia{margin-top:1.25rem;background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.875rem;}
+.art-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--amarelo);margin-bottom:.6rem;letter-spacing:.1em;}
+.art-row{display:flex;align-items:center;justify-content:space-between;padding:.3rem 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.art-row:last-child{border-bottom:none;}
+.art-rank{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--cinza);width:20px;}
+.art-rank.g1{color:gold;}.art-rank.g2{color:silver;}.art-rank.g3{color:#cd7f32;}
+.art-info{flex:1;margin-left:.42rem;}
+.art-nome{font-weight:600;font-size:.8rem;}
+.art-sub{font-size:.58rem;color:var(--cinza);font-family:'Space Mono',monospace;}
+.art-gols{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--amarelo);}
+.btn-novo{width:100%;padding:.9rem;background:var(--amarelo);color:var(--roxo-escuro);border:none;border-radius:4px;font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:.1em;cursor:pointer;margin-top:1.25rem;transition:all .2s;}
+.btn-novo:hover{background:white;}
+.flash{position:fixed;inset:0;pointer-events:none;z-index:999;opacity:0;transition:opacity .07s;}
+.flash.gol{background:radial-gradient(circle at center,rgba(200,255,0,.25) 0%,transparent 65%);}
+.flash.falha{background:radial-gradient(circle at center,rgba(212,0,106,.25) 0%,transparent 65%);}
+.flash.on{opacity:1;}
+#res-overlay{display:none;position:fixed;inset:0;background:rgba(10,0,25,.93);z-index:500;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:2rem;}
+#res-overlay.show{display:flex;}
+.res-emoji{font-size:5rem;margin-bottom:.5rem;animation:popIn .5s cubic-bezier(.17,.67,.5,1.4);}
+@keyframes popIn{from{transform:scale(0);}to{transform:scale(1);}}
+.res-texto{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;letter-spacing:.05em;line-height:1;}
+.res-sub{font-size:.95rem;color:var(--cinza);margin-top:.5rem;font-family:'Space Mono',monospace;}
+.res-btn{margin-top:1.5rem;padding:.78rem 2.5rem;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.1em;border:none;border-radius:4px;cursor:pointer;transition:all .2s;}
+
+.fase-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--amarelo);letter-spacing:.1em;margin:1.2rem 0 .6rem;padding-bottom:.3rem;border-bottom:1px solid var(--card-borda);}
+.grupo-tabela{width:100%;border-collapse:collapse;margin-bottom:.6rem;font-size:.75rem;}
+.grupo-tabela th{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--cinza);letter-spacing:.1em;text-transform:uppercase;padding:.3rem .4rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.08);}
+.grupo-tabela td{padding:.32rem .4rem;text-align:center;border-bottom:1px solid rgba(255,255,255,.04);}
+.grupo-tabela td:first-child{text-align:left;font-weight:600;}
+.grupo-tabela tr.classificado td{color:var(--amarelo);}
+.grupo-tabela tr.eliminado-g td{color:rgba(255,255,255,.35);}
+.grupo-tabela tr.voce td:first-child::before{content:'⭐ ';color:var(--amarelo);}
+.mata-bracket{display:flex;flex-direction:column;gap:.4rem;margin-bottom:.8rem;}
+.mata-jogo{background:rgba(255,255,255,.04);border:1px solid var(--card-borda);border-radius:5px;padding:.5rem .7rem;display:flex;justify-content:space-between;align-items:center;}
+.mata-time{font-size:.8rem;font-weight:600;}
+.mata-placar{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;display:flex;gap:.3rem;align-items:center;}
+.mata-placar .sep{color:var(--cinza);font-size:.8rem;}
+.mata-winner{color:var(--amarelo);}.mata-loser{color:rgba(255,255,255,.35);}
+.btn-avancar{width:100%;padding:.65rem;background:transparent;border:2px solid var(--amarelo);color:var(--amarelo);font-family:'Bebas Neue',sans-serif;font-size:1.15rem;letter-spacing:.15em;cursor:pointer;transition:all .18s;margin-top:.5rem;border-radius:4px;}
+.btn-avancar:hover{background:var(--amarelo);color:var(--roxo-escuro);}
+.adv-info{text-align:right;}
+.adv-flag{font-size:1.55rem;line-height:1;}
+.adv-ano{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--cinza);}
+.jogo-time-info{display:flex;flex-direction:column;gap:.06rem;min-width:75px;}
+.jogo-time-info.adv-info{align-items:flex-end;}
+
+.match-live{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,#0d0020 0%,rgba(13,0,32,.96) 100%);padding:.6rem .5rem .5rem;border-bottom:1px solid var(--card-borda);margin:-.2rem -.2rem .5rem;}
+.live-clock{font-family:'Space Mono',monospace;font-size:1.05rem;color:var(--amarelo);text-align:center;letter-spacing:.08em;font-weight:700;}
+.live-clock .acresc{color:var(--pink);font-size:.85rem;}
+.live-placar{display:flex;justify-content:center;align-items:center;gap:1rem;margin-top:.3rem;}
+.live-side{display:flex;flex-direction:column;align-items:center;gap:.1rem;min-width:90px;}
+.live-side.dir{text-align:center;}
+.live-flag{font-size:1.5rem;line-height:1;}
+.live-nome{font-size:.7rem;font-weight:600;text-align:center;line-height:1.1;}
+.live-ano{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--cinza);}
+.live-num{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;line-height:1;}
+.live-num.bump{animation:bump .25s ease;}
+.live-x{color:var(--cinza);font-size:1.1rem;}
+.live-redcard{font-size:.7rem;margin-top:.1rem;}
+.ev-feed{display:flex;flex-direction:column;gap:.3rem;padding:.3rem .2rem;min-height:60px;}
+.ev-item{font-size:.74rem;line-height:1.4;padding:.4rem .55rem;border-radius:5px;animation:evIn .3s ease;display:flex;gap:.4rem;align-items:flex-start;}
+@keyframes evIn{from{opacity:0;transform:translateX(-10px);}to{opacity:1;transform:translateX(0);}}
+.ev-min{font-family:'Space Mono',monospace;font-size:.6rem;opacity:.7;min-width:30px;padding-top:.1rem;}
+.ev-txt{flex:1;}
+.ev-gol-pro{background:rgba(200,255,0,.1);border-left:3px solid var(--amarelo);}
+.ev-gol-pro .ev-destaque{color:var(--amarelo);font-weight:700;font-family:'Bebas Neue',sans-serif;font-size:.95rem;letter-spacing:.05em;display:block;margin-bottom:.1rem;}
+.ev-gol-contra{background:rgba(212,0,106,.1);border-left:3px solid var(--pink);}
+.ev-gol-contra .ev-destaque{color:var(--pink);font-weight:700;font-family:'Bebas Neue',sans-serif;font-size:.95rem;display:block;margin-bottom:.1rem;}
+.ev-amarelo{background:rgba(255,200,0,.08);border-left:3px solid #f0c000;}
+.ev-vermelho{background:rgba(255,40,40,.1);border-left:3px solid #ff3838;}
+.ev-var{background:rgba(120,80,255,.1);border-left:3px solid #8a5cf0;}
+.ev-lesao{background:rgba(255,140,0,.08);border-left:3px solid #ff8c00;}
+.ev-funny{background:rgba(80,200,255,.08);border-left:3px solid #50c8ff;font-style:italic;}
+.ev-torcida{background:rgba(255,255,255,.04);border-left:3px solid rgba(255,255,255,.25);color:rgba(240,240,255,.78);}
+.ev-narr{background:transparent;color:rgba(240,240,255,.6);font-style:italic;border-left:3px solid rgba(255,255,255,.12);}
+.ev-narr .ev-quem{color:var(--amarelo);font-style:normal;font-weight:600;}
+.stats-box{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.875rem;margin:.6rem 0;}
+.stats-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--amarelo);letter-spacing:.1em;margin-bottom:.6rem;}
+.stat-line{margin-bottom:.5rem;}
+.stat-vals{display:flex;justify-content:space-between;font-family:'Space Mono',monospace;font-size:.72rem;margin-bottom:.18rem;}
+.stat-vals .v-eu{color:var(--amarelo);}.stat-vals .v-adv{color:var(--pink);}
+.stat-lbl{text-align:center;font-size:.56rem;color:var(--cinza);letter-spacing:.05em;text-transform:uppercase;}
+.stat-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;background:rgba(255,255,255,.06);}
+.stat-bar .b-eu{background:var(--amarelo);}.stat-bar .b-adv{background:var(--pink);}
+.mvp-row{display:flex;gap:.5rem;margin-top:.6rem;}
+.mvp-card{flex:1;border-radius:6px;padding:.55rem;text-align:center;}
+.mvp-card.melhor{background:rgba(200,255,0,.1);border:1px solid rgba(200,255,0,.3);}
+.mvp-card.pior{background:rgba(212,0,106,.1);border:1px solid rgba(212,0,106,.3);}
+.mvp-lbl{font-family:'Space Mono',monospace;font-size:.52rem;color:var(--cinza);letter-spacing:.08em;text-transform:uppercase;margin-bottom:.2rem;}
+.mvp-nome{font-weight:700;font-size:.82rem;}
+.mvp-nota{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;line-height:1;margin-top:.1rem;}
+.mvp-card.melhor .mvp-nota{color:var(--amarelo);}.mvp-card.pior .mvp-nota{color:var(--pink);}
+.notas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:.3rem;margin-top:.5rem;}
+.nota-jog{display:flex;justify-content:space-between;align-items:center;padding:.28rem .45rem;background:rgba(255,255,255,.03);border-radius:4px;font-size:.68rem;}
+.nota-jog .nj-nota{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;}
+.nota-alta{color:var(--amarelo);}.nota-media{color:#9fd64a;}.nota-baixa{color:var(--pink);}
+
+.tab-btn{flex:1;padding:.45rem;background:transparent;border:1px solid var(--card-borda);border-radius:5px;color:var(--cinza);font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.05em;cursor:pointer;transition:all .18s;}
+.tab-btn.tab-ativa{border-color:var(--amarelo);color:var(--amarelo);background:rgba(200,255,0,.08);}
+.copa-stat-row{display:flex;justify-content:space-between;align-items:center;padding:.3rem .2rem;border-bottom:1px solid rgba(255,255,255,.04);font-size:.74rem;}
+.copa-stat-row:last-child{border-bottom:none;}
+.copa-stat-lbl{color:rgba(240,240,255,.7);}
+.copa-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--amarelo);}
+
+#select-ano{display:none;margin-bottom:1rem;padding:.5rem .8rem;background:var(--roxo-mid);color:var(--branco);border:1px solid var(--amarelo);border-radius:6px;font-family:'Space Mono',monospace;font-size:.75rem;cursor:pointer;position:relative;z-index:1;outline:none;}
+#select-ano option{background:var(--roxo-escuro);color:var(--branco);}
+
+.live-scorers{display:flex;justify-content:space-between;margin-top:.4rem;padding:0 .2rem;gap:1rem;}
+.scorers-col{flex:1;display:flex;flex-direction:column;gap:.12rem;}
+.scorers-col.dir{text-align:right;align-items:flex-end;}
+.scorer-name{font-size:.62rem;color:rgba(240,240,255,.78);font-family:'Space Mono',monospace;display:flex;gap:.25rem;align-items:center;animation:evIn .3s ease;}
+.scorers-col.dir .scorer-name{flex-direction:row-reverse;}
+.scorer-name .s-min{color:var(--amarelo);font-weight:700;}
+.scorers-col.dir .scorer-name .s-min{color:var(--pink);}
+
+#squad-modal{display:none;position:fixed;inset:0;background:rgba(10,0,25,.88);z-index:600;align-items:center;justify-content:center;padding:1.5rem;}
+#squad-modal.show{display:flex;}
+.squad-box{background:var(--roxo-escuro);border:1px solid var(--amarelo);border-radius:12px;padding:1.25rem;max-width:420px;width:100%;max-height:85vh;overflow-y:auto;position:relative;box-shadow:0 0 40px rgba(200,255,0,.15);}
+.squad-close{position:absolute;top:.7rem;right:.7rem;-webkit-tap-highlight-color:transparent;touch-action:manipulation;background:transparent;border:1px solid var(--card-borda);color:var(--cinza);width:28px;height:28px;border-radius:50%;cursor:pointer;font-size:.85rem;transition:all .18s;}
+.squad-close:hover{border-color:var(--pink);color:var(--pink);}
+.squad-header{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.04em;color:var(--branco);margin-bottom:.2rem;padding-right:2rem;}
+.squad-rating{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--amarelo);letter-spacing:.05em;margin-bottom:.9rem;}
+.squad-list{display:flex;flex-direction:column;gap:.3rem;}
+.squad-pos-group{margin-bottom:.5rem;}
+.squad-pos-lbl{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.25rem;border-bottom:1px solid rgba(255,255,255,.06);padding-bottom:.2rem;}
+.squad-player{display:flex;justify-content:space-between;align-items:center;padding:.32rem .5rem;background:rgba(255,255,255,.03);border-radius:5px;margin-bottom:.2rem;}
+.squad-player.craque{background:rgba(255,215,0,.08);border:1px solid rgba(255,215,0,.2);}
+.squad-pname{font-size:.82rem;font-weight:600;display:flex;align-items:center;gap:.35rem;}
+.squad-ppos{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--pink);}
+.squad-prat{font-family:'Bebas Neue',sans-serif;font-size:1.4rem;color:var(--amarelo);line-height:1;}
+.squad-hint{font-size:.62rem;color:var(--cinza);font-style:italic;cursor:pointer;}
+.clickable-team{cursor:pointer;border-bottom:1px dotted rgba(200,255,0,.4);-webkit-tap-highlight-color:rgba(200,255,0,.3);touch-action:manipulation;}
+.clickable-team:hover{color:var(--amarelo);}
+
+.podio-box,.premios-box,.art-copa-box{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:10px;padding:1rem;margin:.8rem 0;}
+.podio-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--amarelo);letter-spacing:.08em;margin-bottom:.7rem;text-align:center;}
+.podio-item{display:flex;align-items:center;gap:.7rem;padding:.6rem .8rem;border:1px solid;border-radius:8px;margin-bottom:.5rem;background:rgba(0,0,0,.2);}
+.podio-medal{font-size:1.7rem;line-height:1;}
+.podio-lbl{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.1em;text-transform:uppercase;}
+.podio-time{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;line-height:1;letter-spacing:.03em;}
+.podio-item .podio-info{flex:1;}
+.premio-row{display:flex;align-items:center;gap:.7rem;padding:.45rem 0;border-bottom:1px solid rgba(255,255,255,.05);}
+.premio-row:last-child{border-bottom:none;}
+.premio-ico{font-size:1.5rem;width:34px;text-align:center;}
+.premio-lbl{font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.06em;text-transform:uppercase;}
+.premio-nome{font-size:.92rem;font-weight:700;color:var(--branco);}
+</style>
+</head>
+<body>
+<div class="flash" id="flash"></div>
+<div id="squad-modal" onclick="fecharSquad(event)">
+  <div class="squad-box" onclick="event.stopPropagation()">
+    <button class="squad-close" onclick="fecharSquad()">✕</button>
+    <div class="squad-header" id="squad-header"></div>
+    <div class="squad-rating" id="squad-rating"></div>
+    <div class="squad-list" id="squad-list"></div>
+  </div>
+</div>
+<div id="res-overlay">
+  <div class="res-emoji" id="res-emoji"></div>
+  <div class="res-texto" id="res-texto"></div>
+  <div class="res-sub" id="res-sub"></div>
+  <button class="res-btn" id="res-btn" onclick="fecharOverlay()"></button>
+</div>
+
+<div id="tela-inicio">
+  <div class="logo-7a0"><span class="sete">7</span><span class="a">a</span><span class="zero">0</span></div>
+  <p class="logo-sub">Monte sua seleção dos sonhos</p>
+  <p class="inicio-tagline">Role o dado, veja o elenco completo, escolha seu jogador e tente fazer 7 a 0 na Copa.</p>
+  <p class="estilo-label">Modo de Copa</p>
+  <div class="estilo-btns">
+    <button class="btn-estilo ativo-eq" onclick="setCopaModo('mista',this)">🌍 Todas as Copas</button>
+    <button class="btn-estilo" onclick="setCopaModo('ano',this)">📅 Copa por Ano</button>
+    <button class="btn-estilo" onclick="setCopaModo('wc2026',this)">🏆 Copa 2026 Real</button>
+  </div>
+  <select id="select-ano" style="display:none" onchange="setAnoCopa(this.value)"></select>
+  <p class="estilo-label">Estilo de jogo</p>
+  <div class="estilo-btns">
+    <button class="btn-estilo ativo-eq" onclick="setEstilo('equilibrado',this)">⚖️ Equilibrado</button>
+    <button class="btn-estilo" onclick="setEstilo('defensivo',this)">🛡️ Defensivo</button>
+    <button class="btn-estilo" onclick="setEstilo('ofensivo',this)">⚡ Ofensivo</button>
+  </div>
+  <div class="btn-group">
+    <button class="btn-modo btn-classico" onclick="iniciar('classico')">⚽ Modo Clássico<span class="modo-desc">Ratings visíveis</span></button>
+    <button class="btn-modo btn-almanaque" onclick="iniciar('almanaque')">📖 Almanaque<span class="modo-desc">Só memória</span></button>
+  </div>
+</div>
+
+<div id="tela-jogo">
+  <div class="jogo-header">
+    <div class="jogo-logo"><span class="sete">7</span><span style="color:rgba(240,240,255,.22);font-size:.6em">a</span><span class="zero">0</span></div>
+    <div id="prog-cont" class="progresso"></div>
+    <div id="modo-disp"></div>
+  </div>
+  <div class="sorteio-zona">
+    <div class="dado-row">
+      <div class="dado-wrap">
+        <div class="dado-emoji" id="dado" onclick="rolarDado()">🎲</div>
+        <div class="dado-hint">clique para rolar</div>
+        <div class="reroll-info">Rerolls: <span id="rr-num">3</span>/3</div>
+      </div>
+      <div class="sorteio-info" id="sort-info">
+        <div class="sorteio-ano" id="sort-ano"></div>
+        <div class="sorteio-pais" id="sort-pais"></div>
+        <button class="btn-reroll" id="btn-rr" onclick="reroll()">↺ Reroll</button>
+      </div>
+    </div>
+  </div>
+  <button class="super-btn" id="btn-sc" onclick="abrirSC()">
+    ⭐ USAR SUPER CRAQUE
+    <span class="sc-sub">1 chance — escolha um lendário de todas as eras</span>
+  </button>
+  <div class="elenco-zone" id="elenco-zone">
+    <div class="elenco-titulo" id="elenco-titulo">ESCOLHA UM JOGADOR</div>
+    <div class="elenco-grid" id="elenco-grid"></div>
+  </div>
+  <div class="campo-section">
+    <div class="campo-hdr">
+      <div class="campo-titulo">SEU TIME</div>
+      <div class="campo-meta">
+        <span class="meta-pill meta-form" id="meta-form">4-3-3</span>
+        <span class="meta-pill meta-est" id="meta-est">EQUILIBRADO</span>
+      </div>
+    </div>
+    <div class="overall-bar" id="overall-bar">
+      <div class="ov-row">
+        <div class="ov-item"><div class="ov-lbl">OVERALL</div><div class="ov-val ov-total" id="ov-tot">--</div></div>
+        <div class="ov-div"></div>
+        <div class="ov-item"><div class="ov-lbl">ATAQUE</div><div class="ov-val ov-atk" id="ov-atk">--</div></div>
+        <div class="ov-div"></div>
+        <div class="ov-item"><div class="ov-lbl">DEFESA</div><div class="ov-val ov-def" id="ov-def">--</div></div>
+      </div>
+    </div>
+    <div class="campo-visual" id="campo"></div>
+  </div>
+</div>
+
+<div id="tela-sim">
+  <div class="sim-topo">
+    <div id="sim-badge"></div>
+    <div class="sim-titulo" id="sim-titulo">COPA DO MUNDO</div>
+    <div class="placar-total" id="placar-total"></div>
+    <div id="sim-sub" style="color:var(--cinza);font-size:.86rem;"></div>
+  </div>
+  <div id="copa-live" style="display:none;background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.75rem;margin-bottom:1rem;">
+    <div style="display:flex;gap:.5rem;margin-bottom:.6rem;">
+      <button class="tab-btn tab-ativa" id="tab-art" onclick="trocarTab('art')">⚽ Artilharia</button>
+      <button class="tab-btn" id="tab-stats" onclick="trocarTab('stats')">📊 Estatísticas</button>
+    </div>
+    <div id="copa-art-panel"></div>
+    <div id="copa-stats-panel" style="display:none"></div>
+  </div>
+  <div id="jogos-cont"></div>
+  <div class="artilharia" id="art-sec" style="display:none">
+    <div class="art-titulo">⚽ ARTILHARIA DA COPA</div>
+    <div id="art-lista"></div>
+  </div>
+  <button class="btn-novo" onclick="reiniciar()">🎲 JOGAR NOVAMENTE</button>
+</div>
+
+<script>
+const AC=new(window.AudioContext||window.webkitAudioContext)();
+document.addEventListener('click',()=>{if(AC.state==='suspended')AC.resume();},{once:true});
+
+function tocarDado(){
+  for(let i=0;i<8;i++){
+    const t=AC.currentTime+i*0.055*(1+i*0.08);
+    const bl=Math.floor(AC.sampleRate*0.03),buf=AC.createBuffer(1,bl,AC.sampleRate),d=buf.getChannelData(0);
+    for(let j=0;j<bl;j++)d[j]=(Math.random()*2-1)*Math.exp(-j/(bl*0.15));
+    const s=AC.createBufferSource(),h=AC.createBiquadFilter(),g=AC.createGain();
+    h.type='highpass';h.frequency.value=800+Math.random()*400;g.gain.value=0.33*(1-i/11);
+    s.buffer=buf;s.connect(h);h.connect(g);g.connect(AC.destination);s.start(t);
+    const o=AC.createOscillator(),og=AC.createGain();
+    o.connect(og);og.connect(AC.destination);o.type='sine';
+    o.frequency.setValueAtTime(200+Math.random()*120,t);o.frequency.exponentialRampToValueAtTime(80,t+0.025);
+    og.gain.setValueAtTime(0.16*(1-i/12),t);og.gain.exponentialRampToValueAtTime(0.001,t+0.04);
+    o.start(t);o.stop(t+0.05);
+  }
+  const rl=Math.floor(AC.sampleRate*0.45),rb=AC.createBuffer(1,rl,AC.sampleRate),rd=rb.getChannelData(0);
+  for(let j=0;j<rl;j++)rd[j]=(Math.random()*2-1)*0.04*Math.sin(Math.PI*j/rl);
+  const rs=AC.createBufferSource(),rf=AC.createBiquadFilter(),rg=AC.createGain();
+  rf.type='bandpass';rf.frequency.value=300;rf.Q.value=1.5;rg.gain.value=0.45;
+  rs.buffer=rb;rs.connect(rf);rf.connect(rg);rg.connect(AC.destination);rs.start(AC.currentTime);
+}
+
+function tocarGol(){
+  [523,659,784,1047].forEach((f,i)=>{
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.connect(g);g.connect(AC.destination);o.type='sine';o.frequency.value=f;
+    const t=AC.currentTime+i*0.08;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.22,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+.38);
+    o.start(t);o.stop(t+.4);
+  });
+  const bl=Math.floor(AC.sampleRate*.45),buf=AC.createBuffer(1,bl,AC.sampleRate),d=buf.getChannelData(0);
+  for(let i=0;i<bl;i++)d[i]=(Math.random()*2-1)*(1-i/bl)*.11;
+  const s=AC.createBufferSource(),f=AC.createBiquadFilter();
+  f.type='bandpass';f.frequency.value=700;f.Q.value=.5;
+  s.buffer=buf;s.connect(f);f.connect(AC.destination);s.start(AC.currentTime+.08);
+  flashFx('gol');
+}
+
+function tocarFalha(){
+  const o=AC.createOscillator(),g=AC.createGain();
+  o.connect(g);g.connect(AC.destination);o.type='sawtooth';
+  o.frequency.setValueAtTime(420,AC.currentTime);o.frequency.linearRampToValueAtTime(170,AC.currentTime+.55);
+  g.gain.setValueAtTime(.17,AC.currentTime);g.gain.exponentialRampToValueAtTime(.001,AC.currentTime+.65);
+  o.start(AC.currentTime);o.stop(AC.currentTime+.7);
+  flashFx('falha');
+}
+
+let muzNode=null;
+function pararMusica(){if(muzNode){try{muzNode.stop();}catch(e){}muzNode=null;}}
+
+function tocarVitoria(){
+  pararMusica();
+  const ns=[523,587,659,698,784,880,988,1047,988,880,1047,1047];
+  const ds=[.15,.15,.15,.15,.15,.15,.15,.3,.15,.15,.5,.01];
+  let t=AC.currentTime+0.1;
+  ns.forEach((f,i)=>{
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.connect(g);g.connect(AC.destination);o.type=i%3===0?'square':'triangle';o.frequency.value=f;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.26,t+.02);g.gain.exponentialRampToValueAtTime(.001,t+ds[i]*.88);
+    o.start(t);o.stop(t+ds[i]);t+=ds[i];
+  });
+  for(let i=0;i<6;i++){
+    const bt=AC.currentTime+0.1+i*0.25;
+    const bo=AC.createOscillator(),bg=AC.createGain();
+    bo.connect(bg);bg.connect(AC.destination);bo.type='sine';
+    bo.frequency.setValueAtTime(160,bt);bo.frequency.exponentialRampToValueAtTime(40,bt+.15);
+    bg.gain.setValueAtTime(.33,bt);bg.gain.exponentialRampToValueAtTime(.001,bt+.18);
+    bo.start(bt);bo.stop(bt+.2);
+  }
+}
+
+function tocarDerrota(){
+  pararMusica();
+  const ns=[392,370,349,330,311,294,277,262];
+  const ds=[.5,.5,.5,.5,.5,.5,.5,1.2];
+  let t=AC.currentTime+0.2;
+  ns.forEach((f,i)=>{
+    const o=AC.createOscillator(),g=AC.createGain();
+    o.connect(g);g.connect(AC.destination);o.type='sine';o.frequency.value=f;
+    g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.19,t+.1);g.gain.exponentialRampToValueAtTime(.001,t+ds[i]);
+    o.start(t);o.stop(t+ds[i]);
+    const o2=AC.createOscillator(),g2=AC.createGain();
+    o2.connect(g2);g2.connect(AC.destination);o2.type='triangle';o2.frequency.value=f*1.5;
+    g2.gain.setValueAtTime(0,t);g2.gain.linearRampToValueAtTime(.07,t+.1);g2.gain.exponentialRampToValueAtTime(.001,t+ds[i]);
+    o2.start(t);o2.stop(t+ds[i]);t+=ds[i];
+  });
+  for(let i=0;i<4;i++){
+    const bt=AC.currentTime+0.3+i*1.0;
+    const bo=AC.createOscillator(),bg=AC.createGain();
+    bo.connect(bg);bg.connect(AC.destination);bo.type='sine';
+    bo.frequency.setValueAtTime(80,bt);bo.frequency.exponentialRampToValueAtTime(40,bt+.4);
+    bg.gain.setValueAtTime(.23,bt);bg.gain.exponentialRampToValueAtTime(.001,bt+.5);
+    bo.start(bt);bo.stop(bt+.55);
+  }
+}
+
+function flashFx(t){
+  const el=document.getElementById('flash');
+  el.className='flash '+(t==='gol'?'gol':'falha')+' on';
+  setTimeout(()=>{el.className='flash';},260);
+}
+
+// ── SUPER CRAQUES ──
+const SC=[
+  {nome:"Pelé",pos:"ATA",r:99,pais:"Brasil",e:"🇧🇷"},{nome:"Maradona",pos:"MEI",r:99,pais:"Argentina",e:"🇦🇷"},
+  {nome:"Messi",pos:"ATA",r:99,pais:"Argentina",e:"🇦🇷"},{nome:"Cruyff",pos:"ATA",r:98,pais:"Holanda",e:"🇳🇱"},
+  {nome:"Ronaldo R.",pos:"ATA",r:97,pais:"Brasil",e:"🇧🇷"},{nome:"Zidane",pos:"MEI",r:97,pais:"França",e:"🇫🇷"},
+  {nome:"Beckenbauer",pos:"ZAG",r:97,pais:"Alemanha",e:"🇩🇪"},{nome:"Eusébio",pos:"ATA",r:96,pais:"Portugal",e:"🇵🇹"},
+  {nome:"Romário",pos:"ATA",r:96,pais:"Brasil",e:"🇧🇷"},{nome:"Garrincha",pos:"ATA",r:96,pais:"Brasil",e:"🇧🇷"},
+  {nome:"Neuer",pos:"GOL",r:95,pais:"Alemanha",e:"🇩🇪"},{nome:"Müller G.",pos:"ATA",r:95,pais:"Alemanha",e:"🇩🇪"},
+  {nome:"Meazza",pos:"ATA",r:95,pais:"Itália",e:"🇮🇹"},{nome:"Casillas",pos:"GOL",r:95,pais:"Espanha",e:"🇪🇸"},
+  {nome:"Zoff",pos:"GOL",r:94,pais:"Itália",e:"🇮🇹"},{nome:"Baresi",pos:"ZAG",r:94,pais:"Itália",e:"🇮🇹"},
+  {nome:"Iniesta",pos:"MEI",r:94,pais:"Espanha",e:"🇪🇸"},{nome:"Ronaldinho",pos:"MEI",r:93,pais:"Brasil",e:"🇧🇷"},
+  {nome:"Xavi",pos:"MEI",r:93,pais:"Espanha",e:"🇪🇸"},{nome:"Maldini",pos:"LAT",r:93,pais:"Itália",e:"🇮🇹"},
+  {nome:"Banks",pos:"GOL",r:93,pais:"Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},{nome:"Bobby Charlton",pos:"MEI",r:93,pais:"Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿"},
+  {nome:"Matthäus",pos:"MEI",r:93,pais:"Alemanha",e:"🇩🇪"},{nome:"Carlos Alberto",pos:"LAT",r:93,pais:"Brasil",e:"🇧🇷"},
+  {nome:"Buffon",pos:"GOL",r:93,pais:"Itália",e:"🇮🇹"},{nome:"Mbappé",pos:"ATA",r:93,pais:"França",e:"🇫🇷"},
+  {nome:"Modrić",pos:"MEI",r:93,pais:"Croácia",e:"🇭🇷"},{nome:"C.Ronaldo",pos:"ATA",r:93,pais:"Portugal",e:"🇵🇹"},
+  {nome:"Cannavaro",pos:"ZAG",r:92,pais:"Itália",e:"🇮🇹"},{nome:"De Bruyne",pos:"MEI",r:92,pais:"Bélgica",e:"🇧🇪"},
+  {nome:"Kaká",pos:"MEI",r:92,pais:"Brasil",e:"🇧🇷"},{nome:"Kroos",pos:"MEI",r:91,pais:"Alemanha",e:"🇩🇪"},
+  {nome:"Bergkamp",pos:"ATA",r:91,pais:"Holanda",e:"🇳🇱"},{nome:"Kempes",pos:"ATA",r:91,pais:"Argentina",e:"🇦🇷"},
+  {nome:"Falcão",pos:"MED",r:90,pais:"Brasil",e:"🇧🇷"},{nome:"Zico",pos:"MEI",r:93,pais:"Brasil",e:"🇧🇷"},
+  {nome:"Lahm",pos:"LAT",r:90,pais:"Alemanha",e:"🇩🇪"},{nome:"Sneijder",pos:"MEI",r:90,pais:"Holanda",e:"🇳🇱"},
+  {nome:"Courtois",pos:"GOL",r:90,pais:"Bélgica",e:"🇧🇪"},{nome:"Hazard",pos:"ATA",r:90,pais:"Bélgica",e:"🇧🇪"},
+];
+
+// ── FORMAÇÕES ──
+const FORM={
+  equilibrado:{nome:"4-3-3",slots:[
+    {pos:"GOL",l:"gol"},{pos:"LAT",l:"def"},{pos:"ZAG",l:"def"},{pos:"ZAG",l:"def"},{pos:"LAT",l:"def"},
+    {pos:"MED",l:"mei"},{pos:"MEI",l:"mei"},{pos:"MED",l:"mei"},
+    {pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},
+  ]},
+  defensivo:{nome:"5-3-2",slots:[
+    {pos:"GOL",l:"gol"},
+    {pos:"LAT",l:"def"},{pos:"ZAG",l:"def"},{pos:"ZAG",l:"def"},{pos:"ZAG",l:"def"},{pos:"LAT",l:"def"},
+    {pos:"MED",l:"mei"},{pos:"MEI",l:"mei"},{pos:"MED",l:"mei"},
+    {pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},
+  ]},
+  ofensivo:{nome:"4-2-4",slots:[
+    {pos:"GOL",l:"gol"},{pos:"LAT",l:"def"},{pos:"ZAG",l:"def"},{pos:"ZAG",l:"def"},{pos:"LAT",l:"def"},
+    {pos:"MED",l:"mei"},{pos:"MED",l:"mei"},
+    {pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},{pos:"ATA",l:"ata"},
+  ]},
+};
+</script>
+
+<script>
+const SEL=[
+  // ── BRASIL ──
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1958,j:[
+    {nome:"Gilmar",pos:"GOL",r:88},{nome:"De Sordi",pos:"LAT",r:75},{nome:"Orlando",pos:"ZAG",r:77},
+    {nome:"Bellini",pos:"ZAG",r:80},{nome:"Nilton Santos",pos:"LAT",r:84},{nome:"Zito",pos:"MED",r:80},
+    {nome:"Didi",pos:"MEI",r:89},{nome:"Garrincha",pos:"ATA",r:96},{nome:"Vavá",pos:"ATA",r:84},
+    {nome:"Pelé",pos:"ATA",r:97},{nome:"Zagallo",pos:"ATA",r:80},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1962,j:[
+    {nome:"Gilmar",pos:"GOL",r:87},{nome:"Djalma Santos",pos:"LAT",r:83},{nome:"Mauro",pos:"ZAG",r:79},
+    {nome:"Zózimo",pos:"ZAG",r:77},{nome:"Nilton Santos",pos:"LAT",r:82},{nome:"Zito",pos:"MED",r:79},
+    {nome:"Didi",pos:"MEI",r:86},{nome:"Garrincha",pos:"ATA",r:96},{nome:"Vavá",pos:"ATA",r:82},
+    {nome:"Amarildo",pos:"ATA",r:80},{nome:"Zagallo",pos:"ATA",r:78},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1970,j:[
+    {nome:"Félix",pos:"GOL",r:79},{nome:"Carlos Alberto",pos:"LAT",r:93},{nome:"Brito",pos:"ZAG",r:80},
+    {nome:"Piazza",pos:"ZAG",r:79},{nome:"Everaldo",pos:"LAT",r:79},{nome:"Clodoaldo",pos:"MED",r:84},
+    {nome:"Gérson",pos:"MEI",r:90},{nome:"Jairzinho",pos:"ATA",r:91},{nome:"Tostão",pos:"ATA",r:87},
+    {nome:"Pelé",pos:"ATA",r:99},{nome:"Rivelino",pos:"MEI",r:90},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1982,j:[
+    {nome:"Waldir Peres",pos:"GOL",r:78},{nome:"Leandro",pos:"LAT",r:81},{nome:"Luisinho",pos:"ZAG",r:77},
+    {nome:"Oscar",pos:"ZAG",r:80},{nome:"Junior",pos:"LAT",r:83},{nome:"Falcão",pos:"MED",r:90},
+    {nome:"Cerezo",pos:"MED",r:84},{nome:"Zico",pos:"MEI",r:93},{nome:"Éder",pos:"ATA",r:82},
+    {nome:"Sócrates",pos:"MEI",r:89},{nome:"Serginho",pos:"ATA",r:78},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1994,j:[
+    {nome:"Taffarel",pos:"GOL",r:87},{nome:"Cafu",pos:"LAT",r:87},{nome:"Aldair",pos:"ZAG",r:83},
+    {nome:"Marcio Santos",pos:"ZAG",r:80},{nome:"Branco",pos:"LAT",r:82},{nome:"Mauro Silva",pos:"MED",r:77},
+    {nome:"Mazinho",pos:"MED",r:79},{nome:"Bebeto",pos:"ATA",r:90},{nome:"Zinho",pos:"MEI",r:84},
+    {nome:"Romário",pos:"ATA",r:96},{nome:"Mauro Galvão",pos:"ZAG",r:78},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:1998,j:[
+    {nome:"Taffarel",pos:"GOL",r:85},{nome:"Cafu",pos:"LAT",r:89},{nome:"Aldair",pos:"ZAG",r:81},
+    {nome:"Junior Baiano",pos:"ZAG",r:77},{nome:"Roberto Carlos",pos:"LAT",r:91},{nome:"César Sampaio",pos:"MED",r:78},
+    {nome:"Dunga",pos:"MED",r:80},{nome:"Ronaldo",pos:"ATA",r:96},{nome:"Rivaldo",pos:"MEI",r:89},
+    {nome:"Bebeto",pos:"ATA",r:85},{nome:"Leonardo",pos:"MEI",r:82},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2002,j:[
+    {nome:"Marcos",pos:"GOL",r:84},{nome:"Cafu",pos:"LAT",r:90},{nome:"Lúcio",pos:"ZAG",r:86},
+    {nome:"Roque Júnior",pos:"ZAG",r:79},{nome:"Roberto Carlos",pos:"LAT",r:91},{nome:"Gilberto Silva",pos:"MED",r:83},
+    {nome:"Kléberson",pos:"MED",r:78},{nome:"Ronaldinho",pos:"MEI",r:91},{nome:"Rivaldo",pos:"MEI",r:90},
+    {nome:"Ronaldo",pos:"ATA",r:97},{nome:"Edilson",pos:"ATA",r:78},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2006,j:[
+    {nome:"Dida",pos:"GOL",r:83},{nome:"Cafu",pos:"LAT",r:87},{nome:"Lúcio",pos:"ZAG",r:86},
+    {nome:"Juan",pos:"ZAG",r:81},{nome:"Roberto Carlos",pos:"LAT",r:88},{nome:"Emerson",pos:"MED",r:80},
+    {nome:"Gilberto Silva",pos:"MED",r:82},{nome:"Kaká",pos:"MEI",r:92},{nome:"Adriano",pos:"ATA",r:85},
+    {nome:"Ronaldo",pos:"ATA",r:91},{nome:"Ronaldinho",pos:"MEI",r:93},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2010,j:[
+    {nome:"Júlio César",pos:"GOL",r:85},{nome:"Maicon",pos:"LAT",r:87},{nome:"Lúcio",pos:"ZAG",r:84},
+    {nome:"Juan",pos:"ZAG",r:80},{nome:"Michel Bastos",pos:"LAT",r:79},{nome:"Felipe Melo",pos:"MED",r:78},
+    {nome:"Gilberto Silva",pos:"MED",r:80},{nome:"Kaká",pos:"MEI",r:89},{nome:"Robinho",pos:"ATA",r:84},
+    {nome:"Luís Fabiano",pos:"ATA",r:85},{nome:"Elano",pos:"MEI",r:80},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2014,j:[
+    {nome:"Júlio César",pos:"GOL",r:82},{nome:"Maicon",pos:"LAT",r:83},{nome:"Thiago Silva",pos:"ZAG",r:89},
+    {nome:"David Luiz",pos:"ZAG",r:85},{nome:"Marcelo",pos:"LAT",r:87},{nome:"Luiz Gustavo",pos:"MED",r:80},
+    {nome:"Fernandinho",pos:"MED",r:83},{nome:"Oscar",pos:"MEI",r:83},{nome:"Hulk",pos:"ATA",r:82},
+    {nome:"Neymar",pos:"ATA",r:91},{nome:"Fred",pos:"ATA",r:79},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2018,j:[
+    {nome:"Alisson",pos:"GOL",r:87},{nome:"Danilo",pos:"LAT",r:82},{nome:"Thiago Silva",pos:"ZAG",r:88},
+    {nome:"Miranda",pos:"ZAG",r:83},{nome:"Marcelo",pos:"LAT",r:86},{nome:"Casemiro",pos:"MED",r:87},
+    {nome:"Paulinho",pos:"MED",r:82},{nome:"Coutinho",pos:"MEI",r:86},{nome:"Willian",pos:"ATA",r:81},
+    {nome:"Neymar",pos:"ATA",r:92},{nome:"Gabriel Jesus",pos:"ATA",r:82},
+  ]},
+  {p:"🇧🇷 Brasil",e:"🇧🇷",ano:2022,j:[
+    {nome:"Alisson",pos:"GOL",r:90},{nome:"Danilo",pos:"LAT",r:84},{nome:"Marquinhos",pos:"ZAG",r:88},
+    {nome:"Thiago Silva",pos:"ZAG",r:87},{nome:"Alex Sandro",pos:"LAT",r:82},{nome:"Casemiro",pos:"MED",r:88},
+    {nome:"Fred",pos:"MED",r:83},{nome:"Vini Jr",pos:"ATA",r:90},{nome:"Raphinha",pos:"ATA",r:84},
+    {nome:"Richarlison",pos:"ATA",r:84},{nome:"Neymar",pos:"ATA",r:91},
+  ]},
+  // ── ARGENTINA ──
+  {p:"🇦🇷 Argentina",e:"🇦🇷",ano:1978,j:[
+    {nome:"Fillol",pos:"GOL",r:85},{nome:"Olguín",pos:"LAT",r:77},{nome:"Galván",pos:"ZAG",r:78},
+    {nome:"Passarella",pos:"ZAG",r:87},{nome:"Tarantini",pos:"LAT",r:78},{nome:"Ardiles",pos:"MED",r:86},
+    {nome:"Gallego",pos:"MED",r:79},{nome:"Valencia",pos:"ATA",r:77},{nome:"Bertoni",pos:"ATA",r:78},
+    {nome:"Kempes",pos:"ATA",r:91},{nome:"Luque",pos:"ATA",r:81},
+  ]},
+  {p:"🇦🇷 Argentina",e:"🇦🇷",ano:1986,j:[
+    {nome:"Pumpido",pos:"GOL",r:82},{nome:"Cuciuffo",pos:"LAT",r:76},{nome:"Ruggeri",pos:"ZAG",r:84},
+    {nome:"Brown",pos:"ZAG",r:79},{nome:"Olarticoechea",pos:"LAT",r:77},{nome:"Batista",pos:"MED",r:79},
+    {nome:"Giusti",pos:"MED",r:78},{nome:"Maradona",pos:"MEI",r:99},{nome:"Burruchaga",pos:"MEI",r:85},
+    {nome:"Valdano",pos:"ATA",r:83},{nome:"Caniggia",pos:"ATA",r:86},
+  ]},
+  {p:"🇦🇷 Argentina",e:"🇦🇷",ano:1990,j:[
+    {nome:"Goycochea",pos:"GOL",r:84},{nome:"Ruggeri",pos:"ZAG",r:83},{nome:"Monzón",pos:"ZAG",r:77},
+    {nome:"Serrizuela",pos:"LAT",r:75},{nome:"Sensini",pos:"LAT",r:78},{nome:"Basualdo",pos:"MED",r:77},
+    {nome:"Troglio",pos:"MED",r:76},{nome:"Maradona",pos:"MEI",r:96},{nome:"Caniggia",pos:"ATA",r:86},
+    {nome:"Dezotti",pos:"ATA",r:77},{nome:"Balbo",pos:"ATA",r:78},
+  ]},
+  {p:"🇦🇷 Argentina",e:"🇦🇷",ano:2014,j:[
+    {nome:"Romero",pos:"GOL",r:82},{nome:"Zabaleta",pos:"LAT",r:83},{nome:"Garay",pos:"ZAG",r:82},
+    {nome:"Demichelis",pos:"ZAG",r:80},{nome:"Rojo",pos:"LAT",r:79},{nome:"Mascherano",pos:"MED",r:88},
+    {nome:"Biglia",pos:"MED",r:81},{nome:"Messi",pos:"ATA",r:96},{nome:"Di María",pos:"ATA",r:88},
+    {nome:"Higuaín",pos:"ATA",r:85},{nome:"Agüero",pos:"ATA",r:89},
+  ]},
+  {p:"🇦🇷 Argentina",e:"🇦🇷",ano:2022,j:[
+    {nome:"E. Martínez",pos:"GOL",r:90},{nome:"Molina",pos:"LAT",r:83},{nome:"Romero",pos:"ZAG",r:85},
+    {nome:"Otamendi",pos:"ZAG",r:84},{nome:"Tagliafico",pos:"LAT",r:81},{nome:"De Paul",pos:"MED",r:86},
+    {nome:"Fernández E.",pos:"MED",r:85},{nome:"Mac Allister",pos:"MED",r:84},{nome:"Di María",pos:"ATA",r:87},
+    {nome:"Lautaro",pos:"ATA",r:86},{nome:"Messi",pos:"ATA",r:99},
+  ]},
+  // ── ALEMANHA ──
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:1954,j:[
+    {nome:"Turek",pos:"GOL",r:82},{nome:"Laband",pos:"LAT",r:74},{nome:"Liebrich",pos:"ZAG",r:80},
+    {nome:"Kohlmeyer",pos:"LAT",r:75},{nome:"Posipal",pos:"ZAG",r:76},{nome:"Eckel",pos:"MED",r:77},
+    {nome:"Mai",pos:"MED",r:76},{nome:"Morlock",pos:"MEI",r:80},{nome:"Rahn",pos:"ATA",r:85},
+    {nome:"O. Walter",pos:"ATA",r:83},{nome:"F. Walter",pos:"MEI",r:91},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:1966,j:[
+    {nome:"Tilkowski",pos:"GOL",r:80},{nome:"Hottges",pos:"LAT",r:76},{nome:"Schulz",pos:"ZAG",r:78},
+    {nome:"Weber",pos:"ZAG",r:77},{nome:"Schnellinger",pos:"LAT",r:79},{nome:"Haller",pos:"MED",r:80},
+    {nome:"Beckenbauer",pos:"ZAG",r:89},{nome:"Overath",pos:"MEI",r:85},{nome:"Seeler",pos:"ATA",r:86},
+    {nome:"Held",pos:"ATA",r:79},{nome:"Emmerich",pos:"ATA",r:80},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:1974,j:[
+    {nome:"Maier",pos:"GOL",r:93},{nome:"Vogts",pos:"LAT",r:84},{nome:"Schwarzenbeck",pos:"ZAG",r:81},
+    {nome:"Beckenbauer",pos:"ZAG",r:97},{nome:"Breitner",pos:"LAT",r:85},{nome:"Hoeness",pos:"MED",r:81},
+    {nome:"Bonhof",pos:"MED",r:80},{nome:"Overath",pos:"MEI",r:86},{nome:"Grabowski",pos:"ATA",r:80},
+    {nome:"Müller G.",pos:"ATA",r:95},{nome:"Holzenbein",pos:"ATA",r:78},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:1982,j:[
+    {nome:"Schumacher",pos:"GOL",r:84},{nome:"Kaltz",pos:"LAT",r:81},{nome:"Stielike",pos:"ZAG",r:83},
+    {nome:"K.H. Förster",pos:"ZAG",r:80},{nome:"Briegel",pos:"LAT",r:82},{nome:"Dremmler",pos:"MED",r:78},
+    {nome:"Breitner",pos:"MED",r:82},{nome:"Magath",pos:"MEI",r:80},{nome:"Fischer",pos:"ATA",r:83},
+    {nome:"Rummenigge",pos:"ATA",r:89},{nome:"Hrubesch",pos:"ATA",r:82},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:1990,j:[
+    {nome:"Illgner",pos:"GOL",r:84},{nome:"Brehme",pos:"LAT",r:86},{nome:"Augenthaler",pos:"ZAG",r:82},
+    {nome:"Köhler",pos:"ZAG",r:80},{nome:"Buchwald",pos:"ZAG",r:81},{nome:"Häßler",pos:"MED",r:83},
+    {nome:"Matthäus",pos:"MEI",r:93},{nome:"Völler",pos:"ATA",r:87},{nome:"Klinsmann",pos:"ATA",r:87},
+    {nome:"Bein",pos:"MEI",r:79},{nome:"Littbarski",pos:"MEI",r:82},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:2002,j:[
+    {nome:"Kahn",pos:"GOL",r:93},{nome:"Linke",pos:"LAT",r:78},{nome:"Metzelder",pos:"ZAG",r:79},
+    {nome:"Ramelow",pos:"ZAG",r:78},{nome:"Frings",pos:"LAT",r:81},{nome:"Schneider",pos:"MED",r:80},
+    {nome:"Hamann",pos:"MED",r:82},{nome:"Ballack",pos:"MEI",r:89},{nome:"Bode",pos:"ATA",r:77},
+    {nome:"Klose",pos:"ATA",r:83},{nome:"Neuville",pos:"ATA",r:79},
+  ]},
+  {p:"🇩🇪 Alemanha",e:"🇩🇪",ano:2014,j:[
+    {nome:"Neuer",pos:"GOL",r:95},{nome:"Lahm",pos:"LAT",r:90},{nome:"Boateng",pos:"ZAG",r:87},
+    {nome:"Hummels",pos:"ZAG",r:88},{nome:"Höwedes",pos:"LAT",r:82},{nome:"Khedira",pos:"MED",r:86},
+    {nome:"Kroos",pos:"MEI",r:91},{nome:"Özil",pos:"MEI",r:88},{nome:"Müller T.",pos:"ATA",r:88},
+    {nome:"Klose",pos:"ATA",r:84},{nome:"Schweinsteiger",pos:"MED",r:88},
+  ]},
+  // ── ITÁLIA ──
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1934,j:[
+    {nome:"Combi",pos:"GOL",r:84},{nome:"Monzeglio",pos:"LAT",r:77},{nome:"Allemandi",pos:"LAT",r:77},
+    {nome:"Ferraris",pos:"MED",r:79},{nome:"Monti",pos:"MED",r:80},{nome:"Bertolini",pos:"MED",r:76},
+    {nome:"Guaita",pos:"ATA",r:78},{nome:"Meazza",pos:"ATA",r:95},{nome:"Schiavio",pos:"ATA",r:83},
+    {nome:"Ferrari",pos:"ZAG",r:78},{nome:"Orsi",pos:"ATA",r:80},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1938,j:[
+    {nome:"Olivieri",pos:"GOL",r:81},{nome:"Foni",pos:"LAT",r:78},{nome:"Rava",pos:"LAT",r:77},
+    {nome:"Serantoni",pos:"ZAG",r:78},{nome:"Andreolo",pos:"ZAG",r:77},{nome:"Locatelli",pos:"MED",r:76},
+    {nome:"Biavati",pos:"MEI",r:79},{nome:"Meazza",pos:"ATA",r:93},{nome:"Ferrari G.",pos:"MED",r:77},
+    {nome:"Piola",pos:"ATA",r:86},{nome:"Colaussi",pos:"ATA",r:80},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1970,j:[
+    {nome:"Albertosi",pos:"GOL",r:82},{nome:"Burgnich",pos:"LAT",r:80},{nome:"Facchetti",pos:"LAT",r:87},
+    {nome:"Cera",pos:"ZAG",r:78},{nome:"Rosato",pos:"ZAG",r:76},{nome:"Bertini",pos:"MED",r:77},
+    {nome:"De Sisti",pos:"MEI",r:79},{nome:"Mazzola",pos:"MEI",r:87},{nome:"Gori",pos:"ATA",r:74},
+    {nome:"Boninsegna",pos:"ATA",r:83},{nome:"Riva",pos:"ATA",r:89},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1982,j:[
+    {nome:"Zoff",pos:"GOL",r:94},{nome:"Gentile",pos:"LAT",r:83},{nome:"Collovati",pos:"ZAG",r:81},
+    {nome:"Scirea",pos:"ZAG",r:87},{nome:"Cabrini",pos:"LAT",r:84},{nome:"Oriali",pos:"MED",r:78},
+    {nome:"Tardelli",pos:"MED",r:85},{nome:"Antognoni",pos:"MEI",r:88},{nome:"Conti",pos:"MEI",r:82},
+    {nome:"Rossi P.",pos:"ATA",r:92},{nome:"Graziani",pos:"ATA",r:79},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1994,j:[
+    {nome:"Pagliuca",pos:"GOL",r:82},{nome:"Mussi",pos:"LAT",r:77},{nome:"Baresi",pos:"ZAG",r:94},
+    {nome:"Costacurta",pos:"ZAG",r:88},{nome:"Maldini",pos:"LAT",r:93},{nome:"Dino Baggio",pos:"MED",r:79},
+    {nome:"Albertini",pos:"MEI",r:84},{nome:"Donadoni",pos:"MED",r:80},{nome:"Signori",pos:"ATA",r:82},
+    {nome:"Baggio R.",pos:"ATA",r:93},{nome:"Massaro",pos:"ATA",r:79},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:1998,j:[
+    {nome:"Pagliuca",pos:"GOL",r:81},{nome:"Cannavaro",pos:"ZAG",r:89},{nome:"Maldini",pos:"LAT",r:92},
+    {nome:"Costacurta",pos:"ZAG",r:85},{nome:"Nesta",pos:"ZAG",r:89},{nome:"Di Biagio",pos:"MED",r:79},
+    {nome:"Albertini",pos:"MEI",r:83},{nome:"Baggio R.",pos:"ATA",r:89},{nome:"Del Piero",pos:"ATA",r:90},
+    {nome:"Vieri",pos:"ATA",r:87},{nome:"Zola",pos:"MEI",r:84},
+  ]},
+  {p:"🇮🇹 Itália",e:"🇮🇹",ano:2006,j:[
+    {nome:"Buffon",pos:"GOL",r:93},{nome:"Zambrotta",pos:"LAT",r:85},{nome:"Cannavaro",pos:"ZAG",r:92},
+    {nome:"Nesta",pos:"ZAG",r:88},{nome:"Grosso",pos:"LAT",r:81},{nome:"Gattuso",pos:"MED",r:84},
+    {nome:"Pirlo",pos:"MEI",r:90},{nome:"Perrotta",pos:"MED",r:79},{nome:"Camoranesi",pos:"ATA",r:80},
+    {nome:"Totti",pos:"ATA",r:88},{nome:"Toni",pos:"ATA",r:83},
+  ]},
+  // ── HOLANDA ──
+  {p:"🇳🇱 Holanda",e:"🇳🇱",ano:1974,j:[
+    {nome:"Jongbloed",pos:"GOL",r:80},{nome:"Suurbier",pos:"LAT",r:80},{nome:"Rijsbergen",pos:"ZAG",r:78},
+    {nome:"Haan",pos:"ZAG",r:81},{nome:"Krol",pos:"LAT",r:86},{nome:"Jansen",pos:"MED",r:80},
+    {nome:"Neeskens",pos:"MED",r:88},{nome:"Van Hanegem",pos:"MEI",r:84},{nome:"Rep",pos:"ATA",r:82},
+    {nome:"Cruyff",pos:"ATA",r:98},{nome:"Rensenbrink",pos:"ATA",r:83},
+  ]},
+  {p:"🇳🇱 Holanda",e:"🇳🇱",ano:1978,j:[
+    {nome:"Jongbloed",pos:"GOL",r:79},{nome:"Krol",pos:"LAT",r:84},{nome:"Poortvliet",pos:"LAT",r:77},
+    {nome:"Brandts",pos:"ZAG",r:78},{nome:"Rijsbergen",pos:"ZAG",r:76},{nome:"Neeskens",pos:"MED",r:85},
+    {nome:"Haan",pos:"MED",r:79},{nome:"Rep",pos:"ATA",r:80},{nome:"Rensenbrink",pos:"ATA",r:85},
+    {nome:"W.Van de Kerkhof",pos:"MEI",r:80},{nome:"R.Van de Kerkhof",pos:"MEI",r:79},
+  ]},
+  {p:"🇳🇱 Holanda",e:"🇳🇱",ano:1998,j:[
+    {nome:"Van der Sar",pos:"GOL",r:86},{nome:"Reiziger",pos:"LAT",r:81},{nome:"Stam",pos:"ZAG",r:89},
+    {nome:"De Boer F.",pos:"ZAG",r:86},{nome:"Bogarde",pos:"LAT",r:78},{nome:"De Boer R.",pos:"MED",r:84},
+    {nome:"Davids",pos:"MED",r:86},{nome:"Bergkamp",pos:"ATA",r:91},{nome:"Overmars",pos:"ATA",r:86},
+    {nome:"Kluivert",pos:"ATA",r:87},{nome:"Zenden",pos:"MEI",r:79},
+  ]},
+  {p:"🇳🇱 Holanda",e:"🇳🇱",ano:2010,j:[
+    {nome:"Stekelenburg",pos:"GOL",r:81},{nome:"Van der Wiel",pos:"LAT",r:80},{nome:"Heitinga",pos:"ZAG",r:81},
+    {nome:"Mathijsen",pos:"ZAG",r:78},{nome:"Van Bronckhorst",pos:"LAT",r:83},{nome:"Van Bommel",pos:"MED",r:84},
+    {nome:"De Jong N.",pos:"MED",r:84},{nome:"Sneijder",pos:"MEI",r:90},{nome:"Robben",pos:"ATA",r:89},
+    {nome:"Van Persie",pos:"ATA",r:89},{nome:"Kuyt",pos:"ATA",r:82},
+  ]},
+  // ── ESPANHA ──
+  {p:"🇪🇸 Espanha",e:"🇪🇸",ano:1950,j:[
+    {nome:"Ramallets",pos:"GOL",r:82},{nome:"Alonso A.",pos:"LAT",r:76},{nome:"Gonzalvo III",pos:"ZAG",r:79},
+    {nome:"Parra",pos:"ZAG",r:75},{nome:"Gonzalvo II",pos:"LAT",r:77},{nome:"Puchades",pos:"MED",r:76},
+    {nome:"Basora",pos:"MEI",r:81},{nome:"Igoa",pos:"MEI",r:78},{nome:"Zarra",pos:"ATA",r:87},
+    {nome:"Molowny",pos:"ATA",r:79},{nome:"Gainza",pos:"ATA",r:78},
+  ]},
+  {p:"🇪🇸 Espanha",e:"🇪🇸",ano:2010,j:[
+    {nome:"Casillas",pos:"GOL",r:95},{nome:"Sergio Ramos",pos:"LAT",r:87},{nome:"Piqué",pos:"ZAG",r:86},
+    {nome:"Puyol",pos:"ZAG",r:89},{nome:"Capdevila",pos:"LAT",r:81},{nome:"Busquets",pos:"MED",r:87},
+    {nome:"Xabi Alonso",pos:"MED",r:90},{nome:"Xavi",pos:"MEI",r:93},{nome:"Iniesta",pos:"MEI",r:94},
+    {nome:"Villa",pos:"ATA",r:89},{nome:"Torres",pos:"ATA",r:86},
+  ]},
+  {p:"🇪🇸 Espanha",e:"🇪🇸",ano:2014,j:[
+    {nome:"Casillas",pos:"GOL",r:92},{nome:"Sergio Ramos",pos:"ZAG",r:88},{nome:"Piqué",pos:"ZAG",r:87},
+    {nome:"Jordi Alba",pos:"LAT",r:85},{nome:"Azpilicueta",pos:"LAT",r:82},{nome:"Busquets",pos:"MED",r:88},
+    {nome:"Xabi Alonso",pos:"MED",r:89},{nome:"Xavi",pos:"MEI",r:91},{nome:"Iniesta",pos:"MEI",r:93},
+    {nome:"David Silva",pos:"MEI",r:88},{nome:"Torres",pos:"ATA",r:82},
+  ]},
+  // ── FRANÇA ──
+  {p:"🇫🇷 França",e:"🇫🇷",ano:1958,j:[
+    {nome:"Abbes",pos:"GOL",r:78},{nome:"Kaelbel",pos:"LAT",r:74},{nome:"Lerond",pos:"LAT",r:74},
+    {nome:"Penverne",pos:"ZAG",r:76},{nome:"Jonquet",pos:"ZAG",r:80},{nome:"Marcel",pos:"MED",r:75},
+    {nome:"Wisnieski",pos:"MEI",r:77},{nome:"Douis",pos:"MEI",r:76},{nome:"Kopa",pos:"MEI",r:88},
+    {nome:"Fontaine",pos:"ATA",r:90},{nome:"Piantoni",pos:"ATA",r:79},
+  ]},
+  {p:"🇫🇷 França",e:"🇫🇷",ano:1998,j:[
+    {nome:"Barthez",pos:"GOL",r:89},{nome:"Thuram",pos:"LAT",r:87},{nome:"Blanc",pos:"ZAG",r:86},
+    {nome:"Desailly",pos:"ZAG",r:85},{nome:"Lizarazu",pos:"LAT",r:84},{nome:"Deschamps",pos:"MED",r:83},
+    {nome:"Petit",pos:"MED",r:80},{nome:"Zidane",pos:"MEI",r:97},{nome:"Djorkaeff",pos:"MEI",r:83},
+    {nome:"Henry",pos:"ATA",r:89},{nome:"Dugarry",pos:"ATA",r:77},
+  ]},
+  {p:"🇫🇷 França",e:"🇫🇷",ano:2006,j:[
+    {nome:"Barthez",pos:"GOL",r:85},{nome:"Sagnol",pos:"LAT",r:83},{nome:"Gallas",pos:"ZAG",r:83},
+    {nome:"Thuram",pos:"LAT",r:84},{nome:"Abidal",pos:"LAT",r:82},{nome:"Makelele",pos:"MED",r:85},
+    {nome:"Vieira",pos:"MED",r:86},{nome:"Zidane",pos:"MEI",r:95},{nome:"Ribéry",pos:"ATA",r:83},
+    {nome:"Henry",pos:"ATA",r:91},{nome:"Trezeguet",pos:"ATA",r:85},
+  ]},
+  {p:"🇫🇷 França",e:"🇫🇷",ano:2018,j:[
+    {nome:"Lloris",pos:"GOL",r:88},{nome:"Pavard",pos:"LAT",r:82},{nome:"Varane",pos:"ZAG",r:88},
+    {nome:"Umtiti",pos:"ZAG",r:84},{nome:"L.Hernandez",pos:"LAT",r:83},{nome:"Kanté",pos:"MED",r:90},
+    {nome:"Pogba",pos:"MED",r:87},{nome:"Griezmann",pos:"ATA",r:88},{nome:"Dembélé",pos:"ATA",r:83},
+    {nome:"Giroud",pos:"ATA",r:82},{nome:"Mbappé",pos:"ATA",r:91},
+  ]},
+  {p:"🇫🇷 França",e:"🇫🇷",ano:2022,j:[
+    {nome:"Lloris",pos:"GOL",r:87},{nome:"Kounde",pos:"LAT",r:84},{nome:"Varane",pos:"ZAG",r:87},
+    {nome:"Upamecano",pos:"ZAG",r:84},{nome:"T.Hernandez",pos:"LAT",r:86},{nome:"Tchouaméni",pos:"MED",r:84},
+    {nome:"Camavinga",pos:"MED",r:83},{nome:"Griezmann",pos:"ATA",r:87},{nome:"Dembélé",pos:"ATA",r:85},
+    {nome:"Giroud",pos:"ATA",r:82},{nome:"Mbappé",pos:"ATA",r:93},
+  ]},
+  // ── PORTUGAL ──
+  {p:"🇵🇹 Portugal",e:"🇵🇹",ano:1966,j:[
+    {nome:"Carvalho J.",pos:"GOL",r:80},{nome:"João Morais",pos:"LAT",r:77},{nome:"Hilário",pos:"LAT",r:77},
+    {nome:"Vicente",pos:"ZAG",r:77},{nome:"Germano",pos:"ZAG",r:79},{nome:"Graça",pos:"MED",r:78},
+    {nome:"Coluna",pos:"MED",r:85},{nome:"Augusto",pos:"MEI",r:81},{nome:"Torres A.",pos:"ATA",r:80},
+    {nome:"Eusébio",pos:"ATA",r:96},{nome:"Simões",pos:"ATA",r:80},
+  ]},
+  {p:"🇵🇹 Portugal",e:"🇵🇹",ano:2006,j:[
+    {nome:"Ricardo",pos:"GOL",r:81},{nome:"Miguel",pos:"LAT",r:78},{nome:"F.Meira",pos:"ZAG",r:79},
+    {nome:"R.Carvalho",pos:"ZAG",r:85},{nome:"N.Valente",pos:"LAT",r:78},{nome:"Maniche",pos:"MED",r:82},
+    {nome:"Costinha",pos:"MED",r:76},{nome:"Deco",pos:"MEI",r:89},{nome:"Figo",pos:"MEI",r:91},
+    {nome:"Pauleta",pos:"ATA",r:81},{nome:"C.Ronaldo",pos:"ATA",r:89},
+  ]},
+  {p:"🇵🇹 Portugal",e:"🇵🇹",ano:2022,j:[
+    {nome:"Rui Patrício",pos:"GOL",r:84},{nome:"Cancelo",pos:"LAT",r:87},{nome:"Pepe",pos:"ZAG",r:82},
+    {nome:"Dias R.",pos:"ZAG",r:87},{nome:"Guerreiro",pos:"LAT",r:83},{nome:"Palhinha",pos:"MED",r:82},
+    {nome:"B.Fernandes",pos:"MEI",r:87},{nome:"Otávio",pos:"MED",r:81},{nome:"B.Silva",pos:"ATA",r:88},
+    {nome:"João Félix",pos:"ATA",r:84},{nome:"C.Ronaldo",pos:"ATA",r:93},
+  ]},
+  // ── URUGUAI ──
+  {p:"🇺🇾 Uruguai",e:"🇺🇾",ano:1930,j:[
+    {nome:"Ballestero",pos:"GOL",r:78},{nome:"Mascheroni",pos:"LAT",r:76},{nome:"Nasazzi",pos:"ZAG",r:86},
+    {nome:"Andrade J.",pos:"LAT",r:80},{nome:"Fernández",pos:"ZAG",r:77},{nome:"Gestido",pos:"MED",r:78},
+    {nome:"Dorado",pos:"MEI",r:79},{nome:"Scarone",pos:"MEI",r:84},{nome:"Castro",pos:"ATA",r:79},
+    {nome:"Cea",pos:"ATA",r:82},{nome:"Iriarte",pos:"ATA",r:78},
+  ]},
+  {p:"🇺🇾 Uruguai",e:"🇺🇾",ano:1950,j:[
+    {nome:"Máspoli",pos:"GOL",r:84},{nome:"Tejera",pos:"LAT",r:77},{nome:"Gambetta",pos:"ZAG",r:78},
+    {nome:"Varela O.",pos:"ZAG",r:85},{nome:"González M.",pos:"LAT",r:79},{nome:"Andrade R.",pos:"MED",r:80},
+    {nome:"Ghiggia",pos:"ATA",r:87},{nome:"Pérez A.",pos:"MEI",r:81},{nome:"Míguez",pos:"ATA",r:82},
+    {nome:"Schiaffino",pos:"MEI",r:91},{nome:"Morán",pos:"ATA",r:78},
+  ]},
+  {p:"🇺🇾 Uruguai",e:"🇺🇾",ano:2010,j:[
+    {nome:"Muslera",pos:"GOL",r:82},{nome:"Lugano",pos:"ZAG",r:81},{nome:"Victorino",pos:"ZAG",r:79},
+    {nome:"Pereira M.",pos:"LAT",r:78},{nome:"Fucile",pos:"LAT",r:77},{nome:"Arevalo Ríos",pos:"MED",r:78},
+    {nome:"Perez E.",pos:"MED",r:77},{nome:"Forlán",pos:"ATA",r:90},{nome:"Abreu",pos:"ATA",r:78},
+    {nome:"Suárez",pos:"ATA",r:87},{nome:"Cavani",pos:"ATA",r:85},
+  ]},
+  // ── INGLATERRA ──
+  {p:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",ano:1966,j:[
+    {nome:"Banks",pos:"GOL",r:93},{nome:"Cohen",pos:"LAT",r:80},{nome:"Charlton J.",pos:"ZAG",r:84},
+    {nome:"Moore",pos:"ZAG",r:92},{nome:"Wilson R.",pos:"LAT",r:81},{nome:"Stiles",pos:"MED",r:79},
+    {nome:"Ball",pos:"MED",r:83},{nome:"Charlton B.",pos:"MEI",r:93},{nome:"Peters",pos:"MEI",r:82},
+    {nome:"Hunt",pos:"ATA",r:79},{nome:"Hurst",pos:"ATA",r:86},
+  ]},
+  {p:"🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",ano:1990,j:[
+    {nome:"Shilton",pos:"GOL",r:88},{nome:"Parker G.",pos:"LAT",r:77},{nome:"Walker D.",pos:"ZAG",r:80},
+    {nome:"Wright M.",pos:"ZAG",r:79},{nome:"Pearce",pos:"LAT",r:80},{nome:"Gascoigne",pos:"MEI",r:88},
+    {nome:"Platt",pos:"MEI",r:82},{nome:"Butcher",pos:"MED",r:78},{nome:"Waddle",pos:"ATA",r:82},
+    {nome:"Barnes",pos:"ATA",r:81},{nome:"Lineker",pos:"ATA",r:87},
+  ]},
+  // ── BÉLGICA ──
+  {p:"🇧🇪 Bélgica",e:"🇧🇪",ano:1986,j:[
+    {nome:"Pfaff",pos:"GOL",r:88},{nome:"Gerets",pos:"LAT",r:80},{nome:"Millecamps",pos:"ZAG",r:77},
+    {nome:"De Wolf",pos:"ZAG",r:76},{nome:"Renquin",pos:"LAT",r:75},{nome:"Van den Berg",pos:"MED",r:76},
+    {nome:"Scifo",pos:"MEI",r:83},{nome:"Vandereycken",pos:"MEI",r:78},{nome:"Ceulemans",pos:"ATA",r:84},
+    {nome:"Claesen",pos:"ATA",r:79},{nome:"Vercauteren",pos:"ATA",r:77},
+  ]},
+  {p:"🇧🇪 Bélgica",e:"🇧🇪",ano:2018,j:[
+    {nome:"Courtois",pos:"GOL",r:90},{nome:"Alderweireld",pos:"ZAG",r:87},{nome:"Vertonghen",pos:"ZAG",r:86},
+    {nome:"Boyata",pos:"ZAG",r:79},{nome:"Meunier",pos:"LAT",r:81},{nome:"Fellaini",pos:"MED",r:82},
+    {nome:"Witsel",pos:"MED",r:85},{nome:"De Bruyne",pos:"MEI",r:92},{nome:"Mertens",pos:"ATA",r:84},
+    {nome:"Hazard",pos:"ATA",r:90},{nome:"Lukaku",pos:"ATA",r:88},
+  ]},
+  // ── CROÁCIA ──
+  {p:"🇭🇷 Croácia",e:"🇭🇷",ano:1998,j:[
+    {nome:"Ladić",pos:"GOL",r:82},{nome:"Jurić",pos:"LAT",r:76},{nome:"Stimac",pos:"ZAG",r:80},
+    {nome:"Bilic",pos:"ZAG",r:79},{nome:"Jarni",pos:"LAT",r:80},{nome:"Asanović",pos:"MED",r:79},
+    {nome:"Prosinečki",pos:"MEI",r:83},{nome:"Boban",pos:"MEI",r:87},{nome:"Šuker",pos:"ATA",r:89},
+    {nome:"Vlaović",pos:"ATA",r:78},{nome:"Ivić",pos:"MED",r:74},
+  ]},
+  {p:"🇭🇷 Croácia",e:"🇭🇷",ano:2018,j:[
+    {nome:"Subašić",pos:"GOL",r:82},{nome:"Vrsaljko",pos:"LAT",r:80},{nome:"Vida",pos:"ZAG",r:80},
+    {nome:"Lovren",pos:"ZAG",r:81},{nome:"Strinić",pos:"LAT",r:77},{nome:"Modrić",pos:"MEI",r:93},
+    {nome:"Rakitić",pos:"MED",r:87},{nome:"Brozović",pos:"MED",r:84},{nome:"Perisić",pos:"ATA",r:84},
+    {nome:"Kramarić",pos:"ATA",r:81},{nome:"Mandžukić",pos:"ATA",r:83},
+  ]},
+  {p:"🇭🇷 Croácia",e:"🇭🇷",ano:2022,j:[
+    {nome:"Livaković",pos:"GOL",r:83},{nome:"Juranović",pos:"LAT",r:78},{nome:"Šosa",pos:"LAT",r:77},
+    {nome:"Gvardiol",pos:"ZAG",r:85},{nome:"Vida",pos:"ZAG",r:78},{nome:"Modrić",pos:"MEI",r:91},
+    {nome:"Brozović",pos:"MED",r:85},{nome:"Kovačić",pos:"MED",r:84},{nome:"Perisić",pos:"ATA",r:82},
+    {nome:"Kramarić",pos:"ATA",r:82},{nome:"Oršić",pos:"ATA",r:78},
+  ]},
+  // ── MARROCOS ──
+  {p:"🇲🇦 Marrocos",e:"🇲🇦",ano:2022,j:[
+    {nome:"Bono",pos:"GOL",r:85},{nome:"Hakimi",pos:"LAT",r:86},{nome:"Saïss",pos:"ZAG",r:81},
+    {nome:"El Yamiq",pos:"ZAG",r:79},{nome:"Mazraoui",pos:"LAT",r:82},{nome:"Ounahi",pos:"MED",r:80},
+    {nome:"Amrabat",pos:"MED",r:83},{nome:"Ziyech",pos:"ATA",r:82},{nome:"Boufal",pos:"ATA",r:79},
+    {nome:"En-Nesyri",pos:"ATA",r:80},{nome:"Sabiri",pos:"MEI",r:78},
+  ]},
+  // ── COREIA DO SUL ──
+  {p:"🇰🇷 Coreia do Sul",e:"🇰🇷",ano:2002,j:[
+    {nome:"Lee Woon-jae",pos:"GOL",r:80},{nome:"Choi Jin-cheul",pos:"ZAG",r:77},{nome:"Hong Myung-bo",pos:"ZAG",r:84},
+    {nome:"Kim Tae-young",pos:"LAT",r:77},{nome:"Lee Young-pyo",pos:"LAT",r:79},{nome:"Yoo Sang-chul",pos:"MED",r:78},
+    {nome:"Park Ji-sung",pos:"MED",r:83},{nome:"Lee Chun-soo",pos:"MEI",r:78},{nome:"Ahn Jung-hwan",pos:"ATA",r:79},
+    {nome:"Hwang Sun-hong",pos:"ATA",r:78},{nome:"Choi Yong-soo",pos:"ATA",r:76},
+  ]},
+  // ── MÉXICO ──
+  {p:"🇲🇽 México",e:"🇲🇽",ano:1970,j:[
+    {nome:"Calderón",pos:"GOL",r:78},{nome:"Vantolrá",pos:"LAT",r:74},{nome:"Peña",pos:"ZAG",r:75},
+    {nome:"Guzmán",pos:"ZAG",r:74},{nome:"Pérez F.",pos:"LAT",r:74},{nome:"González G.",pos:"MED",r:75},
+    {nome:"Pulido",pos:"MED",r:75},{nome:"Fragoso",pos:"MEI",r:76},{nome:"Valdivia",pos:"MEI",r:75},
+    {nome:"Padilla",pos:"ATA",r:77},{nome:"Borja",pos:"ATA",r:76},
+  ]},
+  {p:"🇲🇽 México",e:"🇲🇽",ano:1986,j:[
+    {nome:"Larios",pos:"GOL",r:80},{nome:"Trejo",pos:"LAT",r:76},{nome:"Cruz",pos:"ZAG",r:77},
+    {nome:"Quirarte",pos:"ZAG",r:78},{nome:"Servin",pos:"LAT",r:76},{nome:"Muñoz",pos:"MED",r:77},
+    {nome:"Negrete",pos:"MED",r:79},{nome:"Aguirre",pos:"MEI",r:78},{nome:"Boy",pos:"ATA",r:77},
+    {nome:"Sánchez H.",pos:"ATA",r:83},{nome:"Flores",pos:"ATA",r:76},
+  ]},
+  // ── CAMARÕES ──
+  {p:"🇨🇲 Camarões",e:"🇨🇲",ano:1990,j:[
+    {nome:"N'Kono",pos:"GOL",r:82},{nome:"Tataw",pos:"LAT",r:76},{nome:"Ndip Akem",pos:"ZAG",r:75},
+    {nome:"Massing",pos:"ZAG",r:76},{nome:"Mfede",pos:"LAT",r:75},{nome:"Makanaky",pos:"MED",r:77},
+    {nome:"Libih",pos:"MED",r:76},{nome:"Omam-Biyick",pos:"ATA",r:79},{nome:"Milla R.",pos:"ATA",r:82},
+    {nome:"Ekéké",pos:"ATA",r:77},{nome:"Pagal",pos:"MEI",r:74},
+  ]},
+  // ── SENEGAL ──
+  {p:"🇸🇳 Senegal",e:"🇸🇳",ano:2002,j:[
+    {nome:"Tony Sylva",pos:"GOL",r:79},{nome:"Pape Sarr",pos:"LAT",r:75},{nome:"Coly",pos:"LAT",r:76},
+    {nome:"Ferdinand Coly",pos:"ZAG",r:77},{nome:"Diatta",pos:"ZAG",r:76},{nome:"Fadiga",pos:"MED",r:78},
+    {nome:"Diouf",pos:"MEI",r:82},{nome:"Diop P.A.",pos:"MED",r:77},{nome:"Diao",pos:"MEI",r:76},
+    {nome:"Camara H.",pos:"ATA",r:79},{nome:"Bouba Diop",pos:"ATA",r:77},
+  ]},
+  // ── SUÉCIA ──
+  {p:"🇸🇪 Suécia",e:"🇸🇪",ano:1958,j:[
+    {nome:"Svensson K.",pos:"GOL",r:80},{nome:"Bergmark",pos:"LAT",r:77},{nome:"Axbom",pos:"LAT",r:76},
+    {nome:"Börjesson",pos:"ZAG",r:77},{nome:"Gustavsson",pos:"ZAG",r:79},{nome:"Parling",pos:"MED",r:78},
+    {nome:"Hamrin",pos:"MEI",r:86},{nome:"Gren",pos:"MEI",r:85},{nome:"Simonsson",pos:"ATA",r:82},
+    {nome:"Liedholm",pos:"MEI",r:86},{nome:"Skoglund",pos:"ATA",r:80},
+  ]},
+  {p:"🇸🇪 Suécia",e:"🇸🇪",ano:1994,j:[
+    {nome:"Ravelli",pos:"GOL",r:84},{nome:"Nilsson R.",pos:"LAT",r:79},{nome:"Björklund",pos:"ZAG",r:78},
+    {nome:"Andersson P.",pos:"ZAG",r:77},{nome:"Kämark",pos:"LAT",r:76},{nome:"Schwarz",pos:"MED",r:79},
+    {nome:"Ingesson",pos:"MED",r:78},{nome:"Brolin",pos:"MEI",r:83},{nome:"Dahlin",pos:"ATA",r:83},
+    {nome:"Kennet Andersson",pos:"ATA",r:80},{nome:"Larsson H.",pos:"ATA",r:82},
+  ]},
+  // ── TCHECOSLOVÁQUIA ──
+  {p:"🇨🇿 Tchecoslováquia",e:"🇨🇿",ano:1962,j:[
+    {nome:"Schröif",pos:"GOL",r:84},{nome:"Lála",pos:"LAT",r:76},{nome:"Novák",pos:"LAT",r:77},
+    {nome:"Pluskal",pos:"ZAG",r:78},{nome:"Popluhar",pos:"ZAG",r:79},{nome:"Masopust",pos:"MEI",r:87},
+    {nome:"Pospíchal",pos:"MED",r:76},{nome:"Scherer",pos:"MEI",r:80},{nome:"Kadraba",pos:"ATA",r:77},
+    {nome:"Jelinek",pos:"ATA",r:77},{nome:"Kvašňák",pos:"ATA",r:76},
+  ]},
+  // ── HUNGRIA ──
+  {p:"🇭🇺 Hungria",e:"🇭🇺",ano:1954,j:[
+    {nome:"Grosics",pos:"GOL",r:84},{nome:"Buzánszky",pos:"LAT",r:77},{nome:"Lóránt",pos:"ZAG",r:80},
+    {nome:"Lantos",pos:"LAT",r:78},{nome:"Bozsik",pos:"MED",r:85},{nome:"Zakariás",pos:"MED",r:78},
+    {nome:"Budai",pos:"ATA",r:80},{nome:"Kocsis",pos:"ATA",r:90},{nome:"Hidegkuti",pos:"MEI",r:88},
+    {nome:"Puskás",pos:"ATA",r:95},{nome:"Czibor",pos:"ATA",r:84},
+  ]},
+  // ── POLÔNIA ──
+  {p:"🇵🇱 Polônia",e:"🇵🇱",ano:1974,j:[
+    {nome:"Tomaszewski",pos:"GOL",r:83},{nome:"Szymanowski",pos:"LAT",r:76},{nome:"Gorgon",pos:"ZAG",r:78},
+    {nome:"Musial",pos:"ZAG",r:76},{nome:"Zmuda",pos:"LAT",r:77},{nome:"Kasperczak",pos:"MED",r:77},
+    {nome:"Deyna",pos:"MEI",r:86},{nome:"Maszczyk",pos:"MED",r:75},{nome:"Gadocha",pos:"ATA",r:80},
+    {nome:"Szarmach",pos:"ATA",r:82},{nome:"Lato",pos:"ATA",r:84},
+  ]},
+  // ── JAPÃO ──
+  {p:"🇯🇵 Japão",e:"🇯🇵",ano:2022,j:[
+    {nome:"Gonda",pos:"GOL",r:78},{nome:"Yamane",pos:"LAT",r:77},{nome:"Yoshida",pos:"ZAG",r:81},
+    {nome:"Itakura",pos:"ZAG",r:79},{nome:"Nagatomo",pos:"LAT",r:79},{nome:"Morita",pos:"MED",r:78},
+    {nome:"Tanaka",pos:"MED",r:77},{nome:"Doan",pos:"ATA",r:78},{nome:"Ito J.",pos:"ATA",r:77},
+    {nome:"Asano",pos:"ATA",r:76},{nome:"Maeda",pos:"ATA",r:76},
+  ]},
+  // ── GHANA ──
+  {p:"🇬🇭 Ghana",e:"🇬🇭",ano:2010,j:[
+    {nome:"Kingson",pos:"GOL",r:79},{nome:"Pantsil",pos:"LAT",r:76},{nome:"Mensah J.",pos:"ZAG",r:78},
+    {nome:"Inkoom",pos:"LAT",r:75},{nome:"Boateng J.",pos:"ZAG",r:76},{nome:"Annan",pos:"MED",r:77},
+    {nome:"Muntari",pos:"MED",r:79},{nome:"Asamoah K.",pos:"MEI",r:79},{nome:"Gyan",pos:"ATA",r:83},
+    {nome:"Ayew A.",pos:"ATA",r:78},{nome:"Boateng K.P.",pos:"ATA",r:80},
+  ]},
+  // ══════ AMÉRICAS ══════
+  {p:"🇺🇸 Estados Unidos",e:"🇺🇸",ano:1930,j:[
+    {nome:"Douglas",pos:"GOL",r:75},{nome:"Wood",pos:"LAT",r:72},{nome:"Gallagher",pos:"ZAG",r:73},
+    {nome:"Tracey",pos:"ZAG",r:73},{nome:"Brown J.",pos:"LAT",r:72},{nome:"Gonsalves",pos:"MED",r:78},
+    {nome:"Patenaude",pos:"ATA",r:80},{nome:"McGhee",pos:"MEI",r:74},{nome:"Florie",pos:"MEI",r:75},
+    {nome:"Auld",pos:"ATA",r:73},{nome:"Brown D.",pos:"ATA",r:72},
+  ]},
+  {p:"🇺🇸 Estados Unidos",e:"🇺🇸",ano:1994,j:[
+    {nome:"Meola",pos:"GOL",r:80},{nome:"Caligiuri",pos:"LAT",r:76},{nome:"Lalas",pos:"ZAG",r:77},
+    {nome:"Balboa",pos:"ZAG",r:78},{nome:"Dooley",pos:"LAT",r:78},{nome:"Ramos",pos:"MED",r:77},
+    {nome:"Harkes",pos:"MEI",r:78},{nome:"Wynalda",pos:"ATA",r:80},{nome:"Stewart",pos:"ATA",r:76},
+    {nome:"Sorber",pos:"MED",r:74},{nome:"Wegerle",pos:"ATA",r:77},
+  ]},
+  {p:"🇺🇸 Estados Unidos",e:"🇺🇸",ano:2002,j:[
+    {nome:"Friedel",pos:"GOL",r:84},{nome:"Hejduk",pos:"LAT",r:77},{nome:"Pope",pos:"ZAG",r:78},
+    {nome:"Sanneh",pos:"ZAG",r:76},{nome:"Agoos",pos:"LAT",r:76},{nome:"Reyna",pos:"MEI",r:82},
+    {nome:"O'Brien",pos:"MED",r:78},{nome:"Mastroeni",pos:"MED",r:77},{nome:"Donovan",pos:"ATA",r:83},
+    {nome:"McBride",pos:"ATA",r:80},{nome:"Beasley",pos:"ATA",r:78},
+  ]},
+  {p:"🇲🇽 México",e:"🇲🇽",ano:2014,j:[
+    {nome:"Ochoa",pos:"GOL",r:84},{nome:"Layún",pos:"LAT",r:79},{nome:"Márquez",pos:"ZAG",r:82},
+    {nome:"Moreno H.",pos:"ZAG",r:80},{nome:"Rodríguez F.",pos:"LAT",r:78},{nome:"Herrera H.",pos:"MED",r:81},
+    {nome:"Guardado",pos:"MEI",r:82},{nome:"Vázquez",pos:"MEI",r:78},{nome:"Dos Santos G.",pos:"ATA",r:81},
+    {nome:"Peralta",pos:"ATA",r:79},{nome:"Hernández J.",pos:"ATA",r:82},
+  ]},
+  {p:"🇨🇱 Chile",e:"🇨🇱",ano:1962,j:[
+    {nome:"Escuti",pos:"GOL",r:80},{nome:"Eyzaguirre",pos:"LAT",r:77},{nome:"Sánchez R.",pos:"ZAG",r:79},
+    {nome:"Navarro",pos:"ZAG",r:76},{nome:"Contreras",pos:"LAT",r:75},{nome:"Toro",pos:"MEI",r:82},
+    {nome:"Rojas E.",pos:"MED",r:76},{nome:"Ramírez",pos:"MEI",r:80},{nome:"Landa",pos:"ATA",r:79},
+    {nome:"Sánchez L.",pos:"ATA",r:83},{nome:"Tobar",pos:"ATA",r:75},
+  ]},
+  {p:"🇨🇱 Chile",e:"🇨🇱",ano:2014,j:[
+    {nome:"Bravo",pos:"GOL",r:85},{nome:"Isla",pos:"LAT",r:80},{nome:"Medel",pos:"ZAG",r:82},
+    {nome:"Jara",pos:"ZAG",r:78},{nome:"Mena",pos:"LAT",r:78},{nome:"Díaz M.",pos:"MED",r:79},
+    {nome:"Aránguiz",pos:"MEI",r:81},{nome:"Vidal",pos:"MEI",r:87},{nome:"Sánchez A.",pos:"ATA",r:87},
+    {nome:"Vargas E.",pos:"ATA",r:81},{nome:"Valdivia",pos:"MEI",r:80},
+  ]},
+  {p:"🇨🇴 Colômbia",e:"🇨🇴",ano:1990,j:[
+    {nome:"Higuita",pos:"GOL",r:82},{nome:"Herrera P.",pos:"LAT",r:76},{nome:"Perea L.",pos:"ZAG",r:78},
+    {nome:"Escobar A.",pos:"ZAG",r:79},{nome:"Gildardo Gómez",pos:"LAT",r:75},{nome:"Álvarez L.",pos:"MED",r:76},
+    {nome:"Redín",pos:"MEI",r:79},{nome:"Valderrama",pos:"MEI",r:88},{nome:"Rincón",pos:"MEI",r:81},
+    {nome:"Iguarán",pos:"ATA",r:79},{nome:"Estrada",pos:"ATA",r:76},
+  ]},
+  {p:"🇨🇴 Colômbia",e:"🇨🇴",ano:2014,j:[
+    {nome:"Ospina",pos:"GOL",r:83},{nome:"Zúñiga",pos:"LAT",r:80},{nome:"Zapata C.",pos:"ZAG",r:80},
+    {nome:"Yepes",pos:"ZAG",r:81},{nome:"Armero",pos:"LAT",r:78},{nome:"Sánchez C.",pos:"MED",r:80},
+    {nome:"Aguilar A.",pos:"MED",r:78},{nome:"Cuadrado",pos:"MEI",r:84},{nome:"Rodríguez J.",pos:"MEI",r:89},
+    {nome:"Ibarbo",pos:"ATA",r:79},{nome:"Martínez J.",pos:"ATA",r:80},
+  ]},
+  {p:"🇵🇪 Peru",e:"🇵🇪",ano:1970,j:[
+    {nome:"Rubiños",pos:"GOL",r:78},{nome:"Campos",pos:"LAT",r:75},{nome:"De la Torre",pos:"ZAG",r:76},
+    {nome:"Fernández H.",pos:"ZAG",r:75},{nome:"Chumpitaz",pos:"ZAG",r:82},{nome:"Mifflin",pos:"MED",r:79},
+    {nome:"Challe",pos:"MED",r:77},{nome:"Cubillas",pos:"MEI",r:86},{nome:"León",pos:"ATA",r:77},
+    {nome:"Gallardo",pos:"ATA",r:78},{nome:"Sotil",pos:"ATA",r:81},
+  ]},
+  {p:"🇵🇾 Paraguai",e:"🇵🇾",ano:2010,j:[
+    {nome:"Villar",pos:"GOL",r:82},{nome:"Bonet",pos:"LAT",r:76},{nome:"Da Silva",pos:"ZAG",r:79},
+    {nome:"Alcaraz A.",pos:"ZAG",r:78},{nome:"Morel",pos:"LAT",r:77},{nome:"Riveros",pos:"MED",r:79},
+    {nome:"Vera",pos:"MED",r:77},{nome:"Ortigoza",pos:"MEI",r:78},{nome:"Santa Cruz",pos:"ATA",r:81},
+    {nome:"Valdez N.",pos:"ATA",r:80},{nome:"Barrios",pos:"ATA",r:78},
+  ]},
+  {p:"🇪🇨 Equador",e:"🇪🇨",ano:2006,j:[
+    {nome:"Mora",pos:"GOL",r:78},{nome:"De la Cruz U.",pos:"LAT",r:78},{nome:"Hurtado I.",pos:"ZAG",r:79},
+    {nome:"Espinoza G.",pos:"ZAG",r:76},{nome:"Reasco",pos:"LAT",r:75},{nome:"Méndez E.",pos:"MED",r:78},
+    {nome:"Castillo S.",pos:"MED",r:77},{nome:"Valencia A.",pos:"MEI",r:80},{nome:"Tenorio C.",pos:"ATA",r:78},
+    {nome:"Delgado A.",pos:"ATA",r:79},{nome:"Kaviedes",pos:"ATA",r:78},
+  ]},
+  {p:"🇨🇷 Costa Rica",e:"🇨🇷",ano:2014,j:[
+    {nome:"Navas K.",pos:"GOL",r:85},{nome:"Gamboa",pos:"LAT",r:77},{nome:"González Ó.",pos:"ZAG",r:79},
+    {nome:"Umaña",pos:"ZAG",r:77},{nome:"Díaz J.",pos:"LAT",r:76},{nome:"Borges",pos:"MED",r:79},
+    {nome:"Tejeda",pos:"MED",r:77},{nome:"Ruiz B.",pos:"MEI",r:81},{nome:"Campbell J.",pos:"ATA",r:80},
+    {nome:"Bolaños",pos:"MEI",r:78},{nome:"Brenes",pos:"ATA",r:76},
+  ]},
+  {p:"🇭🇳 Honduras",e:"🇭🇳",ano:2014,j:[
+    {nome:"Valladares",pos:"GOL",r:77},{nome:"Beckeles",pos:"LAT",r:74},{nome:"Figueroa M.",pos:"ZAG",r:78},
+    {nome:"Bernárdez",pos:"ZAG",r:76},{nome:"Izaguirre",pos:"LAT",r:77},{nome:"García Ó.",pos:"MED",r:75},
+    {nome:"Espinoza R.",pos:"MED",r:74},{nome:"Palacios W.",pos:"MEI",r:78},{nome:"Bengtson",pos:"ATA",r:75},
+    {nome:"Costly",pos:"ATA",r:76},{nome:"Martínez J.C.",pos:"ATA",r:74},
+  ]},
+  {p:"🇵🇦 Panamá",e:"🇵🇦",ano:2018,j:[
+    {nome:"Penedo",pos:"GOL",r:77},{nome:"Murillo M.",pos:"LAT",r:74},{nome:"Torres R.",pos:"ZAG",r:76},
+    {nome:"Escobar F.",pos:"ZAG",r:75},{nome:"Davis A.",pos:"LAT",r:74},{nome:"Gómez A.",pos:"MED",r:75},
+    {nome:"Cooper",pos:"MED",r:74},{nome:"Barcenas",pos:"MEI",r:75},{nome:"Rodríguez A.",pos:"ATA",r:74},
+    {nome:"Pérez B.",pos:"ATA",r:75},{nome:"Tejada L.",pos:"ATA",r:75},
+  ]},
+  {p:"🇨🇦 Canadá",e:"🇨🇦",ano:2022,j:[
+    {nome:"Borjan",pos:"GOL",r:78},{nome:"Johnston",pos:"LAT",r:78},{nome:"Vitória",pos:"ZAG",r:78},
+    {nome:"Miller K.",pos:"ZAG",r:77},{nome:"Davies A.",pos:"LAT",r:84},{nome:"Eustáquio",pos:"MED",r:78},
+    {nome:"Hutchinson",pos:"MED",r:76},{nome:"Buchanan T.",pos:"MEI",r:78},{nome:"David J.",pos:"ATA",r:82},
+    {nome:"Larin",pos:"ATA",r:78},{nome:"Hoilett",pos:"ATA",r:77},
+  ]},
+  {p:"🇸🇻 El Salvador",e:"🇸🇻",ano:1982,j:[
+    {nome:"Mora R.",pos:"GOL",r:74},{nome:"Osorio",pos:"LAT",r:71},{nome:"Jovel",pos:"ZAG",r:72},
+    {nome:"Rodríguez F.",pos:"ZAG",r:71},{nome:"Recinos",pos:"LAT",r:70},{nome:"Huezo",pos:"MED",r:72},
+    {nome:"Rugamas",pos:"MED",r:71},{nome:"Hernández N.",pos:"MEI",r:72},{nome:"Zapata J.",pos:"ATA",r:72},
+    {nome:"González R.",pos:"ATA",r:71},{nome:"Rivas",pos:"ATA",r:70},
+  ]},
+  {p:"🇯🇲 Jamaica",e:"🇯🇲",ano:1998,j:[
+    {nome:"Barrett W.",pos:"GOL",r:75},{nome:"Lowe O.",pos:"LAT",r:73},{nome:"Goodison",pos:"ZAG",r:75},
+    {nome:"Sinclair P.",pos:"ZAG",r:74},{nome:"Gardner",pos:"LAT",r:73},{nome:"Whitmore",pos:"MEI",r:78},
+    {nome:"Malcolm",pos:"MED",r:73},{nome:"Simpson F.",pos:"MED",r:73},{nome:"Earle",pos:"MEI",r:76},
+    {nome:"Burton",pos:"ATA",r:74},{nome:"Gayle",pos:"ATA",r:74},
+  ]},
+  {p:"🇹🇹 Trinidad e Tobago",e:"🇹🇹",ano:2006,j:[
+    {nome:"Hislop",pos:"GOL",r:78},{nome:"Lawrence D.",pos:"LAT",r:74},{nome:"Sancho B.",pos:"ZAG",r:75},
+    {nome:"John A.",pos:"ZAG",r:74},{nome:"Cox I.",pos:"LAT",r:73},{nome:"Birchall",pos:"MED",r:74},
+    {nome:"Whitley",pos:"MED",r:74},{nome:"Yorke",pos:"MEI",r:81},{nome:"Theobald",pos:"MEI",r:73},
+    {nome:"Latapy",pos:"MEI",r:77},{nome:"Jones K.",pos:"ATA",r:74},
+  ]},
+  {p:"🇧🇴 Bolívia",e:"🇧🇴",ano:1994,j:[
+    {nome:"Trucco",pos:"GOL",r:76},{nome:"Quinteros",pos:"LAT",r:73},{nome:"Rimba",pos:"ZAG",r:73},
+    {nome:"Sandy",pos:"ZAG",r:74},{nome:"Cristaldo",pos:"LAT",r:73},{nome:"Soria M.",pos:"MED",r:74},
+    {nome:"Baldivieso",pos:"MEI",r:78},{nome:"Sánchez E.",pos:"MED",r:73},{nome:"Melgar",pos:"MEI",r:74},
+    {nome:"Etcheverry",pos:"MEI",r:80},{nome:"Ramallo",pos:"ATA",r:75},
+  ]},
+  // ══════ EUROPA ══════
+  {p:"🇩🇰 Dinamarca",e:"🇩🇰",ano:1986,j:[
+    {nome:"Rasmussen T.",pos:"GOL",r:79},{nome:"Busk",pos:"LAT",r:76},{nome:"M. Olsen",pos:"ZAG",r:80},
+    {nome:"Nielsen I.",pos:"ZAG",r:78},{nome:"Andersen K.",pos:"LAT",r:76},{nome:"Berggreen",pos:"MED",r:78},
+    {nome:"Lerby",pos:"MED",r:82},{nome:"Arnesen",pos:"MEI",r:81},{nome:"J. Olsen",pos:"MEI",r:80},
+    {nome:"Elkjær",pos:"ATA",r:86},{nome:"Laudrup M.",pos:"ATA",r:88},
+  ]},
+  {p:"🇩🇰 Dinamarca",e:"🇩🇰",ano:1998,j:[
+    {nome:"Schmeichel P.",pos:"GOL",r:90},{nome:"Helveg",pos:"LAT",r:79},{nome:"Rieper",pos:"ZAG",r:80},
+    {nome:"Høgh",pos:"ZAG",r:79},{nome:"Heintze",pos:"LAT",r:79},{nome:"Schjønberg",pos:"MED",r:77},
+    {nome:"Nielsen A.",pos:"MED",r:78},{nome:"Laudrup M.",pos:"MEI",r:88},{nome:"Laudrup B.",pos:"ATA",r:84},
+    {nome:"Sand",pos:"ATA",r:80},{nome:"Møller P.",pos:"ATA",r:79},
+  ]},
+  {p:"🇳🇴 Noruega",e:"🇳🇴",ano:1998,j:[
+    {nome:"Grodås",pos:"GOL",r:78},{nome:"Berg H.",pos:"LAT",r:80},{nome:"Johnsen R.",pos:"ZAG",r:81},
+    {nome:"Bergsson",pos:"ZAG",r:78},{nome:"Bjørnebye",pos:"LAT",r:79},{nome:"Leonhardsen",pos:"MED",r:80},
+    {nome:"Rekdal",pos:"MED",r:79},{nome:"Strand R.",pos:"MEI",r:77},{nome:"H. Flo",pos:"ATA",r:80},
+    {nome:"Solskjær",pos:"ATA",r:84},{nome:"T.A. Flo",pos:"ATA",r:80},
+  ]},
+  {p:"🇨🇭 Suíça",e:"🇨🇭",ano:1994,j:[
+    {nome:"Pascolo",pos:"GOL",r:79},{nome:"Hottiger",pos:"LAT",r:77},{nome:"Geiger",pos:"ZAG",r:78},
+    {nome:"Herr",pos:"ZAG",r:76},{nome:"Quentin",pos:"LAT",r:75},{nome:"Sforza",pos:"MED",r:80},
+    {nome:"Ohrel",pos:"MED",r:76},{nome:"Bregy",pos:"MEI",r:77},{nome:"Sutter A.",pos:"MEI",r:76},
+    {nome:"Chapuisat",pos:"ATA",r:83},{nome:"Knup",pos:"ATA",r:78},
+  ]},
+  {p:"🇨🇭 Suíça",e:"🇨🇭",ano:2018,j:[
+    {nome:"Sommer",pos:"GOL",r:84},{nome:"Lichtsteiner",pos:"LAT",r:80},{nome:"Schär",pos:"ZAG",r:80},
+    {nome:"Akanji",pos:"ZAG",r:80},{nome:"Rodríguez R.",pos:"LAT",r:81},{nome:"Behrami",pos:"MED",r:78},
+    {nome:"Xhaka",pos:"MEI",r:83},{nome:"Shaqiri",pos:"MEI",r:84},{nome:"Zuber",pos:"ATA",r:78},
+    {nome:"Seferovic",pos:"ATA",r:78},{nome:"Embolo",pos:"ATA",r:79},
+  ]},
+  {p:"🇦🇹 Áustria",e:"🇦🇹",ano:1954,j:[
+    {nome:"Schmied",pos:"GOL",r:79},{nome:"Hanappi",pos:"LAT",r:84},{nome:"Happel",pos:"ZAG",r:82},
+    {nome:"Kollmann",pos:"ZAG",r:77},{nome:"Barschandt",pos:"LAT",r:76},{nome:"Ocwirk",pos:"MED",r:85},
+    {nome:"Koller",pos:"MED",r:78},{nome:"Körner R.",pos:"MEI",r:80},{nome:"Stojaspal",pos:"MEI",r:79},
+    {nome:"Probst",pos:"ATA",r:82},{nome:"Körner A.",pos:"ATA",r:80},
+  ]},
+  {p:"🇵🇱 Polônia",e:"🇵🇱",ano:1982,j:[
+    {nome:"Młynarczyk",pos:"GOL",r:81},{nome:"Dziuba",pos:"LAT",r:76},{nome:"Żmuda",pos:"ZAG",r:80},
+    {nome:"Janas",pos:"ZAG",r:77},{nome:"Majewski",pos:"LAT",r:76},{nome:"Matysik",pos:"MED",r:78},
+    {nome:"Buncol",pos:"MED",r:77},{nome:"Boniek",pos:"MEI",r:88},{nome:"Lato",pos:"ATA",r:83},
+    {nome:"Smolarek W.",pos:"ATA",r:80},{nome:"Szarmach",pos:"ATA",r:80},
+  ]},
+  {p:"🇵🇱 Polônia",e:"🇵🇱",ano:2022,j:[
+    {nome:"Szczęsny",pos:"GOL",r:86},{nome:"Cash",pos:"LAT",r:79},{nome:"Glik",pos:"ZAG",r:79},
+    {nome:"Kiwior",pos:"ZAG",r:79},{nome:"Bereszyński",pos:"LAT",r:78},{nome:"Krychowiak",pos:"MED",r:80},
+    {nome:"Bielik",pos:"MED",r:78},{nome:"Zieliński",pos:"MEI",r:84},{nome:"Zalewski",pos:"ATA",r:77},
+    {nome:"Lewandowski",pos:"ATA",r:91},{nome:"Frankowski",pos:"ATA",r:78},
+  ]},
+  {p:"🇷🇴 Romênia",e:"🇷🇴",ano:1994,j:[
+    {nome:"Prunea",pos:"GOL",r:80},{nome:"Petrescu",pos:"LAT",r:82},{nome:"Prodan",pos:"ZAG",r:79},
+    {nome:"Belodedici",pos:"ZAG",r:80},{nome:"Mihali",pos:"LAT",r:76},{nome:"Popescu G.",pos:"MED",r:84},
+    {nome:"Lupescu",pos:"MED",r:78},{nome:"Hagi",pos:"MEI",r:90},{nome:"Dumitrescu",pos:"ATA",r:82},
+    {nome:"Răducioiu",pos:"ATA",r:82},{nome:"Munteanu D.",pos:"MEI",r:77},
+  ]},
+  {p:"🇧🇬 Bulgária",e:"🇧🇬",ano:1994,j:[
+    {nome:"Mihaylov B.",pos:"GOL",r:82},{nome:"Kiryakov",pos:"LAT",r:78},{nome:"Hubchev",pos:"ZAG",r:78},
+    {nome:"Ivanov T.",pos:"ZAG",r:77},{nome:"Tsvetanov",pos:"LAT",r:77},{nome:"Yankov",pos:"MED",r:77},
+    {nome:"Lechkov",pos:"MEI",r:82},{nome:"Balakov",pos:"MEI",r:83},{nome:"Sirakov",pos:"ATA",r:80},
+    {nome:"Stoichkov",pos:"ATA",r:90},{nome:"Kostadinov",pos:"ATA",r:79},
+  ]},
+  {p:"🇹🇷 Turquia",e:"🇹🇷",ano:2002,j:[
+    {nome:"Rüştü",pos:"GOL",r:85},{nome:"Fatih A.",pos:"LAT",r:77},{nome:"Bülent K.",pos:"ZAG",r:79},
+    {nome:"Alpay",pos:"ZAG",r:78},{nome:"Ergün",pos:"LAT",r:76},{nome:"Tugay",pos:"MED",r:80},
+    {nome:"Emre B.",pos:"MEI",r:81},{nome:"Basturk",pos:"MEI",r:80},{nome:"Hasan Şaş",pos:"ATA",r:79},
+    {nome:"Hakan Şükür",pos:"ATA",r:84},{nome:"İlhan M.",pos:"ATA",r:79},
+  ]},
+  {p:"🇬🇷 Grécia",e:"🇬🇷",ano:2004,j:[
+    {nome:"Nikopolidis",pos:"GOL",r:82},{nome:"Seitaridis",pos:"LAT",r:79},{nome:"Dellas",pos:"ZAG",r:81},
+    {nome:"Kapsis",pos:"ZAG",r:78},{nome:"Fyssas",pos:"LAT",r:78},{nome:"Katsouranis",pos:"MED",r:79},
+    {nome:"Basinas",pos:"MED",r:78},{nome:"Zagorakis",pos:"MEI",r:82},{nome:"Giannakopoulos",pos:"MEI",r:78},
+    {nome:"Charisteas",pos:"ATA",r:80},{nome:"Vryzas",pos:"ATA",r:77},
+  ]},
+  {p:"🏴󠁧󠁢󠁳󠁣󠁴󠁿 Escócia",e:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",ano:1978,j:[
+    {nome:"Rough",pos:"GOL",r:78},{nome:"Kennedy S.",pos:"LAT",r:76},{nome:"Buchan",pos:"ZAG",r:78},
+    {nome:"Forsyth",pos:"ZAG",r:76},{nome:"Donachie",pos:"LAT",r:75},{nome:"Masson",pos:"MED",r:77},
+    {nome:"Rioch",pos:"MED",r:77},{nome:"Hartford",pos:"MEI",r:78},{nome:"Dalglish",pos:"ATA",r:86},
+    {nome:"Jordan",pos:"ATA",r:80},{nome:"Gemmill",pos:"MEI",r:79},
+  ]},
+  {p:"🇮🇪 Irlanda",e:"🇮🇪",ano:1994,j:[
+    {nome:"Bonner",pos:"GOL",r:79},{nome:"Irwin",pos:"LAT",r:82},{nome:"McGrath",pos:"ZAG",r:83},
+    {nome:"Babb",pos:"ZAG",r:78},{nome:"Phelan",pos:"LAT",r:75},{nome:"Houghton",pos:"MED",r:78},
+    {nome:"Keane R.",pos:"MED",r:84},{nome:"Townsend",pos:"MEI",r:78},{nome:"McAteer",pos:"MEI",r:77},
+    {nome:"Quinn N.",pos:"ATA",r:79},{nome:"Sheridan",pos:"MEI",r:77},
+  ]},
+  {p:"🇳🇮 Irlanda do Norte",e:"🇮🇪",ano:1982,j:[
+    {nome:"Jennings",pos:"GOL",r:84},{nome:"Nicholl J.",pos:"LAT",r:77},{nome:"McClelland",pos:"ZAG",r:77},
+    {nome:"Nicholl C.",pos:"ZAG",r:76},{nome:"Donaghy",pos:"LAT",r:76},{nome:"O'Neill M.",pos:"MED",r:78},
+    {nome:"McIlroy",pos:"MEI",r:79},{nome:"McCreery",pos:"MED",r:76},{nome:"Armstrong G.",pos:"ATA",r:78},
+    {nome:"Hamilton B.",pos:"ATA",r:76},{nome:"Whiteside",pos:"ATA",r:79},
+  ]},
+  {p:"🏴󠁧󠁢󠁷󠁬󠁳󠁿 País de Gales",e:"🏴󠁧󠁢󠁷󠁬󠁳󠁿",ano:2022,j:[
+    {nome:"Hennessey",pos:"GOL",r:78},{nome:"Roberts C.",pos:"LAT",r:78},{nome:"Rodon",pos:"ZAG",r:78},
+    {nome:"Mepham",pos:"ZAG",r:76},{nome:"Davies B.",pos:"LAT",r:79},{nome:"Ampadu",pos:"MED",r:78},
+    {nome:"Allen J.",pos:"MED",r:78},{nome:"Ramsey",pos:"MEI",r:81},{nome:"Williams N.",pos:"ATA",r:76},
+    {nome:"Bale",pos:"ATA",r:84},{nome:"James D.",pos:"ATA",r:78},
+  ]},
+  {p:"🇷🇸 Sérvia",e:"🇷🇸",ano:2018,j:[
+    {nome:"Stojković V.",pos:"GOL",r:80},{nome:"Ivanović",pos:"LAT",r:81},{nome:"Tošić M.",pos:"ZAG",r:78},
+    {nome:"Milenković",pos:"ZAG",r:80},{nome:"Kolarov",pos:"LAT",r:82},{nome:"Matić",pos:"MED",r:83},
+    {nome:"Milivojević",pos:"MED",r:79},{nome:"Milinković-Savić",pos:"MEI",r:84},{nome:"Tadić",pos:"MEI",r:83},
+    {nome:"Mitrović",pos:"ATA",r:81},{nome:"Kostić",pos:"ATA",r:80},
+  ]},
+  {p:"🇸🇮 Eslovênia",e:"🇸🇮",ano:2002,j:[
+    {nome:"Dabanovič",pos:"GOL",r:76},{nome:"Vugdalič",pos:"LAT",r:74},{nome:"Galič",pos:"ZAG",r:76},
+    {nome:"Knavs",pos:"ZAG",r:75},{nome:"Karič",pos:"LAT",r:74},{nome:"Ceh N.",pos:"MED",r:77},
+    {nome:"Pavlin",pos:"MED",r:75},{nome:"Zahovič",pos:"MEI",r:82},{nome:"Rudonja",pos:"MEI",r:75},
+    {nome:"Acimovič",pos:"MEI",r:76},{nome:"Šiljak",pos:"ATA",r:75},
+  ]},
+  {p:"🇸🇰 Eslováquia",e:"🇸🇰",ano:2010,j:[
+    {nome:"Mucha",pos:"GOL",r:78},{nome:"Pekarík",pos:"LAT",r:77},{nome:"Škrtel",pos:"ZAG",r:82},
+    {nome:"Ďurica",pos:"ZAG",r:77},{nome:"Zabavník",pos:"LAT",r:75},{nome:"Hamšík",pos:"MEI",r:84},
+    {nome:"Kucka",pos:"MED",r:78},{nome:"Strba",pos:"MED",r:76},{nome:"Weiss V.",pos:"MEI",r:78},
+    {nome:"Vittek",pos:"ATA",r:79},{nome:"Jendrišek",pos:"ATA",r:76},
+  ]},
+  {p:"🇧🇦 Bósnia",e:"🇧🇦",ano:2014,j:[
+    {nome:"Begović",pos:"GOL",r:82},{nome:"Mujdža",pos:"LAT",r:76},{nome:"Spahić",pos:"ZAG",r:79},
+    {nome:"Bičakčić",pos:"ZAG",r:77},{nome:"Kolašinac",pos:"LAT",r:79},{nome:"Pjanić",pos:"MEI",r:84},
+    {nome:"Medunjanin",pos:"MED",r:78},{nome:"Lulić",pos:"MED",r:78},{nome:"Misimović",pos:"MEI",r:79},
+    {nome:"Džeko",pos:"ATA",r:85},{nome:"Ibišević",pos:"ATA",r:79},
+  ]},
+  {p:"🇨🇿 República Tcheca",e:"🇨🇿",ano:2006,j:[
+    {nome:"Čech",pos:"GOL",r:89},{nome:"Grygera",pos:"LAT",r:78},{nome:"Rozehnal",pos:"ZAG",r:78},
+    {nome:"Ujfaluši",pos:"ZAG",r:79},{nome:"Jankulovski",pos:"LAT",r:79},{nome:"Galásek",pos:"MED",r:77},
+    {nome:"Poborský",pos:"MEI",r:81},{nome:"Rosický",pos:"MEI",r:85},{nome:"Nedvěd",pos:"MEI",r:88},
+    {nome:"Koller J.",pos:"ATA",r:81},{nome:"Lokvenc",pos:"ATA",r:77},
+  ]},
+  {p:"🇷🇺 Rússia",e:"🇷🇺",ano:2018,j:[
+    {nome:"Akinfeev",pos:"GOL",r:83},{nome:"Fernandes M.",pos:"LAT",r:80},{nome:"Ignashevich",pos:"ZAG",r:79},
+    {nome:"Kutepov",pos:"ZAG",r:78},{nome:"Zhirkov",pos:"LAT",r:79},{nome:"Zobnin",pos:"MED",r:78},
+    {nome:"Kuzyaev",pos:"MED",r:78},{nome:"Golovin",pos:"MEI",r:82},{nome:"Samedov",pos:"MEI",r:77},
+    {nome:"Dzyuba",pos:"ATA",r:80},{nome:"Cheryshev",pos:"ATA",r:79},
+  ]},
+  {p:"🇷🇺 União Soviética",e:"🇷🇺",ano:1966,j:[
+    {nome:"Yashin",pos:"GOL",r:94},{nome:"Ponomarev",pos:"LAT",r:77},{nome:"Shesternyov",pos:"ZAG",r:80},
+    {nome:"Voronin",pos:"ZAG",r:82},{nome:"Danilov",pos:"LAT",r:76},{nome:"Sabo",pos:"MED",r:78},
+    {nome:"Khusainov",pos:"MEI",r:79},{nome:"Chislenko",pos:"MEI",r:81},{nome:"Banishevskiy",pos:"ATA",r:80},
+    {nome:"Malofeyev",pos:"ATA",r:79},{nome:"Porkujan",pos:"ATA",r:78},
+  ]},
+  {p:"🇺🇦 Ucrânia",e:"🇺🇦",ano:2006,j:[
+    {nome:"Shovkovskyi",pos:"GOL",r:81},{nome:"Nesmachniy",pos:"LAT",r:76},{nome:"Vashchuk",pos:"ZAG",r:77},
+    {nome:"Rusol",pos:"ZAG",r:76},{nome:"Husin",pos:"MED",r:77},{nome:"Tymoshchuk",pos:"MED",r:80},
+    {nome:"Husyev",pos:"MEI",r:78},{nome:"Rebrov",pos:"ATA",r:81},{nome:"Shevchenko",pos:"ATA",r:89},
+    {nome:"Voronin A.",pos:"ATA",r:80},{nome:"Kalynychenko",pos:"MEI",r:76},
+  ]},
+  {p:"🇷🇸 Iugoslávia",e:"🇷🇸",ano:1990,j:[
+    {nome:"Ivković",pos:"GOL",r:80},{nome:"Stanojković",pos:"LAT",r:76},{nome:"Spasić",pos:"ZAG",r:78},
+    {nome:"Hadžibegić",pos:"ZAG",r:78},{nome:"Jozić",pos:"LAT",r:76},{nome:"Sušić",pos:"MED",r:82},
+    {nome:"Stojković D.",pos:"MEI",r:86},{nome:"Prosinečki",pos:"MEI",r:83},{nome:"Savićević",pos:"MEI",r:85},
+    {nome:"Pančev",pos:"ATA",r:81},{nome:"Vujović",pos:"ATA",r:79},
+  ]},
+  // ══════ ÁFRICA ══════
+  {p:"🇳🇬 Nigéria",e:"🇳🇬",ano:1994,j:[
+    {nome:"Rufai",pos:"GOL",r:80},{nome:"Eguavoen",pos:"LAT",r:77},{nome:"Okechukwu",pos:"ZAG",r:78},
+    {nome:"Uche O.",pos:"ZAG",r:76},{nome:"Adepoju",pos:"LAT",r:77},{nome:"Oliseh S.",pos:"MED",r:80},
+    {nome:"Okocha",pos:"MEI",r:86},{nome:"Amunike",pos:"MEI",r:82},{nome:"Amokachi",pos:"ATA",r:81},
+    {nome:"Yekini",pos:"ATA",r:82},{nome:"Finidi",pos:"ATA",r:81},
+  ]},
+  {p:"🇳🇬 Nigéria",e:"🇳🇬",ano:2014,j:[
+    {nome:"Enyeama",pos:"GOL",r:82},{nome:"Ambrose",pos:"LAT",r:77},{nome:"Omeruo",pos:"ZAG",r:78},
+    {nome:"Yobo",pos:"ZAG",r:79},{nome:"Echiéjilé",pos:"LAT",r:77},{nome:"Onazi",pos:"MED",r:78},
+    {nome:"Mikel J.",pos:"MEI",r:82},{nome:"Moses V.",pos:"MEI",r:80},{nome:"Musa A.",pos:"ATA",r:80},
+    {nome:"Emenike",pos:"ATA",r:79},{nome:"Odemwingie",pos:"ATA",r:79},
+  ]},
+  {p:"🇩🇿 Argélia",e:"🇩🇿",ano:1982,j:[
+    {nome:"Cerbah",pos:"GOL",r:78},{nome:"Merzekane",pos:"LAT",r:77},{nome:"Guendouz",pos:"ZAG",r:76},
+    {nome:"Kourichi",pos:"ZAG",r:76},{nome:"Mansouri",pos:"LAT",r:75},{nome:"Fergani",pos:"MED",r:78},
+    {nome:"Dahleb",pos:"MEI",r:81},{nome:"Belloumi",pos:"MEI",r:83},{nome:"Madjer",pos:"ATA",r:83},
+    {nome:"Assad",pos:"ATA",r:79},{nome:"Bensaoula",pos:"ATA",r:77},
+  ]},
+  {p:"🇩🇿 Argélia",e:"🇩🇿",ano:2014,j:[
+    {nome:"M'Bolhi",pos:"GOL",r:81},{nome:"Mandi",pos:"LAT",r:78},{nome:"Halliche",pos:"ZAG",r:78},
+    {nome:"Bougherra",pos:"ZAG",r:78},{nome:"Ghoulam",pos:"LAT",r:81},{nome:"Medjani",pos:"MED",r:77},
+    {nome:"Lacen",pos:"MED",r:77},{nome:"Feghouli",pos:"MEI",r:80},{nome:"Brahimi",pos:"MEI",r:81},
+    {nome:"Slimani",pos:"ATA",r:80},{nome:"Soudani",pos:"ATA",r:78},
+  ]},
+  {p:"🇹🇳 Tunísia",e:"🇹🇳",ano:1978,j:[
+    {nome:"Naili",pos:"GOL",r:76},{nome:"Dhiab Khouaja",pos:"LAT",r:74},{nome:"Jendoubi",pos:"ZAG",r:75},
+    {nome:"Kaabi",pos:"ZAG",r:74},{nome:"Gasmi",pos:"LAT",r:73},{nome:"Ghommidh",pos:"MED",r:75},
+    {nome:"Dhiab T.",pos:"MEI",r:79},{nome:"Labidi",pos:"MED",r:74},{nome:"Akid",pos:"MEI",r:75},
+    {nome:"Gommidh A.",pos:"ATA",r:75},{nome:"Temime",pos:"ATA",r:75},
+  ]},
+  {p:"🇪🇬 Egito",e:"🇪🇬",ano:2018,j:[
+    {nome:"El-Shenawy",pos:"GOL",r:80},{nome:"Fathy A.",pos:"LAT",r:76},{nome:"Hegazi",pos:"ZAG",r:79},
+    {nome:"Gabr A.",pos:"ZAG",r:76},{nome:"Abdel-Shafy",pos:"LAT",r:75},{nome:"Elneny",pos:"MED",r:79},
+    {nome:"Hamed T.",pos:"MED",r:77},{nome:"Warda",pos:"MEI",r:77},{nome:"Trezeguet",pos:"MEI",r:79},
+    {nome:"Salah M.",pos:"ATA",r:89},{nome:"Mohsen M.",pos:"ATA",r:75},
+  ]},
+  {p:"🇨🇮 Costa do Marfim",e:"🇨🇮",ano:2010,j:[
+    {nome:"Barry B.",pos:"GOL",r:78},{nome:"Eboué",pos:"LAT",r:80},{nome:"K. Touré",pos:"ZAG",r:82},
+    {nome:"Zokora",pos:"ZAG",r:78},{nome:"Tiéné",pos:"LAT",r:77},{nome:"Y. Touré",pos:"MED",r:85},
+    {nome:"Tiote",pos:"MED",r:79},{nome:"Kalou",pos:"MEI",r:81},{nome:"Dindane",pos:"ATA",r:78},
+    {nome:"Drogba",pos:"ATA",r:88},{nome:"Gervinho",pos:"ATA",r:80},
+  ]},
+  {p:"🇿🇦 África do Sul",e:"🇿🇦",ano:2010,j:[
+    {nome:"Khune",pos:"GOL",r:80},{nome:"Gaxa",pos:"LAT",r:75},{nome:"Mokoena A.",pos:"ZAG",r:78},
+    {nome:"Khumalo B.",pos:"ZAG",r:75},{nome:"Masilela",pos:"LAT",r:75},{nome:"Modise",pos:"MEI",r:78},
+    {nome:"Letsholonyane",pos:"MED",r:76},{nome:"Sibaya",pos:"MED",r:75},{nome:"Tshabalala",pos:"MEI",r:78},
+    {nome:"Mphela",pos:"ATA",r:77},{nome:"Parker B.",pos:"ATA",r:75},
+  ]},
+  {p:"🇦🇴 Angola",e:"🇦🇴",ano:2006,j:[
+    {nome:"João Ricardo",pos:"GOL",r:76},{nome:"Jamba",pos:"LAT",r:74},{nome:"Kali",pos:"ZAG",r:75},
+    {nome:"Marco Airosa",pos:"ZAG",r:74},{nome:"Loco",pos:"LAT",r:74},{nome:"Figueiredo",pos:"MED",r:75},
+    {nome:"André",pos:"MED",r:74},{nome:"Mendonça",pos:"MEI",r:75},{nome:"Gilberto",pos:"MEI",r:74},
+    {nome:"Akwá",pos:"ATA",r:77},{nome:"Flávio",pos:"ATA",r:76},
+  ]},
+  {p:"🇹🇬 Togo",e:"🇹🇬",ano:2006,j:[
+    {nome:"Agassa",pos:"GOL",r:75},{nome:"Nibombé",pos:"ZAG",r:75},{nome:"Abalo",pos:"LAT",r:73},
+    {nome:"Forson",pos:"ZAG",r:73},{nome:"Salifou A.",pos:"LAT",r:73},{nome:"Romão",pos:"MED",r:75},
+    {nome:"Mamam",pos:"MED",r:73},{nome:"Kader",pos:"MEI",r:74},{nome:"Adebayor",pos:"ATA",r:83},
+    {nome:"Touré K.",pos:"ATA",r:73},{nome:"Senaya",pos:"MEI",r:73},
+  ]},
+  {p:"🇨🇩 Zaire",e:"🇨🇩",ano:1974,j:[
+    {nome:"Kazadi",pos:"GOL",r:75},{nome:"Mwepu",pos:"LAT",r:73},{nome:"Bwanga",pos:"ZAG",r:75},
+    {nome:"Mukombo",pos:"ZAG",r:73},{nome:"Lobilo",pos:"LAT",r:72},{nome:"Kilasu",pos:"MED",r:73},
+    {nome:"Mana",pos:"MED",r:73},{nome:"Kidumu",pos:"MEI",r:74},{nome:"Mayanga",pos:"MEI",r:74},
+    {nome:"Ndaye M.",pos:"ATA",r:76},{nome:"Kakoko",pos:"ATA",r:74},
+  ]},
+  // ══════ ÁSIA / OCEANIA ══════
+  {p:"🇮🇷 Irã",e:"🇮🇷",ano:1998,j:[
+    {nome:"Abedzadeh",pos:"GOL",r:78},{nome:"Khakpour",pos:"ZAG",r:76},{nome:"Peyrovani",pos:"ZAG",r:75},
+    {nome:"Zarincheh",pos:"LAT",r:74},{nome:"Minavand",pos:"LAT",r:76},{nome:"Estili",pos:"MEI",r:78},
+    {nome:"Mahdavikia",pos:"MEI",r:80},{nome:"Bagheri",pos:"MED",r:78},{nome:"Azizi",pos:"ATA",r:80},
+    {nome:"Daei",pos:"ATA",r:82},{nome:"Pashazadeh",pos:"MED",r:74},
+  ]},
+  {p:"🇮🇷 Irã",e:"🇮🇷",ano:2018,j:[
+    {nome:"Beiranvand",pos:"GOL",r:79},{nome:"Rezaeian",pos:"LAT",r:76},{nome:"Pouraliganji",pos:"ZAG",r:77},
+    {nome:"Hosseini M.",pos:"ZAG",r:76},{nome:"Hajsafi",pos:"LAT",r:77},{nome:"Ezatolahi",pos:"MED",r:76},
+    {nome:"Shojaei",pos:"MEI",r:78},{nome:"Dejagah",pos:"MEI",r:78},{nome:"Amiri V.",pos:"MEI",r:76},
+    {nome:"Azmoun",pos:"ATA",r:80},{nome:"Jahanbakhsh",pos:"ATA",r:78},
+  ]},
+  {p:"🇮🇶 Iraque",e:"🇮🇶",ano:1986,j:[
+    {nome:"Hammoudi R.",pos:"GOL",r:75},{nome:"Allawi",pos:"LAT",r:73},{nome:"Mohammed K.",pos:"ZAG",r:74},
+    {nome:"Shaker",pos:"ZAG",r:73},{nome:"Saddam",pos:"LAT",r:72},{nome:"Radhi A.",pos:"MEI",r:78},
+    {nome:"Allawi B.",pos:"MED",r:74},{nome:"Mohammed N.",pos:"MED",r:73},{nome:"Hashim",pos:"MEI",r:74},
+    {nome:"Hussein H.",pos:"ATA",r:75},{nome:"Karim",pos:"ATA",r:74},
+  ]},
+  {p:"🇸🇦 Arábia Saudita",e:"🇸🇦",ano:1994,j:[
+    {nome:"Al-Deayea",pos:"GOL",r:80},{nome:"Zubromawi",pos:"LAT",r:74},{nome:"Al-Khlaiwi",pos:"ZAG",r:75},
+    {nome:"Madani",pos:"ZAG",r:74},{nome:"Al-Jawad",pos:"LAT",r:73},{nome:"Al-Anazi K.",pos:"MED",r:75},
+    {nome:"Amin S.",pos:"MEI",r:76},{nome:"Al-Owairan S.",pos:"MEI",r:80},{nome:"Al-Muwallid",pos:"ATA",r:76},
+    {nome:"Al-Jaber",pos:"ATA",r:78},{nome:"Al-Bishi",pos:"ATA",r:74},
+  ]},
+  {p:"🇸🇦 Arábia Saudita",e:"🇸🇦",ano:2022,j:[
+    {nome:"Al-Owais",pos:"GOL",r:78},{nome:"Al-Ghannam",pos:"LAT",r:75},{nome:"Al-Amri",pos:"ZAG",r:76},
+    {nome:"Al-Bulaihi",pos:"ZAG",r:77},{nome:"Al-Shahrani",pos:"LAT",r:76},{nome:"Al-Faraj",pos:"MED",r:78},
+    {nome:"Kanno",pos:"MED",r:77},{nome:"Al-Malki",pos:"MEI",r:76},{nome:"Al-Dawsari S.",pos:"MEI",r:79},
+    {nome:"Al-Shehri S.",pos:"ATA",r:76},{nome:"Al-Buraikan",pos:"ATA",r:75},
+  ]},
+  {p:"🇰🇼 Kuwait",e:"🇰🇼",ano:1982,j:[
+    {nome:"Al-Tarabulsi",pos:"GOL",r:75},{nome:"Mayoof",pos:"LAT",r:72},{nome:"Waleed J.",pos:"ZAG",r:73},
+    {nome:"Mahboub",pos:"ZAG",r:72},{nome:"Al-Suwayed",pos:"LAT",r:72},{nome:"Al-Buloushi",pos:"MED",r:73},
+    {nome:"Al-Houti",pos:"MED",r:72},{nome:"Al-Dakhil",pos:"MEI",r:74},{nome:"Al-Anberi",pos:"MEI",r:73},
+    {nome:"Al-Haddad",pos:"ATA",r:74},{nome:"Al-Buloushi F.",pos:"ATA",r:73},
+  ]},
+  {p:"🇶🇦 Qatar",e:"🇶🇦",ano:2022,j:[
+    {nome:"Barsham",pos:"GOL",r:75},{nome:"Miguel",pos:"LAT",r:74},{nome:"Khoukhi",pos:"ZAG",r:76},
+    {nome:"Salman B.",pos:"ZAG",r:74},{nome:"Hassan A.",pos:"LAT",r:74},{nome:"Hatem",pos:"MED",r:75},
+    {nome:"Madibo",pos:"MED",r:74},{nome:"Al-Haydos",pos:"MEI",r:77},{nome:"Afif A.",pos:"MEI",r:78},
+    {nome:"Ali Almoez",pos:"ATA",r:77},{nome:"Muntari M.",pos:"ATA",r:74},
+  ]},
+  {p:"🇨🇳 China",e:"🇨🇳",ano:2002,j:[
+    {nome:"Jiang Jin",pos:"GOL",r:75},{nome:"Sun Jihai",pos:"LAT",r:78},{nome:"Fan Zhiyi",pos:"ZAG",r:78},
+    {nome:"Li Weifeng",pos:"ZAG",r:76},{nome:"Wu Chengying",pos:"LAT",r:73},{nome:"Li Tie",pos:"MED",r:77},
+    {nome:"Ma Mingyu",pos:"MEI",r:75},{nome:"Qi Hong",pos:"MEI",r:75},{nome:"Sun Jihai B.",pos:"MEI",r:74},
+    {nome:"Hao Haidong",pos:"ATA",r:78},{nome:"Yang Chen",pos:"ATA",r:74},
+  ]},
+  {p:"🇦🇺 Austrália",e:"🇦🇺",ano:2006,j:[
+    {nome:"Schwarzer",pos:"GOL",r:83},{nome:"Neill",pos:"ZAG",r:80},{nome:"Moore C.",pos:"ZAG",r:78},
+    {nome:"Chipperfield",pos:"LAT",r:78},{nome:"Wilkshire",pos:"LAT",r:77},{nome:"Grella",pos:"MED",r:79},
+    {nome:"Culina",pos:"MED",r:78},{nome:"Cahill",pos:"MEI",r:83},{nome:"Bresciano",pos:"MEI",r:81},
+    {nome:"Viduka",pos:"ATA",r:83},{nome:"Kewell",pos:"ATA",r:83},
+  ]},
+  {p:"🇰🇵 Coreia do Norte",e:"🇰🇵",ano:1966,j:[
+    {nome:"Ri Chan-myong",pos:"GOL",r:75},{nome:"Rim Yung-sun",pos:"LAT",r:73},{nome:"Shin Yung-kyoo",pos:"ZAG",r:74},
+    {nome:"Ha Jung-won",pos:"ZAG",r:73},{nome:"O Yoon-kyung",pos:"LAT",r:72},{nome:"Im Seung-hwi",pos:"MED",r:74},
+    {nome:"Pak Seung-jin",pos:"MEI",r:76},{nome:"Han Bong-jin",pos:"MEI",r:74},{nome:"Pak Doo-ik",pos:"ATA",r:77},
+    {nome:"Li Dong-woon",pos:"ATA",r:74},{nome:"Yang Sung-kook",pos:"ATA",r:74},
+  ]},
+  {p:"🇳🇿 Nova Zelândia",e:"🇳🇿",ano:2010,j:[
+    {nome:"Paston",pos:"GOL",r:76},{nome:"Lochhead",pos:"LAT",r:73},{nome:"Nelsen",pos:"ZAG",r:79},
+    {nome:"Reid W.",pos:"ZAG",r:77},{nome:"Vicelich",pos:"LAT",r:74},{nome:"Bertos",pos:"MED",r:74},
+    {nome:"Elliott",pos:"MED",r:73},{nome:"Smeltz",pos:"MEI",r:75},{nome:"Fallon",pos:"ATA",r:74},
+    {nome:"Killen",pos:"ATA",r:73},{nome:"Wood C.",pos:"ATA",r:76},
+  ]},
+  // ── PORTUGAL 1966 foi adicionado acima ──
+];
+</script>
+
+<script>
+// ── ESTADO ──
+let modo='classico',estilo='equilibrado',rerolls=3,rodada=0;
+let selAtual=null,time=[],scUsado=false,artilharia={};
+let copaStats={jogos:0,gp:0,gc:0,fin:0,finAlvo:0,esc:0,faltas:0,amarelos:0,vermelhos:0,defesas:0};
+
+function setEstilo(e,btn){
+  estilo=e;
+  btn.parentNode.querySelectorAll('.btn-estilo').forEach(b=>b.className='btn-estilo');
+  btn.className='btn-estilo ativo-'+(e==='equilibrado'?'eq':e==='defensivo'?'def':'ofe');
+}
+
+// ── MODO DE COPA ──
+let copaModo='mista'; // 'mista' = todas as copas, 'ano' = copa de um ano
+let anoCopa=null;
+
+function setCopaModo(m,btn){
+  copaModo=m;
+  btn.parentNode.querySelectorAll('.btn-estilo').forEach(b=>b.className='btn-estilo');
+  btn.className='btn-estilo ativo-eq';
+  const sel=document.getElementById('select-ano');
+  if(m==='ano'){
+    // Popular dropdown com anos disponíveis no banco
+    const copasValidas=[1930,1934,1938,1950,1954,1958,1962,1966,1970,1974,1978,1982,1986,1990,1994,1998,2002,2006,2010,2014,2018,2022,2026];
+    const anos=[...new Set(SEL.map(s=>s.ano))].filter(a=>copasValidas.includes(a)).sort((a,b)=>a-b);
+    sel.innerHTML='<option value="">— Escolha o ano da Copa —</option>'+
+      anos.map(a=>{
+        const n=SEL.filter(s=>s.ano===a).length;
+        const aviso=n<4?' • elenco enxuto':'';
+        return `<option value="${a}">Copa ${a} — ${n} seleções${aviso}</option>`;
+      }).join('');
+    sel.style.display='block';
+    anoCopa=null;
+    const inf=document.getElementById('wc2026-info');if(inf)inf.style.display='none';
+  }else if(m==='wc2026'){
+    sel.style.display='none';
+    anoCopa=null;
+    // Mostrar info do modo 2026
+    let info=document.getElementById('wc2026-info');
+    if(!info){
+      info=document.createElement('p');info.id='wc2026-info';
+      info.style.cssText='font-size:.7rem;color:var(--amarelo);text-align:center;max-width:420px;line-height:1.5;margin-bottom:1rem;position:relative;z-index:1;';
+      sel.parentNode.insertBefore(info,sel.nextSibling);
+    }
+    info.innerHTML='🏆 <b>Copa do Mundo 2026 Real</b><br>Monte seu time dos sonhos com craques de todas as eras e enfrente as 48 seleções reais nos 12 grupos e chaves oficiais da FIFA.';
+    info.style.display='block';
+  }else{
+    sel.style.display='none';
+    anoCopa=null;
+    const info=document.getElementById('wc2026-info');if(info)info.style.display='none';
+  }
+}
+
+function setAnoCopa(v){anoCopa=v?parseInt(v):null;}
+
+// Retorna o pool de seleções conforme o modo escolhido
+function poolSelecoes(){
+  if(copaModo==='ano'&&anoCopa){
+    const filtradas=SEL.filter(s=>s.ano===anoCopa);
+    return filtradas.length?filtradas:SEL;
+  }
+  return SEL;
+}
+
+function getF(){return FORM[estilo];}
+
+function iniciar(m){
+  modo=m;rerolls=3;rodada=0;selAtual=null;scUsado=false;artilharia={};
+  time=new Array(getF().slots.length).fill(null);
+  document.getElementById('tela-inicio').style.display='none';
+  document.getElementById('tela-jogo').style.display='block';
+  document.getElementById('tela-sim').style.display='none';
+  document.getElementById('modo-disp').innerHTML=`<span class="modo-badge modo-${m}">${m==='classico'?'⚽ CLÁSSICO':'📖 ALMANAQUE'}</span>`;
+  document.getElementById('meta-form').textContent=getF().nome;
+  document.getElementById('meta-est').textContent={equilibrado:'EQUILIBRADO',defensivo:'DEFENSIVO',ofensivo:'OFENSIVO'}[estilo];
+  document.getElementById('sort-info').style.display='none';
+  document.getElementById('elenco-zone').style.display='none';
+  document.getElementById('overall-bar').style.display='none';
+  document.getElementById('dado').textContent='🎲';
+  const sc=document.getElementById('btn-sc');
+  sc.style.display='block';sc.disabled=false;sc.innerHTML='⭐ USAR SUPER CRAQUE<span class="sc-sub">1 chance — escolha um lendário de todas as eras</span>';
+  renderCampo();prog();
+}
+
+function prog(){
+  const tot=getF().slots.length;
+  let h='';
+  for(let i=0;i<tot;i++){let c='prog-bolinha';if(i<rodada)c+=' feito';else if(i===rodada)c+=' atual';h+=`<div class="${c}"></div>`;}
+  document.getElementById('prog-cont').innerHTML=h+`<span style="margin-left:.35rem;font-size:.7rem">${rodada}/${tot}</span>`;
+}
+
+function posLivres(){return getF().slots.filter((_,i)=>!time[i]).map(f=>f.pos);}
+function temVaga(pos){return posLivres().includes(pos);}
+
+function rolarDado(){
+  const tot=getF().slots.length;if(rodada>=tot)return;
+  if(AC.state==='suspended')AC.resume();
+  tocarDado();
+  const dado=document.getElementById('dado');
+  dado.classList.add('rolando');
+  const f=['🎲','🎯','🎰','🃏','🎲'];let i=0;
+  const iv=setInterval(()=>{dado.textContent=f[i++%f.length];},80);
+  setTimeout(()=>{clearInterval(iv);dado.classList.remove('rolando');dado.textContent='🎲';sortear();},560);
+}
+
+function sortear(){
+  const pool=poolSelecoes();
+  const idx=Math.floor(Math.random()*pool.length);
+  selAtual=pool[idx];
+  document.getElementById('sort-ano').textContent=`Copa do Mundo ${selAtual.ano}`;
+  document.getElementById('sort-pais').textContent=selAtual.p;
+  const si=document.getElementById('sort-info');
+  si.style.display='flex';si.style.flexDirection='column';
+  document.getElementById('btn-rr').disabled=rerolls<=0;
+  document.getElementById('rr-num').textContent=rerolls;
+  mostrarElenco();
+}
+
+function reroll(){if(rerolls<=0)return;rerolls--;document.getElementById('rr-num').textContent=rerolls;rolarDado();}
+
+function abrirSC(){
+  if(scUsado)return;
+  selAtual=null;
+  document.getElementById('sort-info').style.display='none';
+  document.getElementById('elenco-titulo').textContent='⭐ ESCOLHA SEU SUPER CRAQUE LENDÁRIO';
+  const grid=document.getElementById('elenco-grid');grid.innerHTML='';
+  [...SC].sort((a,b)=>b.r-a.r).forEach(sc=>{
+    const ok=temVaga(sc.pos);
+    const d=document.createElement('div');
+    d.className='card-jog craque'+(ok?'':' nodisponivel');
+    d.innerHTML=`<span class="card-star">⭐</span><div class="card-pos">${sc.e} ${sc.pos}</div><div class="card-nome">${sc.nome}</div><div class="card-rat">${modo==='classico'?sc.r:'?'}</div>`;
+    if(ok)d.onclick=()=>escolherSC(sc);
+    grid.appendChild(d);
+  });
+  document.getElementById('elenco-zone').style.display='block';
+}
+
+function escolherSC(sc){
+  scUsado=true;
+  const btn=document.getElementById('btn-sc');
+  btn.disabled=true;btn.textContent='⭐ SUPER CRAQUE USADO';
+  escolher({...sc,isCraque:true});
+}
+
+function mostrarElenco(){
+  const livres=new Set(posLivres());
+  const jogs=[...selAtual.j].sort((a,b)=>{
+    const ac=livres.has(a.pos)?0:1,bc=livres.has(b.pos)?0:1;
+    if(ac!==bc)return ac-bc;return b.r-a.r;
+  });
+  document.getElementById('elenco-titulo').textContent=`${selAtual.p} ${selAtual.ano} — ESCOLHA UM JOGADOR`;
+  const grid=document.getElementById('elenco-grid');grid.innerHTML='';
+  jogs.forEach(j=>{
+    const ok=livres.has(j.pos);
+    const d=document.createElement('div');
+    d.className='card-jog'+(j.r>=90?' craque':'')+(ok?'':' nodisponivel');
+    if(j.r>=90)d.innerHTML+=`<span class="card-star">⭐</span>`;
+    d.innerHTML+=`<div class="card-pos">${j.pos}</div><div class="card-nome">${j.nome}</div><div class="card-rat">${j.r}</div>`;
+    if(ok)d.onclick=()=>escolher(j);
+    grid.appendChild(d);
+  });
+  document.getElementById('elenco-zone').style.display='block';
+}
+
+function escolher(jog){
+  const slots=getF().slots;let slot=-1;
+  for(let i=0;i<slots.length;i++)if(!time[i]&&slots[i].pos===jog.pos){slot=i;break;}
+  if(slot===-1)for(let i=0;i<slots.length;i++)if(!time[i]){slot=i;break;}
+  if(slot===-1)return;
+  time[slot]=jog;rodada++;prog();renderCampo();atualizarOv();
+  document.getElementById('elenco-zone').style.display='none';
+  document.getElementById('sort-info').style.display='none';
+  selAtual=null;
+  if(rodada>=getF().slots.length)setTimeout(simular,700);
+}
+
+function atualizarOv(){
+  const filled=time.filter(j=>j);if(!filled.length)return;
+  const slots=getF().slots;
+  const atks=time.filter((j,i)=>j&&['ATA','MEI'].includes(slots[i].pos));
+  const defs=time.filter((j,i)=>j&&['GOL','ZAG','LAT','MED'].includes(slots[i].pos));
+  const avg=a=>a.length?Math.round(a.reduce((s,j)=>s+j.r,0)/a.length):0;
+  document.getElementById('ov-tot').textContent=avg(filled);
+  document.getElementById('ov-atk').textContent=avg(atks)||'--';
+  document.getElementById('ov-def').textContent=avg(defs)||'--';
+  document.getElementById('overall-bar').style.display='block';
+}
+
+function renderCampo(){
+  const slots=getF().slots;
+  const linhas={gol:[],def:[],mei:[],ata:[]};
+  slots.forEach((f,i)=>linhas[f.l].push({i,pos:f.pos,jog:time[i]}));
+  document.getElementById('campo').innerHTML=['ata','mei','def','gol'].map(l=>`
+    <div class="linha-campo">
+      ${linhas[l].map(s=>{const ou=s.jog&&s.jog.r>=90;return`<div class="slot-jog ${s.jog?'cheio':''}${ou?' ouro':''}">
+        <div class="slot-circ">${s.jog?`<span style="font-size:.41rem;text-align:center;line-height:1.15;padding:.04rem">${s.jog.nome.split(' ')[0]}${ou?' ⭐':''}</span>`:s.pos}</div>
+        <div class="slot-pos-txt">${s.pos}</div></div>`;}).join('')}
+    </div>`).join('');
+}
+
+// ── SIMULAÇÃO ──
+function calcF(){
+  const vs=time.filter(j=>j).map(j=>j.r);
+  let b=vs.length?vs.reduce((a,x)=>a+x,0)/vs.length:70;
+  if(estilo==='defensivo')b=b*.88+12;
+  if(estilo==='ofensivo')b=b*1.05;
+  return b;
+}
+
+function atks(){const s=getF().slots;const a=time.filter((j,i)=>j&&['ATA','MEI'].includes(s[i].pos));return a.length?a:time.filter(j=>j);}
+
+function sortArt(lista){
+  const ps=lista.map(j=>Math.max(1,j.r-65)),tot=ps.reduce((a,b)=>a+b,0);
+  let r=Math.random()*tot;
+  for(let i=0;i<lista.length;i++){r-=ps[i];if(r<=0)return lista[i];}
+  return lista[lista.length-1];
+}
+
+// Adversários com bandeira, nome e ano histórico
+
+// ── ADVERSÁRIOS HISTÓRICOS ──
+const ADV=[
+  {n:"Alemanha",e:"🇩🇪",ano:1954},{n:"Alemanha",e:"🇩🇪",ano:1966},{n:"Alemanha",e:"🇩🇪",ano:1974},
+  {n:"Alemanha",e:"🇩🇪",ano:1982},{n:"Alemanha",e:"🇩🇪",ano:1990},{n:"Alemanha",e:"🇩🇪",ano:2002},
+  {n:"Alemanha",e:"🇩🇪",ano:2014},{n:"França",e:"🇫🇷",ano:1958},{n:"França",e:"🇫🇷",ano:1998},
+  {n:"França",e:"🇫🇷",ano:2006},{n:"França",e:"🇫🇷",ano:2018},{n:"França",e:"🇫🇷",ano:2022},
+  {n:"Argentina",e:"🇦🇷",ano:1978},{n:"Argentina",e:"🇦🇷",ano:1986},{n:"Argentina",e:"🇦🇷",ano:1990},
+  {n:"Argentina",e:"🇦🇷",ano:2014},{n:"Argentina",e:"🇦🇷",ano:2022},{n:"Brasil",e:"🇧🇷",ano:1958},
+  {n:"Brasil",e:"🇧🇷",ano:1970},{n:"Brasil",e:"🇧🇷",ano:1982},{n:"Brasil",e:"🇧🇷",ano:1994},
+  {n:"Brasil",e:"🇧🇷",ano:2002},{n:"Brasil",e:"🇧🇷",ano:2022},{n:"Espanha",e:"🇪🇸",ano:2010},
+  {n:"Holanda",e:"🇳🇱",ano:1974},{n:"Holanda",e:"🇳🇱",ano:1978},{n:"Holanda",e:"🇳🇱",ano:2010},
+  {n:"Itália",e:"🇮🇹",ano:1934},{n:"Itália",e:"🇮🇹",ano:1970},{n:"Itália",e:"🇮🇹",ano:1982},
+  {n:"Itália",e:"🇮🇹",ano:1994},{n:"Itália",e:"🇮🇹",ano:2006},{n:"Portugal",e:"🇵🇹",ano:1966},
+  {n:"Portugal",e:"🇵🇹",ano:2006},{n:"Portugal",e:"🇵🇹",ano:2022},{n:"Bélgica",e:"🇧🇪",ano:1986},
+  {n:"Bélgica",e:"🇧🇪",ano:2018},{n:"Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",ano:1966},{n:"Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",ano:1990},
+  {n:"Uruguai",e:"🇺🇾",ano:1950},{n:"Uruguai",e:"🇺🇾",ano:2010},{n:"Croácia",e:"🇭🇷",ano:1998},
+  {n:"Croácia",e:"🇭🇷",ano:2018},{n:"Croácia",e:"🇭🇷",ano:2022},{n:"Hungria",e:"🇭🇺",ano:1954},
+  {n:"Suécia",e:"🇸🇪",ano:1958},{n:"Suécia",e:"🇸🇪",ano:1994},{n:"Polônia",e:"🇵🇱",ano:1974},
+  {n:"Marrocos",e:"🇲🇦",ano:2022},{n:"Coreia do Sul",e:"🇰🇷",ano:2002},{n:"Camarões",e:"🇨🇲",ano:1990},
+  {n:"Senegal",e:"🇸🇳",ano:2002},{n:"México",e:"🇲🇽",ano:1986},{n:"Tchecoslováquia",e:"🇨🇿",ano:1962},
+  {n:"Dinamarca",e:"🇩🇰",ano:1986},{n:"Dinamarca",e:"🇩🇰",ano:1998},{n:"Noruega",e:"🇳🇴",ano:1998},
+  {n:"Suíça",e:"🇨🇭",ano:1994},{n:"Suíça",e:"🇨🇭",ano:2018},{n:"Áustria",e:"🇦🇹",ano:1954},
+  {n:"Polônia",e:"🇵🇱",ano:1982},{n:"Polônia",e:"🇵🇱",ano:2022},{n:"Romênia",e:"🇷🇴",ano:1994},
+  {n:"Bulgária",e:"🇧🇬",ano:1994},{n:"Turquia",e:"🇹🇷",ano:2002},{n:"Grécia",e:"🇬🇷",ano:2004},
+  {n:"Escócia",e:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",ano:1978},{n:"Irlanda",e:"🇮🇪",ano:1994},{n:"País de Gales",e:"🏴󠁧󠁢󠁷󠁬󠁳󠁿",ano:2022},
+  {n:"Sérvia",e:"🇷🇸",ano:2018},{n:"República Tcheca",e:"🇨🇿",ano:2006},{n:"Rússia",e:"🇷🇺",ano:2018},
+  {n:"União Soviética",e:"🇷🇺",ano:1966},{n:"Ucrânia",e:"🇺🇦",ano:2006},{n:"Iugoslávia",e:"🇷🇸",ano:1990},
+  {n:"Estados Unidos",e:"🇺🇸",ano:2002},{n:"México",e:"🇲🇽",ano:2014},{n:"Chile",e:"🇨🇱",ano:2014},
+  {n:"Colômbia",e:"🇨🇴",ano:2014},{n:"Peru",e:"🇵🇪",ano:1970},{n:"Paraguai",e:"🇵🇾",ano:2010},
+  {n:"Equador",e:"🇪🇨",ano:2006},{n:"Costa Rica",e:"🇨🇷",ano:2014},{n:"Canadá",e:"🇨🇦",ano:2022},
+  {n:"Nigéria",e:"🇳🇬",ano:1994},{n:"Nigéria",e:"🇳🇬",ano:2014},{n:"Argélia",e:"🇩🇿",ano:1982},
+  {n:"Tunísia",e:"🇹🇳",ano:1978},{n:"Egito",e:"🇪🇬",ano:2018},{n:"Costa do Marfim",e:"🇨🇮",ano:2010},
+  {n:"África do Sul",e:"🇿🇦",ano:2010},{n:"Zaire",e:"🇨🇩",ano:1974},{n:"Irã",e:"🇮🇷",ano:2018},
+  {n:"Arábia Saudita",e:"🇸🇦",ano:1994},{n:"Qatar",e:"🇶🇦",ano:2022},{n:"China",e:"🇨🇳",ano:2002},
+  {n:"Austrália",e:"🇦🇺",ano:2006},{n:"Coreia do Norte",e:"🇰🇵",ano:1966},{n:"Nova Zelândia",e:"🇳🇿",ano:2010},
+];
+
+// ════════════════════════════════════════════
+//  COPA DO MUNDO 2026 — 48 SELEÇÕES REAIS
+//  Grupos oficiais A-L (sorteio FIFA 05/12/2025)
+//  Força (rating médio do elenco real de 2026)
+// ════════════════════════════════════════════
+const WC2026 = {
+  grupos: {
+    A: [
+      {n:"México",e:"🇲🇽",r:79,pais:"México"},
+      {n:"África do Sul",e:"🇿🇦",r:74,pais:"África do Sul"},
+      {n:"Coreia do Sul",e:"🇰🇷",r:78,pais:"Coreia do Sul"},
+      {n:"República Tcheca",e:"🇨🇿",r:77,pais:"República Tcheca"},
+    ],
+    B: [
+      {n:"Canadá",e:"🇨🇦",r:78,pais:"Canadá"},
+      {n:"Catar",e:"🇶🇦",r:74,pais:"Qatar"},
+      {n:"Suíça",e:"🇨🇭",r:80,pais:"Suíça"},
+      {n:"Bósnia",e:"🇧🇦",r:78,pais:"Bósnia"},
+    ],
+    C: [
+      {n:"Brasil",e:"🇧🇷",r:87,pais:"Brasil"},
+      {n:"Marrocos",e:"🇲🇦",r:83,pais:"Marrocos"},
+      {n:"Haiti",e:"🇭🇹",r:71,pais:"Haiti"},
+      {n:"Escócia",e:"🏴󠁧󠁢󠁳󠁣󠁴󠁿",r:78,pais:"Escócia"},
+    ],
+    D: [
+      {n:"Estados Unidos",e:"🇺🇸",r:80,pais:"Estados Unidos"},
+      {n:"Paraguai",e:"🇵🇾",r:77,pais:"Paraguai"},
+      {n:"Austrália",e:"🇦🇺",r:77,pais:"Austrália"},
+      {n:"Turquia",e:"🇹🇷",r:81,pais:"Turquia"},
+    ],
+    E: [
+      {n:"Alemanha",e:"🇩🇪",r:86,pais:"Alemanha"},
+      {n:"Curaçao",e:"🇨🇼",r:72,pais:"Curaçao"},
+      {n:"Costa do Marfim",e:"🇨🇮",r:80,pais:"Costa do Marfim"},
+      {n:"Equador",e:"🇪🇨",r:79,pais:"Equador"},
+    ],
+    F: [
+      {n:"Holanda",e:"🇳🇱",r:85,pais:"Holanda"},
+      {n:"Japão",e:"🇯🇵",r:80,pais:"Japão"},
+      {n:"Tunísia",e:"🇹🇳",r:76,pais:"Tunísia"},
+      {n:"Suécia",e:"🇸🇪",r:80,pais:"Suécia"},
+    ],
+    G: [
+      {n:"Bélgica",e:"🇧🇪",r:84,pais:"Bélgica"},
+      {n:"Egito",e:"🇪🇬",r:79,pais:"Egito"},
+      {n:"Irã",e:"🇮🇷",r:77,pais:"Irã"},
+      {n:"Nova Zelândia",e:"🇳🇿",r:72,pais:"Nova Zelândia"},
+    ],
+    H: [
+      {n:"Espanha",e:"🇪🇸",r:87,pais:"Espanha"},
+      {n:"Cabo Verde",e:"🇨🇻",r:73,pais:"Cabo Verde"},
+      {n:"Arábia Saudita",e:"🇸🇦",r:75,pais:"Arábia Saudita"},
+      {n:"Uruguai",e:"🇺🇾",r:83,pais:"Uruguai"},
+    ],
+    I: [
+      {n:"França",e:"🇫🇷",r:87,pais:"França"},
+      {n:"Senegal",e:"🇸🇳",r:81,pais:"Senegal"},
+      {n:"Noruega",e:"🇳🇴",r:81,pais:"Noruega"},
+      {n:"Iraque",e:"🇮🇶",r:73,pais:"Iraque"},
+    ],
+    J: [
+      {n:"Argentina",e:"🇦🇷",r:87,pais:"Argentina"},
+      {n:"Argélia",e:"🇩🇿",r:79,pais:"Argélia"},
+      {n:"Áustria",e:"🇦🇹",r:80,pais:"Áustria"},
+      {n:"Jordânia",e:"🇯🇴",r:73,pais:"Jordânia"},
+    ],
+    K: [
+      {n:"Portugal",e:"🇵🇹",r:85,pais:"Portugal"},
+      {n:"Uzbequistão",e:"🇺🇿",r:74,pais:"Uzbequistão"},
+      {n:"Colômbia",e:"🇨🇴",r:82,pais:"Colômbia"},
+      {n:"RD Congo",e:"🇨🇩",r:76,pais:"RD Congo"},
+    ],
+    L: [
+      {n:"Inglaterra",e:"🏴󠁧󠁢󠁥󠁮󠁧󠁿",r:86,pais:"Inglaterra"},
+      {n:"Croácia",e:"🇭🇷",r:82,pais:"Croácia"},
+      {n:"Gana",e:"🇬🇭",r:78,pais:"Gana"},
+      {n:"Panamá",e:"🇵🇦",r:75,pais:"Panamá"},
+    ],
+  }
+};
+
+// ════════════════════════════════════════════
+//  ELENCOS REAIS COPA 2026 — titulares prováveis
+//  LOTE 1: Grupos A, B, C
+// ════════════════════════════════════════════
+const WC2026_SQUADS = {
+  // ─── GRUPO A ───
+  "México":[
+    {nome:"Ochoa",pos:"GOL",r:79},{nome:"Sánchez J.",pos:"LAT",r:78},{nome:"Montes",pos:"ZAG",r:79},
+    {nome:"Vásquez J.",pos:"ZAG",r:78},{nome:"Gallardo",pos:"LAT",r:77},{nome:"Edson Álvarez",pos:"MED",r:82},
+    {nome:"Chávez L.",pos:"MEI",r:78},{nome:"Gilberto Mora",pos:"MEI",r:77},{nome:"Vega A.",pos:"ATA",r:78},
+    {nome:"Raúl Jiménez",pos:"ATA",r:80},{nome:"Hirving Lozano",pos:"ATA",r:81},
+  ],
+  "África do Sul":[
+    {nome:"Williams R.",pos:"GOL",r:76},{nome:"Mudau",pos:"LAT",r:74},{nome:"Mbatha",pos:"ZAG",r:74},
+    {nome:"Modiba",pos:"ZAG",r:73},{nome:"Mendieta",pos:"LAT",r:73},{nome:"Mokoena T.",pos:"MED",r:75},
+    {nome:"Zwane T.",pos:"MEI",r:75},{nome:"Mofokeng",pos:"MEI",r:75},{nome:"Tau P.",pos:"ATA",r:78},
+    {nome:"Mokoena O.",pos:"ATA",r:74},{nome:"Williams I.",pos:"ATA",r:74},
+  ],
+  "Coreia do Sul":[
+    {nome:"Kim Seung-gyu",pos:"GOL",r:78},{nome:"Kim Moon-hwan",pos:"LAT",r:76},{nome:"Kim Min-jae",pos:"ZAG",r:85},
+    {nome:"Kim Young-gwon",pos:"ZAG",r:77},{nome:"Lee Tae-seok",pos:"LAT",r:74},{nome:"Hwang In-beom",pos:"MED",r:79},
+    {nome:"Park Yong-woo",pos:"MED",r:76},{nome:"Lee Jae-sung",pos:"MEI",r:79},{nome:"Son Heung-min",pos:"ATA",r:85},
+    {nome:"Hwang Hee-chan",pos:"ATA",r:79},{nome:"Oh Hyeon-gyu",pos:"ATA",r:76},
+  ],
+  "República Tcheca":[
+    {nome:"Staněk",pos:"GOL",r:77},{nome:"Coufal",pos:"LAT",r:77},{nome:"Hranáč",pos:"ZAG",r:77},
+    {nome:"Krejčí L.",pos:"ZAG",r:78},{nome:"Zelený",pos:"LAT",r:74},{nome:"Souček",pos:"MED",r:81},
+    {nome:"Provod",pos:"MEI",r:79},{nome:"Šulc",pos:"MEI",r:78},{nome:"Černý V.",pos:"ATA",r:77},
+    {nome:"Chorý",pos:"ATA",r:76},{nome:"Hložek",pos:"ATA",r:78},
+  ],
+  // ─── GRUPO B ───
+  "Canadá":[
+    {nome:"St. Clair",pos:"GOL",r:76},{nome:"Johnston",pos:"LAT",r:79},{nome:"Vitória",pos:"ZAG",r:78},
+    {nome:"Cornelius",pos:"ZAG",r:76},{nome:"Davies A.",pos:"LAT",r:85},{nome:"Eustáquio",pos:"MED",r:79},
+    {nome:"Koné I.",pos:"MEI",r:78},{nome:"Buchanan T.",pos:"MEI",r:79},{nome:"David J.",pos:"ATA",r:83},
+    {nome:"Larin",pos:"ATA",r:77},{nome:"Ahmed A.",pos:"ATA",r:76},
+  ],
+  "Catar":[
+    {nome:"Barsham",pos:"GOL",r:75},{nome:"Pedro Miguel",pos:"LAT",r:74},{nome:"Khoukhi",pos:"ZAG",r:76},
+    {nome:"Boudiaf",pos:"ZAG",r:74},{nome:"Hassan A.",pos:"LAT",r:74},{nome:"Madibo",pos:"MED",r:75},
+    {nome:"Hatem",pos:"MEI",r:75},{nome:"Al-Haydos",pos:"MEI",r:77},{nome:"Afif A.",pos:"ATA",r:79},
+    {nome:"Almoez Ali",pos:"ATA",r:77},{nome:"Muntari M.",pos:"ATA",r:75},
+  ],
+  "Suíça":[
+    {nome:"Sommer",pos:"GOL",r:84},{nome:"Widmer",pos:"LAT",r:76},{nome:"Akanji",pos:"ZAG",r:83},
+    {nome:"Schär",pos:"ZAG",r:80},{nome:"Rodríguez R.",pos:"LAT",r:78},{nome:"Freuler",pos:"MED",r:79},
+    {nome:"Xhaka",pos:"MEI",r:83},{nome:"Rieder",pos:"MEI",r:78},{nome:"Ndoye",pos:"ATA",r:79},
+    {nome:"Embolo",pos:"ATA",r:80},{nome:"Vargas R.",pos:"ATA",r:78},
+  ],
+  "Bósnia":[
+    {nome:"Vasilj",pos:"GOL",r:76},{nome:"Katić",pos:"LAT",r:75},{nome:"Bičakčić",pos:"ZAG",r:76},
+    {nome:"Ahmedhodžić",pos:"ZAG",r:78},{nome:"Mujakić",pos:"LAT",r:74},{nome:"Pjanić",pos:"MED",r:80},
+    {nome:"Tahirović",pos:"MEI",r:75},{nome:"Gigović",pos:"MEI",r:74},{nome:"Demirović",pos:"ATA",r:79},
+    {nome:"Džeko",pos:"ATA",r:81},{nome:"Bajraktarević",pos:"ATA",r:75},
+  ],
+  // ─── GRUPO C ───
+  "Brasil":[
+    {nome:"Alisson",pos:"GOL",r:89},{nome:"Wesley",pos:"LAT",r:79},{nome:"Marquinhos",pos:"ZAG",r:86},
+    {nome:"Gabriel Magalhães",pos:"ZAG",r:85},{nome:"Alex Sandro",pos:"LAT",r:79},{nome:"Casemiro",pos:"MED",r:83},
+    {nome:"Bruno Guimarães",pos:"MED",r:85},{nome:"Lucas Paquetá",pos:"MEI",r:83},{nome:"Vini Jr.",pos:"ATA",r:90},
+    {nome:"Estêvão",pos:"ATA",r:82},{nome:"Matheus Cunha",pos:"ATA",r:83},
+  ],
+  "Marrocos":[
+    {nome:"Bono",pos:"GOL",r:84},{nome:"Hakimi",pos:"LAT",r:86},{nome:"Aguerd",pos:"ZAG",r:81},
+    {nome:"Saïss",pos:"ZAG",r:79},{nome:"Mazraoui",pos:"LAT",r:82},{nome:"Amrabat",pos:"MED",r:81},
+    {nome:"Ounahi",pos:"MEI",r:79},{nome:"Sabiri",pos:"MEI",r:78},{nome:"Ziyech",pos:"ATA",r:80},
+    {nome:"En-Nesyri",pos:"ATA",r:81},{nome:"Diaz B.",pos:"ATA",r:82},
+  ],
+  "Haiti":[
+    {nome:"Placide J.",pos:"GOL",r:72},{nome:"Gentil",pos:"LAT",r:70},{nome:"Nazon D.",pos:"ZAG",r:71},
+    {nome:"Vincent R.",pos:"ZAG",r:70},{nome:"Ad. Pierrot",pos:"LAT",r:70},{nome:"Saint-Juste",pos:"MED",r:71},
+    {nome:"Larin H.",pos:"MEI",r:70},{nome:"Bazile",pos:"MEI",r:71},{nome:"Pierrot F.",pos:"ATA",r:74},
+    {nome:"Mondésir",pos:"ATA",r:71},{nome:"Désir",pos:"ATA",r:70},
+  ],
+  "Escócia":[
+    {nome:"Gunn",pos:"GOL",r:77},{nome:"Hickey",pos:"LAT",r:77},{nome:"Tierney",pos:"ZAG",r:79},
+    {nome:"Hanley",pos:"ZAG",r:76},{nome:"Robertson A.",pos:"LAT",r:83},{nome:"McTominay",pos:"MED",r:82},
+    {nome:"Gilmour",pos:"MEI",r:78},{nome:"McGinn",pos:"MEI",r:79},{nome:"Christie",pos:"ATA",r:77},
+    {nome:"Adams Ch.",pos:"ATA",r:77},{nome:"McGregor",pos:"MEI",r:78},
+  ],
+};
+
+
+
+function mins(n,lo,hi){lo=lo||1;hi=hi||90;const m=[];let guard=0;while(m.length<n&&guard<500){const v=Math.floor(Math.random()*(hi-lo+1))+lo;if(!m.includes(v))m.push(v);guard++;}return m.sort((a,b)=>a-b);}
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function chance(p){return Math.random()<p;}
+
+// ── NARRAÇÃO DE GOLS ──
+const GOL_TIPOS=[
+  {t:"bicicleta no ângulo",d:n=>`${n} sobe nas alturas e emenda uma BICICLETA no ângulo! Que obra de arte!`},
+  {t:"voleio de primeira",d:n=>`Cruzamento na medida e ${n} pega de VOLEIO de primeira, sem deixar a bola pingar. Espetacular!`},
+  {t:"cabeçada após escanteio",d:n=>`Na cobrança de escanteio, ${n} salta mais que todo mundo e testa firme pro fundo das redes.`},
+  {t:"chute de fora da área",d:n=>`${n} ajeita o corpo na entrada da área e solta uma BOMBA indefensável de fora!`},
+  {t:"falta no ângulo",d:n=>`${n} ajeita a barreira, respira e cobra a falta com perfeição no ângulo. Sem chance pro goleiro!`},
+  {t:"gol olímpico",d:n=>`Inacreditável! ${n} cobra o escanteio e a bola morre no fundo do gol direto — GOL OLÍMPICO!`},
+  {t:"carrinho na pequena área",d:n=>`Bola viva na pequena área e ${n} chega escorregando de carrinho pra empurrar pro gol!`},
+  {t:"peito e finalização",d:n=>`${n} domina no peito, deixa o zagueiro no chão e finaliza com categoria.`},
+  {t:"rebote do goleiro",d:n=>`O goleiro espalma, mas no rebote ${n} estava ligado e completou pras redes!`},
+  {t:"cobertura",d:n=>`${n} percebe o goleiro adiantado e dá uma COBERTURA delicada por cima. Que frieza!`},
+  {t:"de letra",d:n=>`${n} finaliza DE LETRA, com a perna trocada, e tira tinta da trave antes de entrar. Genial!`},
+  {t:"trivela no ângulo",d:n=>`${n} corta pra dentro e acerta uma TRIVELA perfeita no ângulo esquerdo. GOLAÇO!`},
+  {t:"pênalti com cavadinha",d:n=>`${n} vai pra cobrança... e ousa uma CAVADINHA no meio do gol! Que petulância!`},
+  {t:"bomba de longa distância",d:n=>`Do meio de campo ${n} percebeu o goleiro fora e mandou uma BOMBA de muito longe!`},
+  {t:"desvio na primeira trave",d:n=>`Cruzamento rasteiro e ${n} antecipa a marcação na primeira trave pra desviar pro gol.`},
+  {t:"contra-ataque mortal",d:n=>`Saiu o contra-ataque letal e ${n} apareceu sozinho pra bater cruzado, no canto.`},
+  {t:"drible no goleiro",d:n=>`${n} invade a área, sai cara a cara, DRIBLA o goleiro e empurra pro gol vazio!`},
+  {t:"chapéu e finalização",d:n=>`${n} dá um CHAPÉU no zagueiro dentro da área e finaliza antes da bola cair!`},
+];
+const GOL_CONTRA_TIPOS=[
+  {t:"falha grotesca do goleiro",d:(n,a)=>`FALHA GROTESCA! O goleiro do seu time aceita um chute simples de ${a} e a bola escorre por baixo do corpo.`},
+  {t:"contra-ataque sofrido",d:(n,a)=>`${a} puxa o contra-ataque com velocidade e finaliza no canto. Seu time foi pego mal posicionado.`},
+  {t:"gol contra",d:(n,a)=>`Que azar! Na tentativa de corte, a zaga marca contra e ${a} comemora sem nem ter tocado.`},
+  {t:"cabeçada em escanteio",d:(n,a)=>`${a} ganha de cabeça no escanteio e a bola castiga a marcação adversária.`},
+  {t:"pênalti convertido",d:(n,a)=>`Pênalti pra ${a}... batido com firmeza, o goleiro vai pro lado errado. Empate no marcador.`},
+  {t:"chute de fora",d:(n,a)=>`${a} arrisca de longe e a bola desvia na zaga, matando o goleiro. Golaço sofrido.`},
+  {t:"bola parada ensaiada",d:(n,a)=>`${a} ensaiou: jogada de bola parada trabalhada e finalização certeira. Seu time reclama da marcação.`},
+];
+
+// ── EVENTOS ──
+const EV_AMARELO=[
+  q=>`Cartão amarelo para ${q} após entrada dura no meio-campo.`,
+  q=>`${q} reclama demais da arbitragem e leva amarelo.`,
+  q=>`Falta tática de ${q} interrompe o contra-ataque — amarelo merecido.`,
+  q=>`${q} segura a camisa do adversário e o árbitro não perdoa: amarelo.`,
+];
+const EV_VERMELHO=[
+  q=>`🟥 VERMELHO DIRETO! ${q} chega com sola alta e é expulso sem chance de defesa!`,
+  q=>`🟥 Segundo amarelo para ${q}! O time fica com um a menos em campo!`,
+  q=>`🟥 Confusão! ${q} se exalta, empurra o adversário e acaba EXPULSO!`,
+];
+const EV_VAR=[
+  ()=>`🖥️ VAR em ação! Revisão demorada... e o gol foi ANULADO por impedimento milimétrico! Tensão total.`,
+  ()=>`🖥️ O árbitro vai ao monitor... PÊNALTI marcado após revisão do VAR! Polêmica nas arquibancadas.`,
+  ()=>`🖥️ VAR cancela o pênalti que havia sido assinalado. Os jogadores não acreditam!`,
+  ()=>`🖥️ Após revisão, o amarelo é convertido em VERMELHO. Que reviravolta disciplinar!`,
+];
+const EV_LESAO=[
+  q=>`🩹 ${q} sente a coxa e cai no gramado com cãibras. O jogo para por alguns instantes.`,
+  q=>`🩹 Torção feia em ${q} após dividida. O departamento médico entra em campo.`,
+  q=>`🩹 Corte na cabeça de ${q}! Ele volta enfaixado, guerreiro, e segue em campo.`,
+  q=>`🩹 Contusão muscular tira ${q} da partida. Substituição forçada.`,
+];
+const EV_FUNNY=[
+  ()=>`🐕 Um cachorro invadiu o gramado e ninguém consegue pegá-lo! O jogo está parado e a torcida ri.`,
+  ()=>`🕊️ Pombos pousaram no meio-campo e se recusam a sair. Cena surreal!`,
+  ()=>`🚁 Um drone caiu no gramado! A segurança corre para retirar antes da bronca.`,
+  ()=>`⚽ A bola ESTOUROU no meio de um ataque! Ninguém nunca viu algo assim.`,
+  ()=>`🎤 O narrador perdeu a voz de tanto gritar e segue só no sussurro. Que momento!`,
+  ()=>`🧒 Um torcedor pulou a grade e correu até o meio do campo abraçar seu ídolo!`,
+  ()=>`🌧️ Chuva torrencial de repente! O gramado vira uma piscina em segundos.`,
+  ()=>`💡 Queda parcial dos refletores! Metade do estádio ficou no escuro por instantes.`,
+  ()=>`😡 O técnico chutou a garrafa de água de raiva na beira do campo!`,
+  ()=>`🤡 O mascote provocou a torcida adversária e quase causou confusão geral.`,
+];
+const EV_TORCIDA=[
+  ()=>`📣 A torcida faz um mosaico gigantesco e canta em uníssono. Arrepiante!`,
+  ()=>`📣 "OLÉÉÉ!" — a torcida embala a roda de bobinho dentro de campo.`,
+  ()=>`📣 Papel picado cobre as arquibancadas. Atmosfera de decisão!`,
+  ()=>`📣 Silêncio sepulcral na arquibancada após o gol sofrido.`,
+  ()=>`📣 A torcida pressiona o árbitro com vaias ensurdecedoras.`,
+  ()=>`📣 Os próprios torcedores vaiam o time após a atuação morna.`,
+];
+const EV_NARR=[
+  ["🎙️ Narrador","Que absurdo acabou de acontecer!"],
+  ["🎙️ Comentarista","O zagueiro simplesmente esqueceu a bola."],
+  ["🎙️ Repórter","O técnico está furioso na beira do campo."],
+  ["🎙️ Narrador","Isso é Copa do Mundo, meus amigos! Não tem roteiro!"],
+  ["🎙️ Comentarista","Faltou capricho na hora de finalizar, lance pra esquecer."],
+  ["🎙️ Narrador","O estádio inteiro está de pé! Que jogo!"],
+  ["🎙️ Comentarista","A pressão psicológica está cobrando seu preço."],
+];
+
+// ── GERAÇÃO DA PARTIDA ──
+function gerarPartida(fase,adv,faseIdx){
+  faseIdx=faseIdx||0;
+  const forca=calcF();
+  const base=forca/100;
+  const eB=estilo==='ofensivo'?1.22:estilo==='defensivo'?.82:1;
+  const dB=estilo==='defensivo'?.62:estilo==='ofensivo'?.88:.75;
+  const drama=faseIdx*0.05; // fases avançadas = adversário mais forte
+  const advForca=78+faseIdx*2.2+Math.random()*8; // inteligência do adversário cresce
+
+  let pro=Math.max(0,Math.floor(Math.random()*4*base*eB+Math.random()*1.5*base));
+  let contra=Math.max(0,Math.floor(Math.random()*3.5*(1-base*dB+drama)+Math.random()));
+  // chance de zebra: às vezes adversário surpreende
+  if(chance(0.12)){contra+=Math.floor(Math.random()*2)+1;}
+  if(chance(0.10)){pro+=Math.floor(Math.random()*2)+1;}
+
+  const atkList=atks();
+  // Distribui gols pró em minutos, com narração
+  const golsPro=mins(pro,2,90).map(min=>{
+    const art=sortArt(atkList);
+    const tipo=rnd(GOL_TIPOS);
+    artilharia[art.nome]=(artilharia[art.nome]||{jog:art,g:0});
+    artilharia[art.nome].g++;
+    return{min,nome:art.nome,craque:art.r>=90,tipo:tipo.t,narr:tipo.d(art.nome)};
+  });
+  const golsContra=mins(contra,2,90).filter(m=>!golsPro.find(g=>g.min===m)).map(min=>{
+    const tipo=rnd(GOL_CONTRA_TIPOS);
+    return{min,nome:`${adv.e} ${adv.n}`,adv:true,tipo:tipo.t,narr:tipo.d('seu time',`${adv.n}`)};
+  });
+
+  // ── Eventos aleatórios espalhados pela partida ──
+  const eventos=[];
+  const meusJogadores=time.filter(j=>j);
+  const nomeRand=()=>rnd(meusJogadores)?.nome||'um jogador';
+  // Disciplina
+  const nAmarelos=Math.floor(Math.random()*3);
+  mins(nAmarelos,10,88).forEach(min=>eventos.push({min,tipo:'amarelo',txt:rnd(EV_AMARELO)(nomeRand())}));
+  if(chance(0.18+drama))mins(1,25,90).forEach(min=>eventos.push({min,tipo:'vermelho',txt:rnd(EV_VERMELHO)(nomeRand())}));
+  // VAR
+  if(chance(0.30))mins(1,15,90).forEach(min=>eventos.push({min,tipo:'var',txt:rnd(EV_VAR)()}));
+  // Lesões
+  if(chance(0.35))mins(1,12,85).forEach(min=>eventos.push({min,tipo:'lesao',txt:rnd(EV_LESAO)(nomeRand())}));
+  // Engraçados (prioridade — probabilidade alta)
+  if(chance(0.45))mins(1,5,88).forEach(min=>eventos.push({min,tipo:'funny',txt:rnd(EV_FUNNY)()}));
+  if(chance(0.20))mins(1,5,88).forEach(min=>eventos.push({min,tipo:'funny',txt:rnd(EV_FUNNY)()}));
+  // Torcida
+  mins(1+Math.floor(Math.random()*2),8,88).forEach(min=>eventos.push({min,tipo:'torcida',txt:rnd(EV_TORCIDA)()}));
+  // Narração extra
+  if(chance(0.5)){const n=rnd(EV_NARR);mins(1,20,85).forEach(min=>eventos.push({min,tipo:'narr',quem:n[0],txt:n[1]}));}
+
+  // Acréscimos
+  const acr1=1+Math.floor(Math.random()*4); // 1º tempo +1..+4
+  const acr2=2+Math.floor(Math.random()*7); // 2º tempo +2..+8
+
+  // Gol no acréscimo dramático (fases avançadas)
+  if(chance(0.15+drama)&&golsPro.length){
+    const art=sortArt(atkList);const tipo=rnd(GOL_TIPOS);
+    golsPro.push({min:90,extra:acr2,nome:art.nome,craque:art.r>=90,tipo:tipo.t,narr:tipo.d(art.nome),acrescimo:true});
+    artilharia[art.nome]=(artilharia[art.nome]||{jog:art,g:0});artilharia[art.nome].g++;
+    pro++;
+  }
+
+  // ── Estatísticas ──
+  const posseEu=Math.round(40+base*22+(estilo==='ofensivo'?6:estilo==='defensivo'?-10:0)+(Math.random()*8-4));
+  const posse=Math.max(28,Math.min(72,posseEu));
+  const stats={
+    posse:[posse,100-posse],
+    finalizacoes:[pro*2+4+Math.floor(Math.random()*8),contra*2+3+Math.floor(Math.random()*6)],
+    chutesAlvo:[pro+1+Math.floor(Math.random()*4),contra+1+Math.floor(Math.random()*3)],
+    escanteios:[2+Math.floor(Math.random()*8),1+Math.floor(Math.random()*6)],
+    faltas:[6+Math.floor(Math.random()*10),8+Math.floor(Math.random()*10)],
+    cartoes:[nAmarelos,Math.floor(Math.random()*3)],
+    impedimentos:[Math.floor(Math.random()*5),Math.floor(Math.random()*5)],
+    defesas:[contra+Math.floor(Math.random()*4),pro+Math.floor(Math.random()*4)],
+  };
+
+  // Notas dos jogadores
+  const notas=meusJogadores.map(j=>{
+    let nota=5.8+(j.r-78)*0.07+Math.random()*1.6-0.5;
+    const golsJog=golsPro.filter(g=>g.nome===j.nome).length;
+    nota+=golsJog*1.1;
+    if(pro>contra)nota+=0.3; else if(pro<contra)nota-=0.4;
+    nota=Math.max(3.5,Math.min(10,nota));
+    return{nome:j.nome,pos:j.pos,nota:Math.round(nota*10)/10,gols:golsJog};
+  });
+  notas.sort((a,b)=>b.nota-a.nota);
+  const melhor=notas[0],pior=notas[notas.length-1];
+
+  return{fase,adv:adv.n,advE:adv.e,advAno:adv.ano,pro,contra,ganhou:pro>contra,
+    empate:pro===contra,golsPro,golsContra,eventos,acr1,acr2,stats,notas,melhor,pior,faseIdx};
+}
+
+function simular(){
+  if(copaModo==='wc2026'){simularWC2026();return;}
+  artilharia={};
+  copaStats={jogos:0,gp:0,gc:0,fin:0,finAlvo:0,esc:0,faltas:0,amarelos:0,vermelhos:0,defesas:0};
+  let advs;
+  if(copaModo==='ano'&&anoCopa){
+    // Adversários = seleções reais daquela Copa (exceto a do jogador)
+    const doAno=SEL.filter(s=>s.ano===anoCopa&&s!==selAtual).map(s=>({n:s.p.replace(/^[^ ]+ /,''),e:s.e,ano:s.ano}));
+    advs=doAno.length>=3?doAno.sort(()=>Math.random()-.5):[...ADV].sort(()=>Math.random()-.5);
+  }else{
+    advs=[...ADV].sort(()=>Math.random()-.5);
+  }
+  const grupoAdvs=advs.slice(0,3);
+  const grupoPartidas=grupoAdvs.map((adv,i)=>gerarPartida('FASE DE GRUPOS',adv,0));
+
+  // Tabela do grupo
+  const grupoTimes=[
+    {n:'🌟 Seu Time',e:'⭐',g:0,v:0,e2:0,d:0,gp:0,gc:0,pts:0,voce:true},
+    ...grupoAdvs.map(a=>({n:`${a.e} ${a.n} ${a.ano}`,e:a.e,g:0,v:0,e2:0,d:0,gp:0,gc:0,pts:0})),
+  ];
+  grupoPartidas.forEach((p,i)=>{
+    grupoTimes[0].g++;grupoTimes[i+1].g++;
+    grupoTimes[0].gp+=p.pro;grupoTimes[0].gc+=p.contra;
+    grupoTimes[i+1].gp+=p.contra;grupoTimes[i+1].gc+=p.pro;
+    if(p.ganhou){grupoTimes[0].v++;grupoTimes[0].pts+=3;grupoTimes[i+1].d++;}
+    else if(p.empate){grupoTimes[0].e2++;grupoTimes[0].pts++;grupoTimes[i+1].e2++;grupoTimes[i+1].pts++;}
+    else{grupoTimes[0].d++;grupoTimes[i+1].v++;grupoTimes[i+1].pts+=3;}
+  });
+  for(let i=1;i<grupoTimes.length;i++)for(let j=i+1;j<grupoTimes.length;j++){
+    const ga=Math.floor(Math.random()*4),gb=Math.floor(Math.random()*3);
+    grupoTimes[i].g++;grupoTimes[j].g++;
+    grupoTimes[i].gp+=ga;grupoTimes[i].gc+=gb;grupoTimes[j].gp+=gb;grupoTimes[j].gc+=ga;
+    if(ga>gb){grupoTimes[i].v++;grupoTimes[i].pts+=3;grupoTimes[j].d++;}
+    else if(ga===gb){grupoTimes[i].e2++;grupoTimes[i].pts++;grupoTimes[j].e2++;grupoTimes[j].pts++;}
+    else{grupoTimes[j].v++;grupoTimes[j].pts+=3;grupoTimes[i].d++;}
+  }
+  grupoTimes.sort((a,b)=>b.pts-a.pts||(b.gp-b.gc)-(a.gp-a.gc)||b.gp-a.gp);
+  const playerIdx=grupoTimes.findIndex(t=>t.voce);
+  const classificado=playerIdx<2;
+
+  const mataPartidas=[];
+  if(classificado){
+    const fasesMata=['OITAVAS DE FINAL','QUARTAS DE FINAL','SEMIFINAL','FINAL'];
+    let avancou=true;
+    for(let fi=0;fi<fasesMata.length&&avancou;fi++){
+      const adv=advs[3+fi]||advs[fi];
+      let p=gerarPartida(fasesMata[fi],adv,fi+1);
+      // Mata-mata não pode empatar: prorrogação + pênaltis
+      if(p.empate){
+        p=resolverMataMata(p,adv,fi+1);
+      }
+      mataPartidas.push(p);
+      avancou=p.ganhou;
+    }
+  }
+
+  const todas=[...grupoPartidas,...mataPartidas];
+  const tP=todas.reduce((s,p)=>s+p.pro,0);
+  const tC=todas.reduce((s,p)=>s+p.contra,0);
+  exibirSim(grupoPartidas,grupoTimes,mataPartidas,classificado,tP,tC);
+}
+
+function resolverMataMata(p,adv,faseIdx){
+  // Prorrogação
+  const atkList=atks();
+  const golOuro=chance(0.4);
+  p.prorrogacao=true;
+  // Gols na prorrogação (91-120)
+  const extraPro=chance(0.5)?1:0;
+  const extraContra=chance(0.45)?1:0;
+  if(golOuro&&(extraPro||extraContra)){
+    // Gol de ouro encerra
+    if(extraPro&&(!extraContra||chance(0.5))){
+      const art=sortArt(atkList);const tipo=rnd(GOL_TIPOS);
+      const min=91+Math.floor(Math.random()*29);
+      p.golsPro.push({min,nome:art.nome,craque:art.r>=90,tipo:tipo.t,narr:`⭐ GOL DE OURO! ${tipo.d(art.nome)} Acabou! Classificação garantida!`,golOuro:true});
+      artilharia[art.nome]=(artilharia[art.nome]||{jog:art,g:0});artilharia[art.nome].g++;
+      p.pro++;p.ganhou=true;p.empate=false;
+      return p;
+    }else{
+      const tipo=rnd(GOL_CONTRA_TIPOS);
+      const min=91+Math.floor(Math.random()*29);
+      p.golsContra.push({min,nome:`${adv.e} ${adv.n}`,adv:true,tipo:tipo.t,narr:`💔 GOL DE OURO sofrido! ${tipo.d('seu time',adv.n)} Eliminado na prorrogação...`,golOuro:true});
+      p.contra++;p.ganhou=false;p.empate=false;
+      return p;
+    }
+  }
+  // Prorrogação normal
+  if(extraPro){const art=sortArt(atkList);const tipo=rnd(GOL_TIPOS);const min=91+Math.floor(Math.random()*29);
+    p.golsPro.push({min,nome:art.nome,craque:art.r>=90,tipo:tipo.t,narr:`(Prorrogação) ${tipo.d(art.nome)}`});p.pro++;
+    artilharia[art.nome]=(artilharia[art.nome]||{jog:art,g:0});artilharia[art.nome].g++;}
+  if(extraContra){const tipo=rnd(GOL_CONTRA_TIPOS);const min=91+Math.floor(Math.random()*29);
+    p.golsContra.push({min,nome:`${adv.e} ${adv.n}`,adv:true,tipo:tipo.t,narr:`(Prorrogação) ${tipo.d('seu time',adv.n)}`});p.contra++;}
+  p.ganhou=p.pro>p.contra;p.empate=p.pro===p.contra;
+  // Pênaltis se ainda empatado
+  if(p.empate){
+    const meuP=3+Math.floor(Math.random()*3),advP=3+Math.floor(Math.random()*3);
+    let me=meuP,ad=advP;
+    if(me===ad){chance(0.5)?me++:ad++;}
+    p.penaltis=[me,ad];
+    p.ganhou=me>ad;p.empate=false;
+  }
+  return p;
+}
+
+function esperarAvanco(btnId){
+  return new Promise(res=>{
+    const btn=document.getElementById(btnId);
+    if(!btn)return res();
+    btn.style.display='block';
+    btn.onclick=()=>{btn.style.display='none';res();};
+  });
+}
+
+async function exibirSim(grupoPartidas,grupoTimes,mataPartidas,classificado,tP,tC){
+  document.getElementById('tela-jogo').style.display='none';
+  document.getElementById('tela-sim').style.display='block';
+  document.getElementById('sim-badge').innerHTML='';
+  document.getElementById('sim-titulo').textContent='⚽ COPA DO MUNDO';
+  document.getElementById('placar-total').innerHTML='';
+  document.getElementById('sim-sub').textContent='';
+  document.getElementById('art-sec').style.display='none';
+  document.getElementById('copa-live').style.display='none';
+  const cont=document.getElementById('jogos-cont');cont.innerHTML='';
+
+  cont.innerHTML=`<div class="fase-titulo">📋 FASE DE GRUPOS</div>`;
+  for(const p of grupoPartidas){
+    const idx=document.querySelectorAll('.jogo-card').length;
+    const card=criarCard(p,idx);cont.appendChild(card);
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+    await sleep(300);
+    await jogarPartida(p,idx);
+    await esperarAvanco(`av-${idx}`);
+    await sleep(150);
+  }
+
+  const tabelaEl=document.createElement('div');
+  tabelaEl.innerHTML=renderTabela(grupoTimes);
+  cont.appendChild(tabelaEl);
+  tabelaEl.scrollIntoView({behavior:'smooth',block:'start'});
+  await sleep(400);
+
+  if(!classificado){
+    finalizar(false,tP,tC,'💔 ELIMINADO NA FASE DE GRUPOS','Não avançou para o mata-mata.');
+    return;
+  }
+
+  const titMata=['⚔️ OITAVAS DE FINAL','🏅 QUARTAS DE FINAL','🔥 SEMIFINAL','🏆 GRANDE FINAL'];
+  const nomeFase=['OITAVAS','QUARTAS','SEMIFINAL','FINAL'];
+  for(let fi=0;fi<mataPartidas.length;fi++){
+    const p=mataPartidas[fi];
+    cont.innerHTML+=`<div class="fase-titulo">${titMata[fi]}</div>`;
+    const idx=document.querySelectorAll('.jogo-card').length;
+    const card=criarCard(p,idx);cont.appendChild(card);
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+    await sleep(300);
+    await jogarPartida(p,idx);
+    await esperarAvanco(`av-${idx}`);
+    await sleep(150);
+    if(!p.ganhou){
+      finalizar(false,tP,tC,`💔 ELIMINADO NAS ${nomeFase[fi]}`,`Sua Copa terminou nas ${nomeFase[fi].toLowerCase()}.`);
+      return;
+    }
+  }
+  finalizar(true,tP,tC,'🏆 CAMPEÃO MUNDIAL!','Domínio absoluto — lenda do futebol!');
+}
+
+function finalizar(venceu,tP,tC,badge,sub){
+  document.getElementById('sim-badge').innerHTML=`<span class="vitoria-badge ${venceu?'ganhou':'perdeu'}">${badge}</span>`;
+  document.getElementById('sim-titulo').textContent=venceu?'VOCÊ FEZ 7 A 0!':'COPA ENCERRADA';
+  document.getElementById('placar-total').innerHTML=`<span style="color:var(--amarelo)">${tP}</span><span style="color:var(--cinza);font-size:.55em"> a </span><span style="color:var(--pink)">${tC}</span>`;
+  document.getElementById('sim-sub').textContent=sub;
+  window.scrollTo({top:0,behavior:'smooth'});
+  renderCopaLive();
+  const arts=Object.values(artilharia).sort((a,b)=>b.g-a.g).slice(0,8);
+  if(arts.length){
+    document.getElementById('art-sec').style.display='block';
+    document.querySelector('#art-sec .art-titulo').innerHTML=arts[0]?`👟 CHUTEIRA DE OURO: ${arts[0].jog.nome} (${arts[0].g} gols)`:'⚽ ARTILHARIA DA COPA';
+    document.getElementById('art-lista').innerHTML=arts.map((a,i)=>`
+      <div class="art-row">
+        <div class="art-rank ${i===0?'g1':i===1?'g2':i===2?'g3':''}">${i+1}</div>
+        <div class="art-info"><div class="art-nome">${a.jog.nome}${a.jog.r>=90?' ⭐':''}</div><div class="art-sub">${a.jog.pos}</div></div>
+        <div class="art-gols">${a.g} ⚽</div>
+      </div>`).join('');
+  }
+  setTimeout(()=>showResultado(venceu,tP,tC),600);
+}
+
+function renderTabela(times){
+  const rows=times.map((t,i)=>{
+    const sg=t.gp-t.gc;
+    return`<tr class="${i<2?'classificado':'eliminado-g'} ${t.voce?'voce':''}">
+      <td>${i<2?'✅':'❌'} ${t.n}</td><td>${t.g}</td><td>${t.v}</td><td>${t.e2}</td><td>${t.d}</td>
+      <td>${t.gp}</td><td>${t.gc}</td><td style="color:${sg>=0?'var(--amarelo)':'var(--pink)'}">${sg>0?'+':''}${sg}</td>
+      <td style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:${i<2?'var(--amarelo)':'var(--cinza)'}">${t.pts}</td>
+    </tr>`;
+  }).join('');
+  return`<div style="background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.75rem;margin:.75rem 0;">
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--cinza);letter-spacing:.1em;margin-bottom:.5rem;">TABELA DO GRUPO — Top 2 avançam</div>
+    <table class="grupo-tabela"><thead><tr><th>Time</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>PTS</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+function criarCard(p,idx){
+  const card=document.createElement('div');card.className='jogo-card';
+  card.innerHTML=`
+    <div class="jogo-fase">${p.fase}</div>
+    <div class="match-live" id="live-${idx}">
+      <div class="live-clock" id="clk-${idx}">⏱ 0'</div>
+      <div class="live-placar">
+        <div class="live-side clickable-team" style="cursor:pointer" onclick="abrirMeuTime()"><div class="live-flag">🌟</div><div class="live-nome">Seu Time 👁</div><div class="live-ano">&nbsp;</div></div>
+        <div class="live-num" id="pp-${idx}" style="color:var(--amarelo)">0</div>
+        <div class="live-x">×</div>
+        <div class="live-num" id="pc-${idx}" style="color:var(--pink)">0</div>
+        <div class="live-side dir ${WC2026_SQUADS[p.adv]?'clickable-team':''}" ${WC2026_SQUADS[p.adv]?`style="cursor:pointer" onclick="abrirSquad('${(p.adv||'').replace(/'/g,"\\'")}','${p.advE}')"`:''}><div class="live-flag">${p.advE}</div><div class="live-nome">${p.adv}${WC2026_SQUADS[p.adv]?' 👁':''}</div><div class="live-ano">${p.advAno}</div></div>
+      </div>
+      <div class="live-scorers">
+        <div class="scorers-col" id="scorers-pro-${idx}"></div>
+        <div class="scorers-col dir" id="scorers-contra-${idx}"></div>
+      </div>
+    </div>
+    <div class="ev-feed" id="tl-${idx}"></div>
+    <button class="btn-avancar" id="av-${idx}" style="display:none">▶ AVANÇAR</button>`;
+  return card;
+}
+
+// ── PARTIDA EM TEMPO REAL (~90s) ──
+async function jogarPartida(p,idx){
+  const clk=document.getElementById(`clk-${idx}`);
+  const tl=document.getElementById(`tl-${idx}`);
+  const ppEl=document.getElementById(`pp-${idx}`),pcEl=document.getElementById(`pc-${idx}`);
+  let vpp=0,vpc=0;
+
+  // Monta linha do tempo completa (gols + eventos), ordenada por minuto
+  const linha=[];
+  p.golsPro.forEach(g=>linha.push({min:g.min,extra:g.extra||0,tipo:'gol-pro',data:g}));
+  p.golsContra.forEach(g=>linha.push({min:g.min,tipo:'gol-contra',data:g}));
+  p.eventos.forEach(e=>linha.push({min:e.min,tipo:e.tipo,data:e}));
+  linha.sort((a,b)=>a.min-b.min||(a.extra||0)-(b.extra||0));
+
+  // Tempo real: 90 min simulados em ~78s + paradas nos gols
+  // ~0.85s por minuto simulado no relógio
+  const msPorMin=300;
+  let li=0;
+
+  // 1º TEMPO (1-45 + acréscimos)
+  await rodarPeriodo(clk,tl,1,45,p.acr1,'1º TEMPO',linha,()=>li,(v)=>li=v,p,idx,()=>vpp,(v)=>{vpp=v;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);},()=>vpc,(v)=>{vpc=v;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);},msPorMin);
+
+  // Intervalo
+  addEvento(tl,'',{tipo:'narr',quem:'🟦 INTERVALO',txt:'Fim do primeiro tempo. As equipes vão aos vestiários.'},'narr');
+  clk.innerHTML=`⏸ INTERVALO`;
+  await sleep(450);
+
+  // 2º TEMPO (46-90 + acréscimos)
+  await rodarPeriodo(clk,tl,46,90,p.acr2,'2º TEMPO',linha,()=>li,(v)=>li=v,p,idx,()=>vpp,(v)=>{vpp=v;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);},()=>vpc,(v)=>{vpc=v;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);},msPorMin);
+
+  // Prorrogação / pênaltis
+  const temProrro=p.golsPro.some(g=>g.min>90)||p.golsContra.some(g=>g.min>90)||p.penaltis;
+  if(temProrro){
+    addEvento(tl,'',{tipo:'narr',quem:'⏱ PRORROGAÇÃO',txt:'O jogo está empatado! Vamos para mais 30 minutos!'},'narr');
+    await sleep(450);
+    for(let m=91;m<=120;m++){
+      clk.innerHTML=`⏱ ${m}' <span style="color:#8a5cf0">PRORR</span>`;
+      let cur=linha[li];
+      while(cur&&cur.min===m){
+        aplicarLance(cur,tl);
+        if(cur.tipo==='gol-pro'){vpp++;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);tocarGol();}
+        if(cur.tipo==='gol-contra'){vpc++;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);tocarFalha();}
+        li++;cur=linha[li];await sleep(500);
+      }
+      await sleep(msPorMin*0.55);
+    }
+  }
+  if(p.penaltis){
+    addEvento(tl,'',{tipo:'narr',quem:'🥅 PÊNALTIS',txt:`Disputa por pênaltis! Placar: ${p.penaltis[0]} x ${p.penaltis[1]}. ${p.ganhou?'SEU TIME AVANÇA!':'Eliminado nas penalidades...'}`},p.ganhou?'gol-pro':'gol-contra');
+    if(p.ganhou)tocarGol();else tocarFalha();
+    await sleep(500);
+  }
+
+  // Resultado final
+  let resTxt='⏱ FIM DE JOGO';
+  if(p.penaltis)resTxt=`🏁 FIM — Pênaltis ${p.penaltis[0]}x${p.penaltis[1]}`;
+  clk.innerHTML=resTxt;
+
+  // Estatísticas + notas
+  const statsEl=document.createElement('div');
+  statsEl.innerHTML=renderStats(p);
+  tl.parentNode.insertBefore(statsEl,document.getElementById(`av-${idx}`));
+  acumularStats(p);
+  renderCopaLive();
+}
+
+async function rodarPeriodo(clk,tl,ini,fim,acr,label,linha,getLi,setLi,p,idx,getPp,setPp,getPc,setPc,msPorMin){
+  const ppEl=document.getElementById(`pp-${idx}`),pcEl=document.getElementById(`pc-${idx}`);
+  for(let m=ini;m<=fim;m++){
+    clk.innerHTML=`⏱ ${m}'`;
+    let li=getLi();let cur=linha[li];
+    while(cur&&cur.min===m&&!cur.extra){
+      aplicarLance(cur,tl);
+      if(cur.tipo==='gol-pro'){setPp(getPp()+1);tocarGol();}
+      else if(cur.tipo==='gol-contra'){setPc(getPc()+1);tocarFalha();}
+      li++;setLi(li);cur=linha[li];
+      await sleep(350);
+    }
+    await sleep(msPorMin);
+  }
+  // Acréscimos
+  for(let a=1;a<=acr;a++){
+    clk.innerHTML=`⏱ ${fim}' <span class="acresc">+${a}</span>`;
+    let li=getLi();let cur=linha[li];
+    while(cur&&((cur.min===fim&&cur.extra===a)||(cur.min===fim+a))){
+      aplicarLance(cur,tl);
+      if(cur.tipo==='gol-pro'){setPp(getPp()+1);tocarGol();}
+      else if(cur.tipo==='gol-contra'){setPc(getPc()+1);tocarFalha();}
+      li++;setLi(li);cur=linha[li];
+      await sleep(350);
+    }
+    await sleep(msPorMin*0.85);
+  }
+}
+
+function addArtilheiro(tl,lado,nome,minTxt){
+  const idx=tl.id.replace('tl-','');
+  const col=document.getElementById(`scorers-${lado}-${idx}`);
+  if(!col)return;
+  const d=document.createElement('div');
+  d.className='scorer-name';
+  // limpar nome do adversário (tirar bandeira)
+  const limpo=nome.replace(/^[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{E0000}-\u{E007F} ]+/u,'').trim()||nome;
+  d.innerHTML=`<span class="s-min">${minTxt}</span><span>${limpo}</span>`;
+  col.appendChild(d);
+}
+
+function aplicarLance(item,tl){
+  const d=item.data;
+  if(item.tipo==='gol-pro'){
+    const minTxt=d.acrescimo?`90+${d.extra}'`:d.golOuro?`${d.min}' OURO`:`${d.min}'`;
+    addEvento(tl,minTxt,{destaque:`⚽ GOOOOL DO SEU TIME! (${d.tipo})`,corpo:d.narr},'gol-pro');
+    addArtilheiro(tl,'pro',d.nome,minTxt);
+  }else if(item.tipo==='gol-contra'){
+    addEvento(tl,`${d.min}'`,{destaque:`⚽ Gol de ${d.nome} (${d.tipo})`,corpo:d.narr},'gol-contra');
+    addArtilheiro(tl,'contra',d.nome,`${d.min}'`);
+  }else if(item.tipo==='narr'){
+    addEvento(tl,'',{tipo:'narr',quem:d.quem,txt:d.txt},'narr');
+  }else{
+    addEvento(tl,item.min?`${item.min}'`:'',{txt:d.txt},'ev-'+item.tipo,item.tipo);
+  }
+}
+
+function addEvento(tl,min,obj,cls){
+  const d=document.createElement('div');
+  let classe='ev-item ';
+  if(cls==='gol-pro')classe+='ev-gol-pro';
+  else if(cls==='gol-contra')classe+='ev-gol-contra';
+  else if(cls==='narr')classe+='ev-narr';
+  else if(cls==='amarelo')classe+='ev-amarelo';
+  else if(cls==='vermelho')classe+='ev-vermelho';
+  else if(cls==='var')classe+='ev-var';
+  else if(cls==='lesao')classe+='ev-lesao';
+  else if(cls==='funny')classe+='ev-funny';
+  else if(cls==='torcida')classe+='ev-torcida';
+  else classe+='ev-torcida';
+  d.className=classe;
+  let inner=min?`<span class="ev-min">${min}</span>`:`<span class="ev-min"></span>`;
+  if(obj.destaque){inner+=`<span class="ev-txt"><span class="ev-destaque">${obj.destaque}</span>${obj.corpo}</span>`;}
+  else if(obj.quem){inner+=`<span class="ev-txt"><span class="ev-quem">${obj.quem}:</span> "${obj.txt}"</span>`;}
+  else{inner+=`<span class="ev-txt">${obj.txt}</span>`;}
+  d.innerHTML=inner;
+  tl.appendChild(d);
+  d.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function acumularStats(p){
+  copaStats.jogos++;
+  copaStats.gp+=p.pro;copaStats.gc+=p.contra;
+  copaStats.fin+=p.stats.finalizacoes[0];
+  copaStats.finAlvo+=p.stats.chutesAlvo[0];
+  copaStats.esc+=p.stats.escanteios[0];
+  copaStats.faltas+=p.stats.faltas[0];
+  copaStats.amarelos+=p.stats.cartoes[0];
+  copaStats.defesas+=p.stats.defesas[0];
+}
+
+function renderCopaLive(){
+  document.getElementById('copa-live').style.display='block';
+  // Artilharia
+  const arts=Object.values(artilharia).sort((a,b)=>b.g-a.g).slice(0,10);
+  const artHtml=arts.length?arts.map((a,i)=>`
+    <div class="art-row">
+      <div class="art-rank ${i===0?'g1':i===1?'g2':i===2?'g3':''}">${i+1}</div>
+      <div class="art-info"><div class="art-nome">${a.jog.nome}${a.jog.r>=90?' ⭐':''}</div><div class="art-sub">${a.jog.pos}</div></div>
+      <div class="art-gols">${a.g} ⚽</div>
+    </div>`).join(''):'<div style="color:var(--cinza);font-size:.75rem;padding:.5rem;text-align:center">Nenhum gol ainda</div>';
+  document.getElementById('copa-art-panel').innerHTML=artHtml;
+  // Stats acumuladas
+  const cs=copaStats;
+  const media=(v)=>cs.jogos?(v/cs.jogos).toFixed(1):'0';
+  document.getElementById('copa-stats-panel').innerHTML=`
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Jogos disputados</span><span class="copa-stat-val">${cs.jogos}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Gols marcados</span><span class="copa-stat-val">${cs.gp}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Gols sofridos</span><span class="copa-stat-val" style="color:var(--pink)">${cs.gc}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Saldo de gols</span><span class="copa-stat-val">${cs.gp-cs.gc>0?'+':''}${cs.gp-cs.gc}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Finalizações (total)</span><span class="copa-stat-val">${cs.fin}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Finalizações no alvo</span><span class="copa-stat-val">${cs.finAlvo}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Escanteios</span><span class="copa-stat-val">${cs.esc}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Faltas cometidas</span><span class="copa-stat-val">${cs.faltas}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Cartões amarelos</span><span class="copa-stat-val">${cs.amarelos}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Defesas do goleiro</span><span class="copa-stat-val">${cs.defesas}</span></div>
+    <div class="copa-stat-row"><span class="copa-stat-lbl">Média de gols/jogo</span><span class="copa-stat-val">${media(cs.gp)}</span></div>`;
+}
+
+function trocarTab(qual){
+  const ta=document.getElementById('tab-art'),ts=document.getElementById('tab-stats');
+  const pa=document.getElementById('copa-art-panel'),ps=document.getElementById('copa-stats-panel');
+  if(qual==='art'){ta.classList.add('tab-ativa');ts.classList.remove('tab-ativa');pa.style.display='block';ps.style.display='none';}
+  else{ts.classList.add('tab-ativa');ta.classList.remove('tab-ativa');ps.style.display='block';pa.style.display='none';}
+}
+
+function renderStats(p){
+  const s=p.stats;
+  const barra=(lbl,a,b,pct)=>{
+    const total=a+b||1;
+    const pa=pct!==undefined?pct:Math.round(a/total*100);
+    const pb=100-pa;
+    return`<div class="stat-line">
+      <div class="stat-vals"><span class="v-eu">${a}${lbl==='Posse de bola'?'%':''}</span><span class="stat-lbl">${lbl}</span><span class="v-adv">${b}${lbl==='Posse de bola'?'%':''}</span></div>
+      <div class="stat-bar"><div class="b-eu" style="width:${pa}%"></div><div class="b-adv" style="width:${pb}%"></div></div>
+    </div>`;
+  };
+  const notaCls=n=>n>=7.5?'nota-alta':n>=6?'nota-media':'nota-baixa';
+  const notasHtml=p.notas.map(n=>`<div class="nota-jog"><span>${n.pos} ${n.nome}${n.gols?' ⚽'.repeat(n.gols):''}</span><span class="nj-nota ${notaCls(n.nota)}">${n.nota.toFixed(1)}</span></div>`).join('');
+  return`<div class="stats-box">
+    <div class="stats-titulo">📊 ESTATÍSTICAS DA PARTIDA</div>
+    ${barra('Posse de bola',s.posse[0],s.posse[1],s.posse[0])}
+    ${barra('Finalizações',s.finalizacoes[0],s.finalizacoes[1])}
+    ${barra('Finalizações no alvo',s.chutesAlvo[0],s.chutesAlvo[1])}
+    ${barra('Escanteios',s.escanteios[0],s.escanteios[1])}
+    ${barra('Faltas',s.faltas[0],s.faltas[1])}
+    ${barra('Cartões',s.cartoes[0],s.cartoes[1])}
+    ${barra('Impedimentos',s.impedimentos[0],s.impedimentos[1])}
+    ${barra('Defesas do goleiro',s.defesas[0],s.defesas[1])}
+    <div class="mvp-row">
+      <div class="mvp-card melhor"><div class="mvp-lbl">⭐ Melhor em campo</div><div class="mvp-nome">${p.melhor.nome}</div><div class="mvp-nota">${p.melhor.nota.toFixed(1)}</div></div>
+      <div class="mvp-card pior"><div class="mvp-lbl">👎 Pior em campo</div><div class="mvp-nome">${p.pior.nome}</div><div class="mvp-nota">${p.pior.nota.toFixed(1)}</div></div>
+    </div>
+    <div style="font-family:'Space Mono',monospace;font-size:.55rem;color:var(--cinza);letter-spacing:.08em;margin:.6rem 0 .3rem;text-transform:uppercase;">Notas dos atletas</div>
+    <div class="notas-grid">${notasHtml}</div>
+  </div>`;
+}
+
+function showResultado(venceu,tP,tC){
+  const ov=document.getElementById('res-overlay');
+  const em=document.getElementById('res-emoji'),tx=document.getElementById('res-texto');
+  const sb=document.getElementById('res-sub'),btn=document.getElementById('res-btn');
+  if(venceu){
+    em.textContent='🏆';tx.textContent='CAMPEÃO MUNDIAL!';tx.style.color='var(--amarelo)';
+    sb.textContent=`${tP} gols marcados — lenda do futebol`;
+    btn.style.cssText='background:var(--amarelo);color:var(--roxo-escuro)';btn.textContent='VER RELATÓRIO';
+    tocarVitoria();
+  }else{
+    em.textContent='💀';tx.textContent='ELIMINADO...';tx.style.color='var(--pink)';
+    sb.textContent=`Sua campanha terminou. ${tP} gols marcados.`;
+    btn.style.cssText='background:var(--pink);color:white';btn.textContent='VER RELATÓRIO';
+    tocarDerrota();
+  }
+  ov.className='show';
+}
+
+function fecharOverlay(){document.getElementById('res-overlay').className='';pararMusica();}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+
+// ════════════════════════════════════════════
+//  MODO COPA DO MUNDO 2026 REAL
+// ════════════════════════════════════════════
+let wc2026State=null;
+
+function forcaMeuTime(){
+  const vs=time.filter(j=>j).map(j=>j.r);
+  let b=vs.length?vs.reduce((a,x)=>a+x,0)/vs.length:80;
+  if(estilo==='defensivo')b=b*.95+4;
+  if(estilo==='ofensivo')b=b*1.03;
+  return Math.round(b);
+}
+
+// Simula um placar entre duas forças (retorna [golsA, golsB])
+function placarEntre(fA,fB){
+  const diff=(fA-fB)/8;
+  const base=1.1+Math.max(0,diff*0.5);
+  const baseB=1.1+Math.max(0,-diff*0.5);
+  let ga=Math.max(0,Math.round(randPoisson(base)+ (Math.random()<0.12?1:0)));
+  let gb=Math.max(0,Math.round(randPoisson(baseB)));
+  return [ga,gb];
+}
+function randPoisson(lambda){
+  const L=Math.exp(-lambda);let k=0,p=1;
+  do{k++;p*=Math.random();}while(p>L);
+  return k-1;
+}
+
+
+// ════════════════════════════════════════════
+//  SIMULAÇÃO COMPLETA DO BRACKET (até o fim)
+// ════════════════════════════════════════════
+let artilhariaCopa={}; // gols de TODAS as seleções na Copa
+
+function regGolCopa(time){
+  // Credita um gol a um jogador real do time (ou ao nome do país)
+  const sq=WC2026_SQUADS[time.n];
+  let nome, pos='ATA', emoji=time.e;
+  if(sq){
+    const atk=sq.filter(j=>['ATA','MEI','MED'].includes(j.pos));
+    const jog=atk.length?sortArt(atk):sq[sq.length-1];
+    nome=jog.nome;pos=jog.pos;
+  }else{
+    nome=time.n;
+  }
+  const key=time.n+'|'+nome;
+  artilhariaCopa[key]=artilhariaCopa[key]||{nome,pos,time:time.n,emoji,g:0,r:sq?(sq.find(j=>j.nome===nome)?.r||78):time.r};
+  artilhariaCopa[key].g++;
+}
+
+// Credita os gols que VOCÊ marca à artilharia da Copa também
+function regMeusGolsCopa(golsPro){
+  golsPro.forEach(g=>{
+    const key='Seu Time|'+g.nome;
+    artilhariaCopa[key]=artilhariaCopa[key]||{nome:g.nome,pos:'',time:'Seu Time',emoji:'🌟',g:0,r:g.craque?92:80,voce:true};
+    artilhariaCopa[key].g++;
+  });
+}
+
+// Simula confronto eliminatório entre dois times (retorna vencedor e credita gols)
+function confrontoMata(a,b){
+  let [ga,gb]=placarEntre(a.r,b.r);
+  // registra gols
+  for(let i=0;i<ga;i++)regGolCopa(a);
+  for(let i=0;i<gb;i++)regGolCopa(b);
+  let vencedor,perdedor;
+  if(ga>gb){vencedor=a;perdedor=b;}
+  else if(gb>ga){vencedor=b;perdedor=a;}
+  else{
+    // pênaltis
+    vencedor=Math.random()<(a.r/(a.r+b.r))?a:b;
+    perdedor=vencedor===a?b:a;
+  }
+  return {vencedor,perdedor,ga,gb};
+}
+
+// Simula TODO o bracket a partir de uma lista de 32 classificados.
+// Retorna {campeao, vice, terceiro, quarto, caminhoMeu}
+// Se 'meuTime' for passado e ainda estiver vivo, marca onde ele caiu
+function simularBracketCompleto(classificados32, meuTimeRef, faseQueParei){
+  // Embaralha e monta chaves
+  let atual=[...classificados32].sort(()=>Math.random()-.5);
+  const fases=['RODADA DE 32','OITAVAS','QUARTAS','SEMIFINAL'];
+  let semifinalistas=null, finalistas=null;
+
+  // Ir reduzindo até sobrarem 4 (semifinalistas)
+  let rodada=atual;
+  const historico=[];
+  while(rodada.length>2){
+    const prox=[];
+    for(let i=0;i<rodada.length;i+=2){
+      const r=confrontoMata(rodada[i],rodada[i+1]);
+      prox.push(r.vencedor);
+    }
+    historico.push(rodada);
+    if(prox.length===4)semifinalistas=[...prox];
+    rodada=prox;
+  }
+  // rodada agora tem 2 = finalistas
+  finalistas=rodada;
+
+  // Semifinais: precisamos dos perdedores das semis pra disputar 3º lugar
+  // Recriar a partir dos semifinalistas (4)
+  let terceiro=null,quarto=null,campeao=null,vice=null;
+  if(semifinalistas&&semifinalistas.length===4){
+    const semi1=confrontoMata(semifinalistas[0],semifinalistas[1]);
+    const semi2=confrontoMata(semifinalistas[2],semifinalistas[3]);
+    // Final
+    const finalR=confrontoMata(semi1.vencedor,semi2.vencedor);
+    campeao=finalR.vencedor;vice=finalR.perdedor;
+    // Disputa 3º lugar
+    const terc=confrontoMata(semi1.perdedor,semi2.perdedor);
+    terceiro=terc.vencedor;quarto=terc.perdedor;
+  }else{
+    // fallback
+    const finalR=confrontoMata(finalistas[0],finalistas[1]);
+    campeao=finalR.vencedor;vice=finalR.perdedor;
+  }
+  return {campeao,vice,terceiro,quarto};
+}
+
+function simularWC2026(){
+  artilharia={};
+  artilhariaCopa={};
+  copaStats={jogos:0,gp:0,gc:0,fin:0,finAlvo:0,esc:0,faltas:0,amarelos:0,vermelhos:0,defesas:0};
+
+  // Clonar grupos reais
+  const grupos={};
+  Object.keys(WC2026.grupos).forEach(g=>{
+    grupos[g]=WC2026.grupos[g].map(t=>{
+      const sq=WC2026_SQUADS[t.n];
+      const rReal=sq?Math.round(sq.reduce((s,j)=>s+j.r,0)/sq.length):t.r;
+      return{...t,r:rReal,voce:false,pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0};
+    });
+  });
+
+  // Inserir o time dos sonhos num grupo aleatório, substituindo a 4ª seleção (mais fraca)
+  const gruposKeys=Object.keys(grupos);
+  const meuGrupo=gruposKeys[Math.floor(Math.random()*gruposKeys.length)];
+  const meuTime={n:'Seu Time dos Sonhos',e:'🌟',r:forcaMeuTime(),pais:'voce',voce:true,pts:0,gp:0,gc:0,v:0,emp:0,d:0,j:0};
+  // Substituir o time de menor rating do grupo
+  let idxFraco=0,menor=999;
+  grupos[meuGrupo].forEach((t,i)=>{if(t.r<menor){menor=t.r;idxFraco=i;}});
+  const substituido=grupos[meuGrupo][idxFraco];
+  grupos[meuGrupo][idxFraco]=meuTime;
+
+  wc2026State={grupos,meuGrupo,substituido,meuTime,classificados:[],terceiros:[]};
+
+  exibirWC2026();
+}
+
+async function exibirWC2026(){
+  const st=wc2026State;
+  document.getElementById('tela-jogo').style.display='none';
+  document.getElementById('tela-sim').style.display='block';
+  document.getElementById('sim-badge').innerHTML='';
+  document.getElementById('sim-titulo').textContent='🏆 COPA DO MUNDO 2026';
+  document.getElementById('placar-total').innerHTML='';
+  document.getElementById('sim-sub').textContent=`EUA · Canadá · México — Grupo ${st.meuGrupo}`;
+  document.getElementById('art-sec').style.display='none';
+  document.getElementById('copa-live').style.display='none';
+  const cont=document.getElementById('jogos-cont');cont.innerHTML='';
+
+  // ── FASE DE GRUPOS ──
+  cont.innerHTML=`<div class="fase-titulo">📋 FASE DE GRUPOS — GRUPO ${st.meuGrupo}</div>`;
+  cont.innerHTML+=`<div style="font-size:.72rem;color:var(--cinza);margin-bottom:.6rem;">Você assumiu a vaga de ${st.substituido.e} ${st.substituido.n} no Grupo ${st.meuGrupo}.</div>`;
+
+  const grupoTimes=st.grupos[st.meuGrupo];
+  // Round-robin: seu time joga contra os 3 do grupo (com animação)
+  const meusJogos=grupoTimes.filter(t=>!t.voce);
+  for(const adv of meusJogos){
+    const p=gerarPartidaWC('FASE DE GRUPOS — GRUPO '+st.meuGrupo,adv,0);
+    const idx=document.querySelectorAll('.jogo-card').length;
+    const card=criarCard(p,idx);cont.appendChild(card);
+    card.scrollIntoView({behavior:'smooth',block:'start'});
+    await sleep(300);
+    await jogarPartida(p,idx);
+    aplicarResultadoGrupo(st.meuTime,adv,p.pro,p.contra);
+    regMeusGolsCopa(p.golsPro);
+    for(let gi=0;gi<p.contra;gi++)regGolCopa(adv);
+    await esperarAvanco(`av-${idx}`);
+    await sleep(150);
+    acumularStats(p);renderCopaLive();
+  }
+
+  // Jogos entre os adversários do grupo (sem animação)
+  for(let i=0;i<grupoTimes.length;i++)for(let j=i+1;j<grupoTimes.length;j++){
+    const a=grupoTimes[i],b=grupoTimes[j];
+    if(a.voce||b.voce)continue;
+    const [ga,gb]=placarEntre(a.r,b.r);
+    aplicarResultadoGrupo(a,b,ga,gb);
+    for(let x=0;x<ga;x++)regGolCopa(a);for(let x=0;x<gb;x++)regGolCopa(b);
+  }
+
+  // Simular os outros 11 grupos inteiros (silencioso)
+  Object.keys(st.grupos).forEach(g=>{
+    if(g===st.meuGrupo)return;
+    const ts=st.grupos[g];
+    for(let i=0;i<ts.length;i++)for(let j=i+1;j<ts.length;j++){
+      const [ga,gb]=placarEntre(ts[i].r,ts[j].r);
+      aplicarResultadoGrupo(ts[i],ts[j],ga,gb);
+      for(let x=0;x<ga;x++)regGolCopa(ts[i]);for(let x=0;x<gb;x++)regGolCopa(ts[j]);
+    }
+  });
+
+  // Mostrar tabela do meu grupo
+  const ordenado=[...grupoTimes].sort(ordenaGrupo);
+  const tabEl=document.createElement('div');
+  tabEl.innerHTML=renderTabelaWC(ordenado,st.meuGrupo);
+  cont.appendChild(tabEl);
+  tabEl.scrollIntoView({behavior:'smooth',block:'start'});
+  await sleep(500);
+
+  // ── Classificação geral: 2 de cada grupo + 8 melhores terceiros ──
+  const primeiros=[],segundos=[],terceiros=[];
+  Object.keys(st.grupos).forEach(g=>{
+    const ord=[...st.grupos[g]].sort(ordenaGrupo);
+    primeiros.push({...ord[0],grupo:g,pos:1});
+    segundos.push({...ord[1],grupo:g,pos:2});
+    terceiros.push({...ord[2],grupo:g,pos:3});
+  });
+  terceiros.sort(ordenaGrupo);
+  const melhoresTerc=terceiros.slice(0,8);
+
+  const grupoTimesRef=st.grupos[st.meuGrupo];
+  const ordMeu=[...grupoTimesRef].sort(ordenaGrupo);
+  const minhaPos=ordMeu.findIndex(t=>t.voce)+1;
+  const classificadoGrupo = minhaPos<=2 || (minhaPos===3 && melhoresTerc.some(t=>t.voce));
+
+  // 32 classificados ao mata-mata (incluindo você se passou)
+  let classificados32=[...primeiros,...segundos,...melhoresTerc];
+
+  // Painel de classificados
+  const classEl=document.createElement('div');
+  classEl.innerHTML=`<div class="fase-titulo">✅ CLASSIFICADOS PARA O MATA-MATA (32)</div>
+    <div style="font-size:.72rem;color:${classificadoGrupo?'var(--amarelo)':'var(--pink)'};margin-bottom:.5rem;">
+    ${classificadoGrupo?`Você passou em ${minhaPos}º no Grupo ${st.meuGrupo}! 🎉`:`Você terminou em ${minhaPos}º e foi eliminado na fase de grupos. 💔 Mas a Copa continua até o fim!`}</div>`;
+  cont.appendChild(classEl);
+  classEl.scrollIntoView({behavior:'smooth',block:'start'});
+  await sleep(500);
+
+  // Estado da campanha do jogador
+  let meuStatus={vivo:classificadoGrupo, faseSaiu:classificadoGrupo?null:'FASE DE GRUPOS', titulo:''};
+
+  // ── MATA-MATA jogado pelo usuário (enquanto vivo) ──
+  const fasesMata=[
+    {nome:'RODADA DE 32',emoji:'🎯'},
+    {nome:'OITAVAS DE FINAL',emoji:'⚔️'},
+    {nome:'QUARTAS DE FINAL',emoji:'🏅'},
+    {nome:'SEMIFINAL',emoji:'🔥'},
+    {nome:'FINAL',emoji:'🏆'},
+  ];
+
+  let pool=classificados32.filter(t=>!t.voce);
+  pool.sort(()=>Math.random()-.5);
+  let faseIdx=1;
+  let cheguei='GRUPOS'; // até onde o jogador chegou
+
+  if(meuStatus.vivo){
+    for(const fase of fasesMata){
+      const adv=pool[Math.floor(Math.random()*pool.length)]||pool[0];
+      cont.innerHTML+=`<div class="fase-titulo">${fase.emoji} ${fase.nome}</div>`;
+      const p=gerarPartidaWC(fase.nome,adv,faseIdx);
+      if(p.empate){resolverMataMata(p,adv,faseIdx);}
+      const idx=document.querySelectorAll('.jogo-card').length;
+      const card=criarCard(p,idx);cont.appendChild(card);
+      card.scrollIntoView({behavior:'smooth',block:'start'});
+      await sleep(300);
+      await jogarPartida(p,idx);
+      regMeusGolsCopa(p.golsPro);
+      for(let gi=0;gi<p.contra;gi++)regGolCopa(adv);
+      await esperarAvanco(`av-${idx}`);
+      await sleep(150);
+      acumularStats(p);renderCopaLive();
+      pool=pool.filter(t=>t!==adv);
+      cheguei=fase.nome;
+      if(!p.ganhou){
+        meuStatus.vivo=false;meuStatus.faseSaiu=fase.nome;
+        // Adversário que te eliminou continua no bracket
+        break;
+      }
+      faseIdx++;
+    }
+  }
+
+  // ── Simular o RESTO do bracket silenciosamente até definir pódio ──
+  // Garante 32 times; simula bracket completo
+  const podio=simularBracketCompleto(classificados32);
+
+  // Se VOCÊ foi campeão (ganhou a final), forçar você no pódio
+  const fuiCampeao = meuStatus.vivo && cheguei==='FINAL';
+  if(fuiCampeao){
+    const meuRef=classificados32.find(t=>t.voce)||st.meuTime;
+    podio.campeao=meuRef;
+  }
+
+  // Determinar seu resultado final
+  let badge,sub,venceu=false;
+  if(fuiCampeao){
+    venceu=true;badge='🏆 CAMPEÃO DO MUNDO 2026!';sub='Você conquistou a Copa com seu time dos sonhos!';
+  }else if(!classificadoGrupo){
+    badge=`💔 ELIMINADO NA FASE DE GRUPOS`;sub=`Você terminou em ${minhaPos}º no Grupo ${st.meuGrupo}. Veja como ficou o resto da Copa abaixo.`;
+  }else{
+    const nomeF={'RODADA DE 32':'Rodada de 32','OITAVAS DE FINAL':'Oitavas','QUARTAS DE FINAL':'Quartas','SEMIFINAL':'Semifinal','FINAL':'Final'}[meuStatus.faseSaiu]||meuStatus.faseSaiu;
+    badge=`💔 ELIMINADO NAS ${meuStatus.faseSaiu}`;sub=`Sua campanha parou nas ${nomeF}. A Copa seguiu até o campeão.`;
+  }
+
+  // Renderizar PÓDIO + premiações na tela
+  const tP=copaStats.gp,tC=copaStats.gc;
+  renderPodioEPremios(podio);
+  finalizar(venceu,tP,tC,badge,sub);
+}
+
+
+// ── PÓDIO + PREMIAÇÕES DA COPA ──
+function renderPodioEPremios(podio){
+  const cont=document.getElementById('jogos-cont');
+
+  // Artilharia completa da Copa
+  const artLista=Object.values(artilhariaCopa).sort((a,b)=>b.g-a.g);
+  const artMax=artLista[0];
+
+  // Bola de Ouro (melhor jogador): maior rating entre os que mais marcaram + bônus campeão
+  const candidatos=artLista.slice(0,15).map(a=>({...a,score:a.g*2.5+a.r*0.15+(podio.campeao&&a.time===podio.campeao.n?6:0)+(a.voce?2:0)}));
+  candidatos.sort((a,b)=>b.score-a.score);
+  const bolaOuro=candidatos[0]||artMax;
+
+  // Luva de Ouro (melhor goleiro): goleiro do campeão ou vice
+  function goleiroDe(t){const sq=t&&WC2026_SQUADS[t.n];if(sq){const g=sq.find(j=>j.pos==='GOL');if(g)return{nome:g.nome,r:g.r,time:t.n,emoji:t.e};}return t?{nome:t.n+' (GOL)',r:t.r,time:t.n,emoji:t.e}:null;}
+  const luvaOuro=goleiroDe(podio.campeao)||goleiroDe(podio.vice);
+
+  // Melhor jovem: um meia/atacante jovem de destaque (simulado pelo 2º melhor artilheiro com rating alto)
+  const jovem=candidatos.find(c=>c!==bolaOuro&&['ATA','MEI'].includes(c.pos))||candidatos[1]||artMax;
+
+  const podioRow=(medal,lbl,t,cor)=>t?`
+    <div class="podio-item" style="border-color:${cor}">
+      <div class="podio-medal">${medal}</div>
+      <div class="podio-info"><div class="podio-lbl">${lbl}</div>
+      <div class="podio-time">${t.e||t.emoji||''} ${t.n||t.nome}</div></div>
+    </div>`:'';
+
+  let h=`<div class="podio-box">
+    <div class="podio-titulo">🏆 PÓDIO DA COPA DO MUNDO 2026</div>
+    ${podioRow('🥇','CAMPEÃO',podio.campeao,'gold')}
+    ${podioRow('🥈','VICE-CAMPEÃO',podio.vice,'silver')}
+    ${podioRow('🥉','TERCEIRO LUGAR',podio.terceiro,'#cd7f32')}
+    ${podioRow('4️⃣','QUARTO LUGAR',podio.quarto,'rgba(255,255,255,.25)')}
+  </div>`;
+
+  // Premiações individuais
+  h+=`<div class="premios-box">
+    <div class="podio-titulo">⭐ PREMIAÇÕES INDIVIDUAIS</div>
+    <div class="premio-row">
+      <div class="premio-ico">👟</div>
+      <div class="premio-info"><div class="premio-lbl">Chuteira de Ouro (Artilheiro)</div>
+      <div class="premio-nome">${artMax?`${artMax.emoji} ${artMax.nome} — ${artMax.g} gols`:'—'}</div></div>
+    </div>
+    <div class="premio-row">
+      <div class="premio-ico">🏅</div>
+      <div class="premio-info"><div class="premio-lbl">Bola de Ouro (Melhor Jogador)</div>
+      <div class="premio-nome">${bolaOuro?`${bolaOuro.emoji} ${bolaOuro.nome}`:'—'}</div></div>
+    </div>
+    <div class="premio-row">
+      <div class="premio-ico">🧤</div>
+      <div class="premio-info"><div class="premio-lbl">Luva de Ouro (Melhor Goleiro)</div>
+      <div class="premio-nome">${luvaOuro?`${luvaOuro.emoji} ${luvaOuro.nome}`:'—'}</div></div>
+    </div>
+    <div class="premio-row">
+      <div class="premio-ico">🌟</div>
+      <div class="premio-info"><div class="premio-lbl">Melhor Jovem</div>
+      <div class="premio-nome">${jovem?`${jovem.emoji} ${jovem.nome}`:'—'}</div></div>
+    </div>
+  </div>`;
+
+  // Artilharia completa (top 15)
+  h+=`<div class="art-copa-box">
+    <div class="podio-titulo">⚽ ARTILHARIA DA COPA</div>
+    ${artLista.slice(0,15).map((a,i)=>`
+      <div class="art-row">
+        <div class="art-rank ${i===0?'g1':i===1?'g2':i===2?'g3':''}">${i+1}</div>
+        <div class="art-info"><div class="art-nome">${a.voce?'🌟 ':a.emoji+' '}${a.nome}</div><div class="art-sub">${a.time}${a.pos?' · '+a.pos:''}</div></div>
+        <div class="art-gols">${a.g} ⚽</div>
+      </div>`).join('')}
+  </div>`;
+
+  const podioEl=document.createElement('div');
+  podioEl.innerHTML=h;
+  cont.appendChild(podioEl);
+}
+
+function gerarPartidaWC(fase,adv,faseIdx){
+  // Igual gerarPartida mas adversário tem força fixa (rating real 2026)
+  faseIdx=faseIdx||0;
+  const forca=forcaMeuTime();
+  const advForca=adv.r+faseIdx*0.8;
+  const diff=(forca-advForca)/9;
+  const eB=estilo==='ofensivo'?1.18:estilo==='defensivo'?.85:1;
+  const dB=estilo==='defensivo'?.7:estilo==='ofensivo'?.9:.8;
+
+  let pro=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,diff*0.6))*eB)));
+  let contra=Math.max(0,Math.round(randPoisson((1.2+Math.max(0,-diff*0.6))*(2-dB)*0.6)));
+  if(Math.random()<0.10)contra+=1;
+  if(Math.random()<0.10)pro+=1;
+
+  const atkList=atks();
+  const golsPro=mins(pro,2,90).map(min=>{
+    const art=sortArt(atkList);const tipo=rnd(GOL_TIPOS);
+    artilharia[art.nome]=(artilharia[art.nome]||{jog:art,g:0});artilharia[art.nome].g++;
+    return{min,nome:art.nome,craque:art.r>=90,tipo:tipo.t,narr:tipo.d(art.nome)};
+  });
+  // Elenco real do adversário (se disponível): atacantes/meias marcam os gols
+  const advSquad=WC2026_SQUADS[adv.n]||null;
+  const advAtacantes=advSquad?advSquad.filter(j=>['ATA','MEI','MED'].includes(j.pos)):null;
+  const golsContra=mins(contra,2,90).filter(m=>!golsPro.find(g=>g.min===m)).map(min=>{
+    const tipo=rnd(GOL_CONTRA_TIPOS);
+    let autor=`${adv.e} ${adv.n}`;
+    if(advAtacantes&&advAtacantes.length){
+      const jog=sortArt(advAtacantes);
+      autor=`${adv.e} ${jog.nome}`;
+    }
+    return{min,nome:autor,adv:true,tipo:tipo.t,narr:tipo.d('seu time',adv.n)};
+  });
+
+  // Eventos (reaproveita a mesma geração)
+  const eventos=[];
+  const meus=time.filter(j=>j);
+  const nr=()=>rnd(meus)?.nome||'um jogador';
+  mins(Math.floor(Math.random()*3),10,88).forEach(min=>eventos.push({min,tipo:'amarelo',txt:rnd(EV_AMARELO)(nr())}));
+  if(chance(0.18))mins(1,25,90).forEach(min=>eventos.push({min,tipo:'vermelho',txt:rnd(EV_VERMELHO)(nr())}));
+  if(chance(0.30))mins(1,15,90).forEach(min=>eventos.push({min,tipo:'var',txt:rnd(EV_VAR)()}));
+  if(chance(0.35))mins(1,12,85).forEach(min=>eventos.push({min,tipo:'lesao',txt:rnd(EV_LESAO)(nr())}));
+  if(chance(0.45))mins(1,5,88).forEach(min=>eventos.push({min,tipo:'funny',txt:rnd(EV_FUNNY)()}));
+  mins(1+Math.floor(Math.random()*2),8,88).forEach(min=>eventos.push({min,tipo:'torcida',txt:rnd(EV_TORCIDA)()}));
+  if(chance(0.5)){const n=rnd(EV_NARR);mins(1,20,85).forEach(min=>eventos.push({min,tipo:'narr',quem:n[0],txt:n[1]}));}
+
+  const acr1=1+Math.floor(Math.random()*4),acr2=2+Math.floor(Math.random()*7);
+
+  const posseEu=Math.round(45+diff*4+(estilo==='ofensivo'?6:estilo==='defensivo'?-8:0)+(Math.random()*8-4));
+  const posse=Math.max(30,Math.min(72,posseEu));
+  const stats={posse:[posse,100-posse],finalizacoes:[pro*2+5+Math.floor(Math.random()*7),contra*2+3+Math.floor(Math.random()*6)],
+    chutesAlvo:[pro+1+Math.floor(Math.random()*4),contra+1+Math.floor(Math.random()*3)],
+    escanteios:[3+Math.floor(Math.random()*7),1+Math.floor(Math.random()*5)],
+    faltas:[6+Math.floor(Math.random()*9),8+Math.floor(Math.random()*9)],
+    cartoes:[Math.floor(Math.random()*3),Math.floor(Math.random()*3)],
+    impedimentos:[Math.floor(Math.random()*5),Math.floor(Math.random()*5)],
+    defesas:[contra+Math.floor(Math.random()*4),pro+Math.floor(Math.random()*4)]};
+
+  const notas=meus.map(j=>{
+    let nota=5.8+(j.r-78)*0.07+Math.random()*1.5-0.5;
+    const gj=golsPro.filter(g=>g.nome===j.nome).length;nota+=gj*1.1;
+    if(pro>contra)nota+=0.3;else if(pro<contra)nota-=0.4;
+    nota=Math.max(3.5,Math.min(10,nota));
+    return{nome:j.nome,pos:j.pos,nota:Math.round(nota*10)/10,gols:gj};
+  }).sort((a,b)=>b.nota-a.nota);
+
+  return{fase,adv:adv.n,advE:adv.e,advAno:'2026',pro,contra,ganhou:pro>contra,empate:pro===contra,
+    golsPro,golsContra,eventos,acr1,acr2,stats,notas,melhor:notas[0],pior:notas[notas.length-1],faseIdx};
+}
+
+function aplicarResultadoGrupo(a,b,ga,gb){
+  a.j++;b.j++;a.gp+=ga;a.gc+=gb;b.gp+=gb;b.gc+=ga;
+  if(ga>gb){a.v++;a.pts+=3;b.d++;}
+  else if(ga===gb){a.emp++;a.pts++;b.emp++;b.pts++;}
+  else{b.v++;b.pts+=3;a.d++;}
+}
+
+function ordenaGrupo(a,b){return b.pts-a.pts||(b.gp-b.gc)-(a.gp-a.gc)||b.gp-a.gp;}
+
+
+// ── MODAL DE ESCALAÇÃO ──
+
+function abrirMeuTime(){
+  const sq=time.filter(j=>j);
+  if(!sq.length)return;
+  const rMedio=Math.round(sq.reduce((s,j)=>s+j.r,0)/sq.length);
+  document.getElementById('squad-header').innerHTML='🌟 Seu Time dos Sonhos';
+  document.getElementById('squad-rating').textContent=`Overall ${rMedio} · ${sq.length} jogadores · ${getF().nome}`;
+  const ordem=['GOL','LAT','ZAG','MED','MEI','ATA'];
+  const lbls={GOL:'Goleiro',LAT:'Laterais',ZAG:'Zagueiros',MED:'Volantes',MEI:'Meias',ATA:'Atacantes'};
+  let h='';
+  ordem.forEach(pos=>{
+    const js=sq.filter(j=>j.pos===pos);
+    if(!js.length)return;
+    h+=`<div class="squad-pos-group"><div class="squad-pos-lbl">${lbls[pos]}</div>`;
+    js.sort((a,b)=>b.r-a.r).forEach(j=>{
+      const cr=j.r>=90;
+      h+=`<div class="squad-player ${cr?'craque':''}"><div class="squad-pname">${cr?'⭐':''}${j.nome}<span class="squad-ppos">${j.pos}</span></div><div class="squad-prat">${j.r}</div></div>`;
+    });
+    h+='</div>';
+  });
+  document.getElementById('squad-list').innerHTML=h;
+  document.getElementById('squad-modal').classList.add('show');
+}
+
+function abrirSquad(nomeSel,emoji){
+  const sq=WC2026_SQUADS[nomeSel];
+  if(!sq){
+    // Sem elenco real cadastrado
+    document.getElementById('squad-header').innerHTML=`${emoji||''} ${nomeSel}`;
+    document.getElementById('squad-rating').textContent='Escalação detalhada ainda não cadastrada para esta seleção.';
+    document.getElementById('squad-list').innerHTML='<div style="color:var(--cinza);font-size:.78rem;padding:1rem;text-align:center">Em breve! Os elencos reais estão sendo adicionados em lotes.</div>';
+    document.getElementById('squad-modal').classList.add('show');
+    return;
+  }
+  const rMedio=Math.round(sq.reduce((s,j)=>s+j.r,0)/sq.length);
+  document.getElementById('squad-header').innerHTML=`${emoji||''} ${nomeSel}`;
+  document.getElementById('squad-rating').textContent=`Overall ${rMedio} · ${sq.length} titulares`;
+
+  // Agrupar por linha
+  const ordem=['GOL','LAT','ZAG','MED','MEI','ATA'];
+  const lbls={GOL:'Goleiro',LAT:'Laterais',ZAG:'Zagueiros',MED:'Volantes',MEI:'Meias',ATA:'Atacantes'};
+  let h='';
+  ordem.forEach(pos=>{
+    const js=sq.filter(j=>j.pos===pos);
+    if(!js.length)return;
+    h+=`<div class="squad-pos-group"><div class="squad-pos-lbl">${lbls[pos]}</div>`;
+    js.sort((a,b)=>b.r-a.r).forEach(j=>{
+      const cr=j.r>=90;
+      h+=`<div class="squad-player ${cr?'craque':''}">
+        <div class="squad-pname">${cr?'⭐':''}${j.nome}<span class="squad-ppos">${j.pos}</span></div>
+        <div class="squad-prat">${j.r}</div>
+      </div>`;
+    });
+    h+='</div>';
+  });
+  document.getElementById('squad-list').innerHTML=h;
+  document.getElementById('squad-modal').classList.add('show');
+}
+
+function fecharSquad(ev){
+  if(ev&&ev.target&&ev.target.id!=='squad-modal'&&!ev.target.classList.contains('squad-close'))return;
+  document.getElementById('squad-modal').classList.remove('show');
+}
+
+function renderTabelaWC(times,grupo){
+  const rows=times.map((t,i)=>{
+    const sg=t.gp-t.gc;
+    return`<tr class="${i<2?'classificado':i===2?'':'eliminado-g'} ${t.voce?'voce':''}">
+      <td ${t.voce?'':`class="clickable-team" style="cursor:pointer" onclick="abrirSquad('${t.n.replace(/'/g,"\\'")}','${t.e}')"`}>${i<2?'✅':i===2?'➕':'❌'} ${t.e} ${t.n}${t.voce?'':' 👁'}</td><td>${t.j}</td><td>${t.v}</td><td>${t.emp}</td><td>${t.d}</td>
+      <td>${t.gp}</td><td>${t.gc}</td><td style="color:${sg>=0?'var(--amarelo)':'var(--pink)'}">${sg>0?'+':''}${sg}</td>
+      <td style="font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:${i<2?'var(--amarelo)':'var(--cinza)'}">${t.pts}</td>
+    </tr>`;
+  }).join('');
+  return`<div style="background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.75rem;margin:.75rem 0;">
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;color:var(--cinza);letter-spacing:.1em;margin-bottom:.5rem;">GRUPO ${grupo} — Top 2 ✅ + 3º pode avançar ➕</div>
+    <table class="grupo-tabela"><thead><tr><th>Seleção</th><th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>PTS</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+function reiniciar(){pararMusica();document.getElementById('tela-sim').style.display='none';document.getElementById('tela-inicio').style.display='flex';}
+</script>
+</body>
+</html>
