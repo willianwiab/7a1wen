@@ -134,6 +134,49 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .tab-btn.tab-ativa{border-color:var(--amarelo);color:var(--amarelo);background:rgba(200,255,0,.08);}
 .copa-stat-row{display:flex;justify-content:space-between;padding:.3rem .2rem;border-bottom:1px solid rgba(255,255,255,.04);font-size:.74rem;}
 .copa-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--amarelo);}
+
+/* CAMPO DE FUTEBOL */
+.campo{background:linear-gradient(160deg,#1a5c2e,#0d3d1c);border:2px solid rgba(255,255,255,.15);border-radius:12px;padding:.8rem .5rem;margin-bottom:.6rem;position:relative;overflow:hidden;}
+.campo::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,.2);}
+.campo::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border:1px solid rgba(255,255,255,.2);border-radius:50%;}
+.campo-linha{display:flex;justify-content:center;gap:.4rem;margin:.45rem 0;position:relative;z-index:1;flex-wrap:wrap;}
+.pos-slot{width:52px;display:flex;flex-direction:column;align-items:center;}
+.pos-bola{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;border:2px dashed rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:rgba(255,255,255,.5);transition:all .2s;}
+.pos-slot.filled .pos-bola{border-style:solid;border-color:var(--amarelo);background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;box-shadow:0 0 12px rgba(200,255,0,.4);}
+.pos-lbl{font-family:'Space Mono',monospace;font-size:.5rem;color:rgba(255,255,255,.7);margin-top:.2rem;letter-spacing:.05em;}
+.pos-nome{font-size:.52rem;color:#fff;font-weight:600;margin-top:.05rem;text-align:center;line-height:1;max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.pos-slot.filled .pos-lbl{color:var(--amarelo);}
+
+.dados-row{display:flex;gap:1rem;justify-content:center;align-items:center;}
+.dado-dourado{background:linear-gradient(135deg,#ffd700,#ffaa00)!important;color:#5a3d00;position:relative;box-shadow:0 8px 30px rgba(255,200,0,.5)!important;}
+.dado-dourado .dourado-badge{position:absolute;top:-6px;right:-6px;background:#fff;color:#ffaa00;border-radius:50%;width:22px;height:22px;font-size:.8rem;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
+.dado-dourado.usado{opacity:.3;pointer-events:none;filter:grayscale(1);}
+.jcard-dourado{border-color:#ffd700!important;background:rgba(255,215,0,.1)!important;}
+.jcard-dourado .jcard-rat{color:#ffd700!important;}
+
+#alerta-overlay{display:none;position:fixed;inset:0;background:rgba(10,0,25,.92);z-index:700;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px);}
+#alerta-overlay.show{display:flex;animation:fadeIn .3s;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.alerta-box{background:linear-gradient(160deg,var(--roxo-mid),var(--roxo-escuro));border:2px solid var(--amarelo);border-radius:18px;padding:2rem 1.5rem;max-width:380px;width:100%;text-align:center;position:relative;box-shadow:0 0 60px rgba(200,255,0,.25);animation:popIn .4s cubic-bezier(.18,.89,.32,1.28);}
+.alerta-box.derrota{border-color:var(--pink);box-shadow:0 0 60px rgba(212,0,106,.3);}
+.alerta-box.campeao{border-color:#ffd700;box-shadow:0 0 80px rgba(255,215,0,.4);}
+@keyframes popIn{from{transform:scale(.7);opacity:0}to{transform:scale(1);opacity:1}}
+.alerta-emoji{font-size:4rem;line-height:1;margin-bottom:.5rem;animation:bounce 1s ease infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.alerta-titulo{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;line-height:1;letter-spacing:.03em;color:var(--branco);margin-bottom:.5rem;}
+.alerta-sub{font-size:.85rem;color:var(--cinza);line-height:1.4;margin-bottom:1.3rem;}
+.alerta-btn{padding:.8rem 2rem;border:none;border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;letter-spacing:.05em;cursor:pointer;background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;}
+
+.btn-pular{display:block;width:100%;margin-top:.7rem;padding:.6rem;border:1px dashed var(--cinza);border-radius:6px;background:transparent;color:var(--cinza);font-family:'Space Mono',monospace;font-size:.7rem;cursor:pointer;transition:all .18s;}
+.btn-pular:hover{border-color:var(--pink);color:var(--pink);}
+.btn-pular.usado{display:none;}
+
+.campeao-share{background:linear-gradient(160deg,rgba(255,215,0,.12),rgba(40,12,70,.6));border:2px solid #FFD700;border-radius:14px;padding:1rem;margin:.8rem 0;text-align:center;}
+.campeao-share-titulo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:#FFD700;letter-spacing:.04em;margin-bottom:.8rem;}
+#card-preview{margin-bottom:.8rem;}
+.campeao-btns{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;}
+.btn-share{padding:.7rem 1.4rem;border:none;border-radius:8px;font-family:'Bebas Neue',sans-serif;font-size:1.2rem;letter-spacing:.04em;cursor:pointer;background:linear-gradient(135deg,#FFD700,#ffaa00);color:#5a3d00;}
+.btn-share.alt{background:linear-gradient(135deg,var(--pink),var(--roxo));color:#fff;}
 </style>
 </head>
 <body>
@@ -163,18 +206,22 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
       <button class="btn-voltar" onclick="location.reload()">↺ Reiniciar</button>
     </div>
     <div class="sorteio-zona">
-      <div class="dado" id="dado" onclick="rolarDado()">🎲</div>
+      <div class="dados-row">
+        <div class="dado" id="dado" onclick="rolarDado()">🎲</div>
+        <div class="dado dado-dourado" id="dado-dourado" onclick="rolarDadoDourado()">🎲<span class="dourado-badge">★</span></div>
+      </div>
       <div class="sort-info">
         <div class="sort-pais" id="sort-pais">Toque no dado</div>
-        <div class="sort-hint" id="sort-hint">para sortear uma seleção</div>
+        <div class="sort-hint" id="sort-hint">🎲 normal: seleção aleatória · 🥇 dourado: craque 90+ (1 vez)</div>
       </div>
     </div>
     <div id="elenco-zona" style="display:none">
       <div class="elenco-titulo" id="elenco-titulo"></div>
       <div class="elenco-grid" id="elenco-grid"></div>
+      <button class="btn-pular" id="btn-pular" onclick="pularSelecao()">⏭️ Pular esta seleção (1 vez disponível)</button>
     </div>
     <div class="meu-time-barra">
-      <div class="time-slots" id="time-slots"></div>
+      <div class="campo" id="campo-time"></div>
       <div class="barra-info" id="barra-info">Monte seu time: 0/11 jogadores</div>
       <button class="btn-confirmar" id="btn-confirmar" onclick="confirmarTime()">⚽ INICIAR COPA</button>
     </div>
@@ -200,6 +247,16 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
     </div>
     <div id="jogos-cont"></div>
     <button class="btn-novo" onclick="location.reload()">🎲 JOGAR NOVAMENTE</button>
+  </div>
+</div>
+
+<!-- ALERTA BONITO -->
+<div id="alerta-overlay" onclick="fecharAlerta(event)">
+  <div class="alerta-box" id="alerta-box">
+    <div class="alerta-emoji" id="alerta-emoji">🏆</div>
+    <div class="alerta-titulo" id="alerta-titulo"></div>
+    <div class="alerta-sub" id="alerta-sub"></div>
+    <button class="alerta-btn" onclick="fecharAlerta()">Continuar</button>
   </div>
 </div>
 
@@ -251,7 +308,9 @@ async function carregarDados(){
     snap.forEach(d => {
       const x = d.data();
       // formato esperado: {nome, e (emoji), r (overall), j: [{n,p,r}]}
-      wc[x.nome] = { e: x.e, r: x.r, j: x.j };
+      // Normaliza: jogadores podem vir com {n,p,r}; o jogo usa {n,pos,r}
+      const jogadores = (x.j||[]).map(p => ({ n: p.n, pos: p.pos||p.p, r: p.r }));
+      wc[x.nome] = { e: x.e, r: x.r, j: jogadores };
     });
     window.WC = wc;
 
@@ -320,6 +379,23 @@ function tocarDado(){for(let i=0;i<5;i++)setTimeout(()=>beep(200+Math.random()*3
 function tocarGol(){beep(523,.15,.12);setTimeout(()=>beep(659,.15,.12),120);setTimeout(()=>beep(784,.3,.12),240);}
 function tocarFalha(){beep(180,.3,.1,'sawtooth');}
 function tocarSelecao(){beep(440,.1,.1);setTimeout(()=>beep(660,.15,.1),100);}
+function tocarDadoDourado(){for(let i=0;i<6;i++)setTimeout(()=>beep(400+i*100,.07,.09,'triangle'),i*70);}
+function tocarDourado(){beep(659,.12,.13,'triangle');setTimeout(()=>beep(784,.12,.13,'triangle'),120);setTimeout(()=>beep(988,.12,.13,'triangle'),240);setTimeout(()=>beep(1319,.35,.13,'triangle'),360);}
+// Melodias de resultado
+function tocarVitoria(){const n=[523,659,784,1047];n.forEach((f,i)=>setTimeout(()=>beep(f,.2,.12,'square'),i*140));}
+function tocarDerrota(){const n=[392,349,311,262];n.forEach((f,i)=>setTimeout(()=>beep(f,.28,.1,'sawtooth'),i*170));}
+function tocarCampeao(){
+  // fanfarra de campeão
+  const seq=[[523,.15],[523,.15],[523,.15],[659,.4],[784,.2],[659,.2],[784,.6]];
+  let t=0;seq.forEach(([f,d])=>{setTimeout(()=>beep(f,d,.14,'square'),t);t+=d*1000;});
+  setTimeout(()=>{[1047,1319,1568].forEach((f,i)=>setTimeout(()=>beep(f,.5,.13,'triangle'),i*120));},t);
+}
+function tocarEliminado(){
+  const seq=[[440,.3],[415,.3],[392,.3],[349,.6]];
+  let t=0;seq.forEach(([f,d])=>{setTimeout(()=>beep(f,d,.11,'sawtooth'),t);t+=d*900;});
+}
+function tocarApito(){beep(2000,.15,.08,'square');setTimeout(()=>beep(2000,.15,.08,'square'),180);setTimeout(()=>beep(2000,.35,.08,'square'),360);}
+function tocarCartao(){beep(300,.4,.08,'sawtooth');}
 
 // ═══════════ UTILS ═══════════
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
@@ -341,50 +417,104 @@ function iniciar(){
   renderSlots();
 }
 
+let dadoDouradoUsado=false;
+let pulosRestantes=1; // pode pular 1 seleção em toda a montagem
+let escolhaPendente=false; // trava o dado até escolher/pular
+let modoDourado=false; // se true, só mostra craques 90+
+
 function rolarDado(){
   if(meuTime.length>=11)return;
-  const disp=nomesSel().filter(n=>!usadas.includes(n));
-  if(!disp.length){usadas=[];}
+  if(escolhaPendente){
+    // Já tem uma seleção sorteada esperando — não deixa rolar de novo
+    document.getElementById('sort-hint').textContent='⚠️ Escolha um jogador desta seleção antes de rolar de novo!';
+    document.getElementById('elenco-zona').scrollIntoView({behavior:'smooth',block:'center'});
+    beep(200,.2,.1,'sawtooth');
+    return;
+  }
   const pool=nomesSel().filter(n=>!usadas.includes(n));
+  if(!pool.length){usadas=[];}
+  const pool2=nomesSel().filter(n=>!usadas.includes(n));
   const dado=document.getElementById('dado');
   dado.classList.add('rolling');tocarDado();
-  let ticks=0;
-  const iv=setInterval(()=>{
-    const tmp=rnd(pool);
-    document.getElementById('sort-pais').innerHTML=`${WC[tmp].e} ${tmp}`;
-    ticks++;
-    if(ticks>8){
-      clearInterval(iv);dado.classList.remove('rolling');
-      selSorteada=rnd(pool);usadas.push(selSorteada);
-      tocarSelecao();
-      mostrarElenco();
-    }
-  },70);
+  modoDourado=false;
+  setTimeout(()=>{
+    dado.classList.remove('rolling');
+    selSorteada=rnd(pool2);usadas.push(selSorteada);
+    escolhaPendente=true; // trava até escolher ou pular
+    tocarSelecao();
+    mostrarElenco();
+  },500);
+}
+
+function rolarDadoDourado(){
+  if(meuTime.length>=11||dadoDouradoUsado)return;
+  if(escolhaPendente){document.getElementById('sort-hint').textContent='⚠️ Escolha um jogador da seleção atual primeiro!';beep(200,.2,.1,'sawtooth');return;}
+  const dado=document.getElementById('dado-dourado');
+  dado.classList.add('rolling');tocarDadoDourado();
+  modoDourado=true;
+  // Sorteia uma seleção que TENHA craque 90+
+  const comCraque=nomesSel().filter(n=>WC[n].j.some(j=>j.r>=90));
+  const pool=comCraque.length?comCraque:nomesSel();
+  setTimeout(()=>{
+    dado.classList.remove('rolling');
+    selSorteada=rnd(pool);
+    dadoDouradoUsado=true;
+    dado.classList.add('usado');
+    escolhaPendente=true;
+    tocarDourado();
+    mostrarElenco();
+  },500);
 }
 
 function mostrarElenco(){
   const s=WC[selSorteada];
-  document.getElementById('sort-pais').innerHTML=`${s.e} ${selSorteada}`;
-  document.getElementById('sort-hint').textContent='Escolha 1 jogador para seu time';
+  const dourado=modoDourado;
+  document.getElementById('sort-pais').innerHTML=`${dourado?'🥇 ':''}${s.e} ${selSorteada}`;
+  document.getElementById('sort-hint').textContent=dourado?'⭐ Escolha um CRAQUE (rating 90+)':'Escolha 1 jogador para seu time';
   document.getElementById('elenco-zona').style.display='block';
-  document.getElementById('elenco-titulo').innerHTML=`${s.e} ${selSorteada} — overall ${s.r} · escolha 1 jogador`;
+  // Botão pular: só se ainda tem pulo e não é dado dourado
+  const btnP=document.getElementById('btn-pular');
+  if(btnP){
+    if(pulosRestantes>0&&!dourado){btnP.style.display='block';btnP.textContent='⏭️ Pular esta seleção (1 vez disponível)';}
+    else{btnP.style.display='none';}
+  }
+  document.getElementById('elenco-titulo').innerHTML=`${dourado?'🥇 ':''}${s.e} ${selSorteada} — ${dourado?'apenas craques 90+':'overall '+s.r+' · escolha 1 jogador'}`;
   const grid=document.getElementById('elenco-grid');
-  // Quais posições ainda faltam
   const slots=getF().slots.slice();
   meuTime.forEach(j=>{const i=slots.indexOf(j.pos);if(i>=0)slots.splice(i,1);});
   grid.innerHTML='';
-  s.j.forEach((j,idx)=>{
+  // No modo dourado, filtrar só craques 90+
+  let lista=s.j;
+  if(dourado)lista=s.j.filter(j=>j.r>=90);
+  if(dourado&&!lista.length){
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--cinza);font-size:.8rem;padding:1rem">Esta seleção não tem craque 90+. Role o dado dourado de novo.</div>';
+    document.getElementById('dado-dourado').classList.remove('usado');
+    dadoDouradoUsado=false;
+    return;
+  }
+  lista.forEach((j)=>{
     const podeEntrar=slots.includes(j.pos);
     const d=document.createElement('div');
-    d.className='jcard'+(podeEntrar?'':' disabled');
+    d.className='jcard'+(podeEntrar?'':' disabled')+(dourado?' jcard-dourado':'');
     d.innerHTML=`${j.r>=88?'<span class="jcard-star">⭐</span>':''}<div class="jcard-pos">${j.pos}</div><div class="jcard-nome">${j.n}</div><div class="jcard-rat">${j.r}</div>`;
     if(podeEntrar)d.onclick=()=>escolherJogador(j);
     grid.appendChild(d);
   });
 }
 
+function pularSelecao(){
+  if(pulosRestantes<=0||!escolhaPendente)return;
+  pulosRestantes--;
+  escolhaPendente=false;
+  document.getElementById('elenco-zona').style.display='none';
+  document.getElementById('sort-pais').textContent='Pulou! Toque no dado';
+  document.getElementById('sort-hint').textContent='Você usou seu único pulo. Agora escolha um jogador de cada seleção.';
+  beep(300,.15,.1,'square');
+}
+
 function escolherJogador(j){
   if(meuTime.length>=11)return;
+  escolhaPendente=false;
   meuTime.push({...j,sel:selSorteada,emoji:WC[selSorteada].e});
   beep(700,.12,.12);
   renderSlots();
@@ -399,23 +529,41 @@ function escolherJogador(j){
 
 function renderSlots(){
   const slots=getF().slots;
-  const cont=document.getElementById('time-slots');
-  // Ordenar meuTime por slot
-  const usados=[...meuTime];
+  const cont=document.getElementById('campo-time');
   cont.innerHTML='';
-  slots.forEach(pos=>{
-    const idx=usados.findIndex(j=>j.pos===pos);
-    const d=document.createElement('div');
-    if(idx>=0){
-      const j=usados.splice(idx,1)[0];
-      d.className='slot filled';
-      d.innerHTML=`<span class="slot-rat">${j.r}</span>`;
-      d.title=`${j.n} (${j.sel})`;
-    }else{
-      d.className='slot';
-      d.textContent=pos;
+  // Agrupar slots por linha do campo (de cima/ataque para baixo/gol)
+  const linhas=[
+    {pos:'ATA',lbl:'ATA'},
+    {pos:'MEI',lbl:'MEI'},
+    {pos:'MED',lbl:'MED'},
+    {pos:'LAT',lbl:'LAT'},
+    {pos:'ZAG',lbl:'ZAG'},
+    {pos:'GOL',lbl:'GOL'},
+  ];
+  // contar quantos slots de cada posição a formação pede
+  const cont_pos={};
+  slots.forEach(p=>cont_pos[p]=(cont_pos[p]||0)+1);
+  // jogadores disponíveis por posição (cópia)
+  const disp=[...meuTime];
+  linhas.forEach(L=>{
+    const qtd=cont_pos[L.pos]||0;
+    if(!qtd)return;
+    const linhaEl=document.createElement('div');
+    linhaEl.className='campo-linha';
+    for(let i=0;i<qtd;i++){
+      const idx=disp.findIndex(j=>j.pos===L.pos);
+      const slot=document.createElement('div');
+      slot.className='pos-slot';
+      if(idx>=0){
+        const j=disp.splice(idx,1)[0];
+        slot.className+=' filled';
+        slot.innerHTML=`<div class="pos-bola">${j.r}</div><div class="pos-lbl">${L.lbl}</div><div class="pos-nome">${j.n}</div>`;
+      }else{
+        slot.innerHTML=`<div class="pos-bola">+</div><div class="pos-lbl">${L.lbl}</div>`;
+      }
+      linhaEl.appendChild(slot);
     }
-    cont.appendChild(d);
+    cont.appendChild(linhaEl);
   });
   document.getElementById('barra-info').textContent=`Monte seu time: ${meuTime.length}/11 jogadores · ${getF().nome}`;
 }
@@ -551,6 +699,8 @@ async function simularCopa(){
     ${passou?`Você passou em ${minhaPos}º no Grupo ${meuGrupo}! 🎉`:`Você caiu na fase de grupos (${minhaPos}º). Mas a Copa segue até o fim! 💔`}</div>`;
   cont.appendChild(ce);ce.scrollIntoView({behavior:'smooth',block:'start'});
   await sleep(400);
+  if(passou){tocarVitoria();await mostrarAlerta('🎉','CLASSIFICADO!',`Você passou em ${minhaPos}º no Grupo ${meuGrupo} e está no mata-mata!`,'');}
+  else{tocarDerrota();await mostrarAlerta('💔','ELIMINADO NA FASE DE GRUPOS',`Você terminou em ${minhaPos}º no Grupo ${meuGrupo}. Mas veja como termina a Copa!`,'derrota');}
 
   // ── MATA-MATA jogado por você (enquanto vivo) ──
   const fases=['RODADA DE 32','OITAVAS DE FINAL','QUARTAS DE FINAL','SEMIFINAL','FINAL'];
@@ -570,6 +720,11 @@ async function simularCopa(){
       regMeusGols(p.golsPro);
       for(let i=0;i<p.contra;i++)regGolCopa(adv.n);
       acumular(p);renderCopaLive();
+      // Som + alerta de vitória/derrota da partida (exceto a final, que tem alerta de Copa)
+      if(fase!=='FINAL'){
+        if(p.ganhou){tocarVitoria();await mostrarAlerta('✅','VITÓRIA!',`Você venceu ${adv.e} ${adv.n} por ${p.pro}×${p.contra} e avançou nas ${fase.toLowerCase()}!`,'');}
+        else{tocarDerrota();await mostrarAlerta('❌','DERROTA',`${adv.e} ${adv.n} venceu por ${p.contra}×${p.pro}. Fim da sua campanha nas ${fase.toLowerCase()}.`,'derrota');}
+      }
       await esperarAvanco(idx);
       pool=pool.filter(t=>t!==adv);
       cheguei=fase;
@@ -587,7 +742,31 @@ async function simularCopa(){
   else if(!passou){badge='💔 ELIMINADO NA FASE DE GRUPOS';sub=`Você terminou em ${minhaPos}º no Grupo ${meuGrupo}.`;}
   else{badge=`💔 ELIMINADO — ${faseSaiu}`;sub=`Sua campanha parou em ${faseSaiu.toLowerCase()}.`;}
 
+  // Alerta grandioso de fim de Copa
+  if(venceu){tocarCampeao();await mostrarAlerta('🏆','CAMPEÃO DO MUNDO!','Você conquistou a Copa de 2026 com seu time dos sonhos! Lenda absoluta! 🥇','campeao');}
+  else{tocarEliminado();await mostrarAlerta('🥀','FIM DA SUA COPA',sub+' Veja o pódio e a artilharia completos abaixo.','derrota');}
+
   renderPodio(podio);
+  // Card compartilhável de campeão
+  if(venceu){
+    const cont=document.getElementById('jogos-cont');
+    const box=document.createElement('div');
+    box.className='campeao-share';
+    box.innerHTML=`
+      <div class="campeao-share-titulo">🏆 Você é CAMPEÃO! Compartilhe seu time:</div>
+      <div id="card-preview"></div>
+      <div class="campeao-btns">
+        <button class="btn-share" onclick="compartilharCampeao()">📤 Compartilhar</button>
+        <button class="btn-share alt" onclick="baixarCardCampeao()">⬇️ Baixar imagem</button>
+      </div>`;
+    cont.insertBefore(box,cont.firstChild);
+    // Preview do card
+    try{
+      const cv=gerarCardCampeao();
+      cv.style.width='100%';cv.style.maxWidth='320px';cv.style.borderRadius='12px';cv.style.display='block';cv.style.margin='0 auto';
+      document.getElementById('card-preview').appendChild(cv);
+    }catch(e){console.error(e);}
+  }
   document.getElementById('sim-badge').innerHTML=`<div style="font-family:'Bebas Neue';font-size:2rem;color:${venceu?'var(--amarelo)':'var(--pink)'}">${badge}</div>`;
   document.getElementById('sim-sub').textContent=sub;
   window.scrollTo({top:document.getElementById('sim-badge').offsetTop-20,behavior:'smooth'});
@@ -643,9 +822,13 @@ const GOL_CONTRA_TIPOS=[
   {t:'contra-ataque',d:(a,s)=>`${s} puxou o contra-ataque e marcou.`},
   {t:'cabeçada',d:(a,s)=>`Escanteio e ${s} cabeceou pro gol.`},
 ];
-const EV_AMARELO=[n=>`Cartão amarelo para ${n}.`,n=>`${n} comete falta dura e leva amarelo.`];
-const EV_VAR=[()=>'VAR checando possível impedimento...',()=>'Árbitro vai ao monitor do VAR.'];
-const EV_FUNNY=[()=>'🐕 Um cachorro invadiu o gramado!',()=>'🌧️ Começa a chover forte no estádio.',()=>'📣 A torcida faz um mosaico gigante.'];
+const EV_AMARELO=[n=>`Cartão amarelo para ${n}.`,n=>`${n} comete falta dura e leva amarelo.`,n=>`${n} reclama com o árbitro e é advertido.`,n=>`${n} faz falta tática e vê o amarelo.`];
+const EV_VERMELHO=[n=>`🟥 CARTÃO VERMELHO! ${n} está expulso!`,n=>`${n} comete falta violenta e recebe o vermelho direto!`,n=>`Segundo amarelo para ${n} — expulso!`];
+const EV_VAR=[()=>'📺 VAR checando possível impedimento...',()=>'📺 Árbitro vai ao monitor do VAR.',()=>'📺 VAR analisa possível pênalti!',()=>'📺 Gol anulado após revisão do VAR.'];
+const EV_LESAO=[n=>`🤕 ${n} sente a coxa e pede substituição.`,n=>`🤕 ${n} cai no gramado com cãibra.`,n=>`🤕 Contusão preocupante de ${n}, entra a maca.`,n=>`🤕 ${n} torce o tornozelo numa dividida.`];
+const EV_FUNNY=[()=>'🐕 Um cachorro invadiu o gramado e parou o jogo!',()=>'🌧️ Começa a chover forte no estádio.',()=>'📣 A torcida faz um mosaico gigante nas arquibancadas.',()=>'🎆 Sinalizadores acesos na torcida visitante.',()=>'🕊️ Uma gaivota pousa no meio-campo.',()=>'📱 Torcedor invade o gramado pra tirar selfie!',()=>'🥁 A bateria da torcida não para um segundo.',()=>'🤳 Câmera flagra jogador rindo no banco.'];
+const EV_DEFESA=[g=>`🧤 Que defesa! O goleiro ${g} salva o que era gol certo!`,g=>`🧤 ${g} voa no ângulo e espalma!`,g=>`🧤 Defesão de ${g} no mano a mano!`];
+const EV_NARR=[()=>'⚽ Jogo truncado no meio-campo.',()=>'⚽ Pressão total no campo de ataque!',()=>'⚽ Ritmo cai, equipes se estudam.',()=>'⚽ Que partida intensa!',()=>'⚽ Torcida empurra o time pra frente.',()=>'⚽ Troca de passes envolvente no meio.'];
 
 function atks(){let a=meuTime.filter(j=>['ATA','MEI','MED'].includes(j.pos));if(!a.length)a=meuTime.filter(j=>j.pos!=='GOL');if(!a.length)a=meuTime.slice();return a;}
 function sortArt(lst){
@@ -679,10 +862,23 @@ function gerarPartida(adv,faseIdx,mata){
     return{min,nome:`${adv.e} ${autor}`,adv:true,tipo:tipo.t,narr:tipo.d('seu time',autor)};
   });
 
-  const eventos=[];const nr=()=>rnd(meuTime)?.n||'um jogador';
-  mins(Math.floor(Math.random()*3),10,88).forEach(m=>eventos.push({min:m,tipo:'amarelo',txt:rnd(EV_AMARELO)(nr())}));
-  if(chance(.3))mins(1,15,90).forEach(m=>eventos.push({min:m,tipo:'var',txt:rnd(EV_VAR)()}));
-  if(chance(.4))mins(1,5,88).forEach(m=>eventos.push({min:m,tipo:'funny',txt:rnd(EV_FUNNY)()}));
+  const eventos=[];
+  const nr=()=>rnd(meuTime)?.n||'um jogador';
+  const goleiro=meuTime.find(j=>j.pos==='GOL')?.n||'o goleiro';
+  // Cartões amarelos (1-3)
+  mins(1+Math.floor(Math.random()*3),10,88).forEach(m=>eventos.push({min:m,tipo:'amarelo',txt:rnd(EV_AMARELO)(nr())}));
+  // Vermelho (18% de chance)
+  if(chance(.18))mins(1,30,89).forEach(m=>eventos.push({min:m,tipo:'vermelho',txt:rnd(EV_VERMELHO)(nr())}));
+  // VAR (35%)
+  if(chance(.35))mins(1,15,90).forEach(m=>eventos.push({min:m,tipo:'var',txt:rnd(EV_VAR)()}));
+  // Lesão/contusão (40%)
+  if(chance(.4))mins(1,12,85).forEach(m=>eventos.push({min:m,tipo:'lesao',txt:rnd(EV_LESAO)(nr())}));
+  // Defesa do goleiro (50%)
+  if(chance(.5))mins(1+Math.floor(Math.random()*2),8,88).forEach(m=>eventos.push({min:m,tipo:'defesa',txt:rnd(EV_DEFESA)(goleiro)}));
+  // Eventos engraçados (45%)
+  if(chance(.45))mins(1,5,88).forEach(m=>eventos.push({min:m,tipo:'funny',txt:rnd(EV_FUNNY)()}));
+  // Narração de ambiente (sempre 2-3)
+  mins(2+Math.floor(Math.random()*2),5,85).forEach(m=>eventos.push({min:m,tipo:'narr',txt:rnd(EV_NARR)()}));
 
   // empate em mata-mata -> pênaltis decididos por força
   let ganhou=pro>contra,penaltis=null;
@@ -711,11 +907,11 @@ function criarCard(p,idx){
   return card;
 }
 
-function addScorer(idx,lado,nome,min){
+function addScorer(idx,lado,nome,min,ico){
   const col=document.getElementById(`s${lado}-${idx}`);if(!col)return;
   const limpo=nome.replace(/^[\u{1F1E6}-\u{1F1FF}\u{1F3F4}\u{E0000}-\u{E007F} ]+/u,'').trim()||nome;
   const d=document.createElement('div');d.className='scorer-name';
-  d.innerHTML=`<span class="s-min">${min}'</span> ${limpo}`;col.appendChild(d);
+  d.innerHTML=`<span class="s-min">${min}'</span> ${ico||'⚽'} ${limpo}`;col.appendChild(d);
 }
 
 async function jogarPartida(p,idx){
@@ -724,18 +920,26 @@ async function jogarPartida(p,idx){
   const ppEl=document.getElementById(`pp-${idx}`),pcEl=document.getElementById(`pc-${idx}`);
   let vpp=0,vpc=0;
   const lances=[...p.golsPro.map(g=>({...g,tipo:'gol-pro'})),...p.golsContra.map(g=>({...g,tipo:'gol-contra'})),...p.eventos].sort((a,b)=>a.min-b.min);
-  const msPorMin=18;
+  const msPorMin=480; // ~43s base + pausas = ~50-55s
+  tocarApito();
   let li=0;
   for(let m=1;m<=90;m++){
     clk.textContent=`⏱️ ${m}'`;
+    if(m===45){clk.textContent='⏸️ INTERVALO';await sleep(800);}
     while(li<lances.length&&lances[li].min===m){
       const cur=lances[li];aplicarLance(cur,tl,idx);
-      if(cur.tipo==='gol-pro'){vpp++;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);tocarGol();addScorer(idx,'p',cur.nome,cur.min);}
-      if(cur.tipo==='gol-contra'){vpc++;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);tocarFalha();addScorer(idx,'c',cur.nome,cur.min);}
-      li++;await sleep(250);
+      if(cur.tipo==='gol-pro'){vpp++;ppEl.textContent=vpp;ppEl.classList.add('bump');setTimeout(()=>ppEl.classList.remove('bump'),250);tocarGol();addScorer(idx,'p',cur.nome,cur.min,'⚽');await sleep(750);}
+      else if(cur.tipo==='gol-contra'){vpc++;pcEl.textContent=vpc;pcEl.classList.add('bump');setTimeout(()=>pcEl.classList.remove('bump'),250);tocarFalha();addScorer(idx,'c',cur.nome,cur.min,'⚽');await sleep(750);}
+      else if(cur.tipo==='vermelho'){tocarCartao();addScorer(idx,'p',cur.txt.replace(/^[^A-ZÀ-Ý]*/,'').split(' ')[0]||'—',cur.min,'🟥');await sleep(500);}
+      else if(cur.tipo==='amarelo'){tocarCartao();await sleep(300);}
+      else if(cur.tipo==='lesao'){addScorer(idx,'p','Contusão',cur.min,'🤕');await sleep(350);}
+      else if(cur.tipo==='defesa'){await sleep(350);}
+      else{await sleep(300);}
+      li++;
     }
     await sleep(msPorMin);
   }
+  tocarApito();
   let fim=`⏹️ Fim: ${vpp} × ${vpc}`;
   if(p.penaltis)fim+=` (pên. ${p.penaltis[0]}×${p.penaltis[1]})`;
   clk.textContent=fim;
@@ -745,7 +949,7 @@ function aplicarLance(item,tl,idx){
   const d=document.createElement('div');d.className='ev-item';
   if(item.tipo==='gol-pro'){d.className+=' ev-gol-pro';d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ GOL! ${item.nome} — ${item.narr}`;}
   else if(item.tipo==='gol-contra'){d.className+=' ev-gol-contra';d.innerHTML=`<span class="ev-min">${item.min}'</span>⚽ ${item.nome} — ${item.narr}`;}
-  else{const ico={amarelo:'🟨',var:'📺',funny:'🎪'}[item.tipo]||'•';d.innerHTML=`<span class="ev-min">${item.min}'</span>${ico} ${item.txt}`;}
+  else{const ico={amarelo:'🟨',vermelho:'🟥',var:'📺',funny:'🎪',lesao:'🤕',defesa:'🧤',narr:'🎙️'}[item.tipo]||'•';d.innerHTML=`<span class="ev-min">${item.min}'</span>${ico} ${item.txt}`;}
   tl.appendChild(d);
 }
 
@@ -814,6 +1018,98 @@ function renderTabela(times,grupo){
 }
 
 // ═══════════ PÓDIO + PREMIAÇÕES ═══════════
+
+// ═══════════ CARD DE CAMPEÃO COMPARTILHÁVEL ═══════════
+function gerarCardCampeao(){
+  const cv=document.createElement('canvas');
+  const W=720,H=1280;cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+
+  // Fundo gradiente WEN
+  const g=ctx.createLinearGradient(0,0,W,H);
+  g.addColorStop(0,'#1a0030');g.addColorStop(.5,'#3a0a5c');g.addColorStop(1,'#1a0030');
+  ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+
+  // Brilho dourado no topo
+  const gr=ctx.createRadialGradient(W/2,120,20,W/2,120,400);
+  gr.addColorStop(0,'rgba(255,215,0,.35)');gr.addColorStop(1,'rgba(255,215,0,0)');
+  ctx.fillStyle=gr;ctx.fillRect(0,0,W,300);
+
+  // Troféu + título
+  ctx.textAlign='center';
+  ctx.font='90px serif';ctx.fillText('🏆',W/2,140);
+  ctx.fillStyle='#FFD700';ctx.font='bold 64px Arial';
+  ctx.fillText('CAMPEÃO MUNDIAL',W/2,220);
+  ctx.fillStyle='#C8FF00';ctx.font='bold 38px Arial';
+  ctx.fillText('COPA 2026',W/2,270);
+
+  // Overall do time
+  const ov=Math.round(meuTime.reduce((a,j)=>a+j.r,0)/meuTime.length);
+  ctx.fillStyle='#fff';ctx.font='bold 28px Arial';
+  ctx.fillText('OVERALL DO TIME',W/2,340);
+  ctx.fillStyle='#FFD700';ctx.font='bold 90px Arial';
+  ctx.fillText(ov,W/2,430);
+
+  // Linha divisória
+  ctx.strokeStyle='rgba(255,255,255,.2)';ctx.lineWidth=2;
+  ctx.beginPath();ctx.moveTo(60,470);ctx.lineTo(W-60,470);ctx.stroke();
+
+  // Jogadores — ordenar por rating
+  const ordem={GOL:0,ZAG:1,LAT:2,MED:3,MEI:4,ATA:5};
+  const time=[...meuTime].sort((a,b)=>(ordem[a.pos]-ordem[b.pos])||b.r-a.r);
+  let y=520;
+  ctx.textAlign='left';
+  time.forEach(j=>{
+    // posição (badge)
+    ctx.fillStyle='#D4006A';ctx.font='bold 22px monospace';
+    ctx.fillText(j.pos,70,y);
+    // nome
+    ctx.fillStyle='#fff';ctx.font='bold 34px Arial';
+    ctx.fillText(j.n.length>20?j.n.slice(0,19)+'…':j.n,150,y);
+    // estrelas (rating >=90 = 3 estrelas, >=85 = 2, >=80 = 1)
+    const est=j.r>=90?'⭐⭐⭐':j.r>=85?'⭐⭐':j.r>=80?'⭐':'';
+    // rating à direita
+    ctx.textAlign='right';
+    ctx.fillStyle=j.r>=90?'#FFD700':j.r>=85?'#C8FF00':'#fff';
+    ctx.font='bold 40px Arial';
+    ctx.fillText(j.r,W-70,y);
+    ctx.textAlign='left';
+    if(est){ctx.font='20px serif';ctx.fillText(est,W-260,y);}
+    y+=64;
+  });
+
+  // Rodapé
+  ctx.textAlign='center';
+  ctx.fillStyle='rgba(255,255,255,.5)';ctx.font='22px monospace';
+  ctx.fillText('⚽ Copa 2026 · Meu Time dos Sonhos',W/2,H-50);
+
+  return cv;
+}
+
+async function compartilharCampeao(){
+  const cv=gerarCardCampeao();
+  cv.toBlob(async(blob)=>{
+    const file=new File([blob],'campeao-copa2026.png',{type:'image/png'});
+    // Tenta compartilhamento nativo (celular)
+    if(navigator.canShare&&navigator.canShare({files:[file]})){
+      try{
+        await navigator.share({files:[file],title:'Campeão da Copa 2026!',text:'Fui campeão mundial com meu time dos sonhos! ⚽🏆'});
+        return;
+      }catch(e){/* usuário cancelou */}
+    }
+    // Fallback: download
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');a.href=url;a.download='campeao-copa2026.png';a.click();
+    URL.revokeObjectURL(url);
+  },'image/png');
+}
+
+function baixarCardCampeao(){
+  const cv=gerarCardCampeao();
+  const url=cv.toDataURL('image/png');
+  const a=document.createElement('a');a.href=url;a.download='campeao-copa2026.png';a.click();
+}
+
 function renderPodio(podio){
   const cont=document.getElementById('jogos-cont');
   const artLista=Object.values(artilhariaCopa).sort((a,b)=>b.g-a.g);
@@ -873,6 +1169,24 @@ function montarListaSquad(js,meu){
   });
   return h;
 }
+function mostrarAlerta(emoji,titulo,sub,tipo){
+  return new Promise(res=>{
+    const ov=document.getElementById('alerta-overlay');
+    const box=document.getElementById('alerta-box');
+    box.className='alerta-box'+(tipo?' '+tipo:'');
+    document.getElementById('alerta-emoji').textContent=emoji;
+    document.getElementById('alerta-titulo').textContent=titulo;
+    document.getElementById('alerta-sub').textContent=sub;
+    ov.classList.add('show');
+    window._alertaRes=res;
+  });
+}
+function fecharAlerta(ev){
+  if(ev&&ev.target&&ev.target.id!=='alerta-overlay'&&!ev.target.classList.contains('alerta-btn'))return;
+  document.getElementById('alerta-overlay').classList.remove('show');
+  if(window._alertaRes){window._alertaRes();window._alertaRes=null;}
+}
+
 function fecharSquad(ev){
   if(ev&&ev.target&&ev.target.id!=='squad-modal'&&!ev.target.classList.contains('squad-close'))return;
   document.getElementById('squad-modal').classList.remove('show');
