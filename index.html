@@ -40,15 +40,15 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .sort-hint{font-size:.78rem;color:var(--cinza);margin-top:.3rem;}
 /* ELENCO */
 .elenco-titulo{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--amarelo);letter-spacing:.1em;text-transform:uppercase;text-align:center;margin:1rem 0 .6rem;}
-.elenco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(95px,1fr));gap:.5rem;}
-.jcard{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.5rem;text-align:center;cursor:pointer;transition:all .15s;position:relative;}
+.elenco-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(82px,1fr));gap:.4rem;}
+.jcard{background:var(--card-bg);border:1px solid var(--card-borda);border-radius:8px;padding:.42rem .35rem;text-align:center;cursor:pointer;transition:all .15s;position:relative;min-height:66px;display:flex;flex-direction:column;justify-content:center;}
 .jcard:active{transform:scale(.95);}
 .jcard.sel{border-color:var(--amarelo);background:rgba(200,255,0,.12);}
 .jcard.disabled{opacity:.35;pointer-events:none;}
-.jcard-pos{font-family:'Space Mono',monospace;font-size:.5rem;color:var(--pink);letter-spacing:.05em;}
-.jcard-nome{font-size:.74rem;font-weight:700;margin:.15rem 0;line-height:1.05;}
-.jcard-rat{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--amarelo);line-height:1;}
-.jcard-star{position:absolute;top:.2rem;right:.3rem;font-size:.6rem;}
+.jcard-pos{font-family:'Space Mono',monospace;font-size:.44rem;color:var(--pink);letter-spacing:.05em;}
+.jcard-nome{font-size:.66rem;font-weight:700;margin:.12rem 0;line-height:1.02;}
+.jcard-rat{font-family:'Bebas Neue',sans-serif;font-size:1.08rem;color:var(--amarelo);line-height:1;}
+.jcard-star{position:absolute;top:.18rem;right:.28rem;font-size:.52rem;}
 /* TIME MONTADO */
 .meu-time-barra{position:sticky;bottom:0;background:linear-gradient(180deg,transparent,var(--roxo-escuro) 30%);padding:1rem 0 .5rem;margin-top:1rem;z-index:50;}
 .time-slots{display:flex;flex-wrap:wrap;gap:.3rem;justify-content:center;margin-bottom:.6rem;}
@@ -138,15 +138,19 @@ body{font-family:'Inter',sans-serif;background:var(--roxo-escuro);color:var(--br
 .copa-stat-val{font-family:'Bebas Neue',sans-serif;font-size:1.2rem;color:var(--amarelo);}
 
 /* CAMPO DE FUTEBOL */
-.campo{background:linear-gradient(160deg,#1a5c2e,#0d3d1c);border:2px solid rgba(255,255,255,.15);border-radius:12px;padding:.8rem .5rem;margin-bottom:.6rem;position:relative;overflow:hidden;}
-.campo::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:rgba(255,255,255,.2);}
-.campo::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:50px;height:50px;border:1px solid rgba(255,255,255,.2);border-radius:50%;}
-.campo-linha{display:flex;justify-content:center;gap:.4rem;margin:.45rem 0;position:relative;z-index:1;flex-wrap:wrap;}
-.pos-slot{width:52px;display:flex;flex-direction:column;align-items:center;}
-.pos-bola{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.3rem;border:2px dashed rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:rgba(255,255,255,.5);transition:all .2s;}
-.pos-slot.filled .pos-bola{border-style:solid;border-color:var(--amarelo);background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;box-shadow:0 0 12px rgba(200,255,0,.4);}
-.pos-lbl{font-family:'Space Mono',monospace;font-size:.5rem;color:rgba(255,255,255,.7);margin-top:.2rem;letter-spacing:.05em;}
-.pos-nome{font-size:.52rem;color:#fff;font-weight:600;margin-top:.05rem;text-align:center;line-height:1;max-width:54px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.campo{background:linear-gradient(180deg,#24703a 0%,#18572b 55%,#0e401f 100%);border:2px solid rgba(255,255,255,.15);border-radius:16px;padding:.7rem .55rem .55rem;margin-bottom:.6rem;position:relative;overflow:hidden;min-height:255px;display:flex;flex-direction:column;justify-content:space-between;}
+.campo::before{content:'';position:absolute;left:10%;right:10%;bottom:12px;height:34%;border:2px solid rgba(255,255,255,.18);border-bottom:none;border-top-left-radius:18px;border-top-right-radius:18px;}
+.campo::after{content:'';position:absolute;left:50%;top:58%;transform:translate(-50%,-50%);width:120px;height:62px;border:2px solid rgba(255,255,255,.18);border-bottom:none;border-top-left-radius:120px;border-top-right-radius:120px;}
+.campo-linha{display:flex;justify-content:center;gap:.45rem;position:relative;z-index:1;flex-wrap:nowrap;}
+.campo-linha.linha-ata{margin-top:.1rem;}
+.campo-linha.linha-meio{margin-top:.55rem;gap:.35rem;}
+.campo-linha.linha-def{margin-top:.8rem;justify-content:space-between;padding:0 .3rem;}
+.campo-linha.linha-gol{margin-top:.55rem;margin-bottom:.1rem;}
+.pos-slot{width:46px;display:flex;flex-direction:column;align-items:center;flex:0 0 auto;}
+.pos-bola{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.08rem;border:2px dashed rgba(255,255,255,.4);background:rgba(0,0,0,.25);color:rgba(255,255,255,.55);transition:all .2s;}
+.pos-slot.filled .pos-bola{border-style:solid;border-color:var(--amarelo);background:linear-gradient(135deg,var(--amarelo),#9ac400);color:#1a0030;box-shadow:0 0 10px rgba(200,255,0,.36);}
+.pos-lbl{font-family:'Space Mono',monospace;font-size:.42rem;color:rgba(255,255,255,.72);margin-top:.18rem;letter-spacing:.05em;}
+.pos-nome{font-size:.49rem;color:#fff;font-weight:600;margin-top:.05rem;text-align:center;line-height:1;max-width:46px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 .pos-slot.filled .pos-lbl{color:var(--amarelo);}
 
 .dados-row{display:flex;gap:1rem;justify-content:center;align-items:center;}
@@ -888,6 +892,12 @@ function rolarDado(){
   },500);
 }
 
+function posicoesLivres(){
+  const slots=getF().slots.slice();
+  meuTime.forEach(j=>{const i=slots.indexOf(j.pos);if(i>=0)slots.splice(i,1);});
+  return slots;
+}
+
 function rolarDadoDourado(){
   if(meuTime.length>=11||dadoDouradoUsado)return;
   if(dadoRolando){document.getElementById('sort-hint').textContent='🎲 O dado ainda está rolando...';return;}
@@ -895,10 +905,19 @@ function rolarDadoDourado(){
   const dado=document.getElementById('dado-dourado');
   dadoRolando=true;dado.classList.add('rolling','bloqueado');tocarDadoDourado();
   modoDourado=true;
+  const livres=posicoesLivres();
+  const comCraqueNaPosicao=nomesSel().filter(n=>WC[n].j.some(j=>j.r>=90 && livres.includes(j.pos)));
   const comCraque=nomesSel().filter(n=>WC[n].j.some(j=>j.r>=90));
-  const pool=comCraque.length?comCraque:nomesSel();
+  const pool=comCraqueNaPosicao.length?comCraqueNaPosicao:comCraque;
   setTimeout(()=>{
     dado.classList.remove('rolling','bloqueado');
+    if(!pool.length){
+      dadoRolando=false;
+      modoDourado=false;
+      document.getElementById('sort-hint').textContent='⚠️ Nenhum craque 90+ disponível para as posições livres do seu time.';
+      beep(180,.25,.1,'sawtooth');
+      return;
+    }
     selSorteada=rnd(pool);
     dadoDouradoUsado=true;
     dado.classList.add('usado');
@@ -912,7 +931,7 @@ function mostrarElenco(){
   const s=WC[selSorteada];
   const dourado=modoDourado;
   document.getElementById('sort-pais').innerHTML=`${dourado?'🥇 ':''}${s.e} ${selSorteada}`;
-  document.getElementById('sort-hint').textContent=dourado?'⭐ Escolha um CRAQUE (rating 90+)':'Escolha 1 jogador para seu time';
+  document.getElementById('sort-hint').textContent=dourado?'⭐ Escolha um CRAQUE (rating 90+) numa posição livre':'Escolha 1 jogador para seu time';
   document.getElementById('elenco-zona').style.display='block';
   // Botão pular: só se ainda tem pulo e não é dado dourado
   const btnP=document.getElementById('btn-pular');
@@ -920,18 +939,20 @@ function mostrarElenco(){
     if(pulosRestantes>0&&!dourado){btnP.style.display='block';btnP.textContent='⏭️ Pular esta seleção (1 vez disponível)';}
     else{btnP.style.display='none';}
   }
-  document.getElementById('elenco-titulo').innerHTML=`${dourado?'🥇 ':''}${s.e} ${selSorteada} — ${dourado?'apenas craques 90+':'overall '+s.r+' · escolha 1 jogador'}`;
+  document.getElementById('elenco-titulo').innerHTML=`${dourado?'🥇 ':''}${s.e} ${selSorteada} — ${dourado?'apenas craques 90+ em posições livres':'overall '+s.r+' · escolha 1 jogador'}`;
   const grid=document.getElementById('elenco-grid');
-  const slots=getF().slots.slice();
-  meuTime.forEach(j=>{const i=slots.indexOf(j.pos);if(i>=0)slots.splice(i,1);});
+  const slots=posicoesLivres();
   grid.innerHTML='';
-  // No modo dourado, filtrar só craques 90+
   let lista=s.j;
-  if(dourado)lista=s.j.filter(j=>j.r>=90);
+  if(dourado)lista=s.j.filter(j=>j.r>=90 && slots.includes(j.pos));
   if(dourado&&!lista.length){
-    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--cinza);font-size:.8rem;padding:1rem">Esta seleção não tem craque 90+. Role o dado dourado de novo.</div>';
+    grid.innerHTML='<div style="grid-column:1/-1;text-align:center;color:var(--cinza);font-size:.8rem;padding:1rem">Nenhum craque 90+ desta seleção cabe nas posições livres. Clique no dado dourado para um novo sorteio.</div>';
     document.getElementById('dado-dourado').classList.remove('usado');
     dadoDouradoUsado=false;
+    escolhaPendente=false;
+    modoDourado=false;
+    document.getElementById('sort-pais').textContent='Toque no dado';
+    document.getElementById('sort-hint').textContent='O dado dourado agora só sorteia craques que encaixam no seu time.';
     return;
   }
   lista.forEach((j)=>{
@@ -981,40 +1002,56 @@ function renderSlots(){
   const slots=getF().slots;
   const cont=document.getElementById('campo-time');
   cont.innerHTML='';
-  // Agrupar slots por linha do campo (de cima/ataque para baixo/gol)
-  const linhas=[
-    {pos:'ATA',lbl:'ATA'},
-    {pos:'MEI',lbl:'MEI'},
-    {pos:'MED',lbl:'MED'},
-    {pos:'LAT',lbl:'LAT'},
-    {pos:'ZAG',lbl:'ZAG'},
-    {pos:'GOL',lbl:'GOL'},
-  ];
-  // contar quantos slots de cada posição a formação pede
-  const cont_pos={};
-  slots.forEach(p=>cont_pos[p]=(cont_pos[p]||0)+1);
-  // jogadores disponíveis por posição (cópia)
-  const disp=[...meuTime];
-  linhas.forEach(L=>{
-    const qtd=cont_pos[L.pos]||0;
-    if(!qtd)return;
+  const contPos={};
+  slots.forEach(p=>contPos[p]=(contPos[p]||0)+1);
+  const disp={ATA:[],MEI:[],MED:[],LAT:[],ZAG:[],GOL:[]};
+  meuTime.forEach(j=>{ if(disp[j.pos]) disp[j.pos].push(j); });
+
+  function buildRow(className, seq){
+    if(!seq.length)return;
     const linhaEl=document.createElement('div');
-    linhaEl.className='campo-linha';
-    for(let i=0;i<qtd;i++){
-      const idx=disp.findIndex(j=>j.pos===L.pos);
+    linhaEl.className='campo-linha '+className;
+    seq.forEach(pos=>{
       const slot=document.createElement('div');
       slot.className='pos-slot';
-      if(idx>=0){
-        const j=disp.splice(idx,1)[0];
+      const j=disp[pos]&&disp[pos].length?disp[pos].shift():null;
+      if(j){
         slot.className+=' filled';
-        slot.innerHTML=`<div class="pos-bola">${j.r}</div><div class="pos-lbl">${L.lbl}</div><div class="pos-nome">${j.n}</div>`;
+        slot.innerHTML=`<div class="pos-bola">${j.r}</div><div class="pos-lbl">${pos}</div><div class="pos-nome">${j.n}</div>`;
       }else{
-        slot.innerHTML=`<div class="pos-bola">+</div><div class="pos-lbl">${L.lbl}</div>`;
+        slot.innerHTML=`<div class="pos-bola">+</div><div class="pos-lbl">${pos}</div>`;
       }
       linhaEl.appendChild(slot);
-    }
+    });
     cont.appendChild(linhaEl);
-  });
+  }
+
+  const linhaAta=[];
+  for(let i=0;i<(contPos.ATA||0);i++)linhaAta.push('ATA');
+
+  const linhaMeio=[];
+  const meds=(contPos.MED||0), meis=(contPos.MEI||0);
+  if(meds===2 && meis===1) linhaMeio.push('MED','MEI','MED');
+  else {
+    for(let i=0;i<Math.ceil(meds/2);i++)linhaMeio.push('MED');
+    for(let i=0;i<meis;i++)linhaMeio.push('MEI');
+    for(let i=Math.ceil(meds/2);i<meds;i++)linhaMeio.push('MED');
+  }
+
+  const linhaDef=[];
+  const lats=(contPos.LAT||0), zags=(contPos.ZAG||0);
+  for(let i=0;i<Math.ceil(lats/2);i++)linhaDef.push('LAT');
+  for(let i=0;i<zags;i++)linhaDef.push('ZAG');
+  for(let i=Math.ceil(lats/2);i<lats;i++)linhaDef.push('LAT');
+
+  const linhaGol=[];
+  for(let i=0;i<(contPos.GOL||0);i++)linhaGol.push('GOL');
+
+  buildRow('linha-ata',linhaAta);
+  buildRow('linha-meio',linhaMeio);
+  buildRow('linha-def',linhaDef);
+  buildRow('linha-gol',linhaGol);
+
   document.getElementById('barra-info').textContent=`Monte seu time: ${meuTime.length}/11 jogadores · ${getF().nome}`;
 }
 
